@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;org.mt4j&apos; to &apos;GestureChallenge/src&apos;&#x0A;- Original project: &apos;mt4j-core&apos;&#x0A;- Destination element: &apos;GestureChallenge/src&apos;&#x0A;- Original element: &apos;mt4j-core/src/org.mt4j&apos;" description="Copy package" destination="=GestureChallenge/src" element1="/src&lt;org.mt4j" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1336494940867" version="1.0"/>
+</session>

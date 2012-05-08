@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.mt4j.sceneManagement.AbstractScene"/>
+<fullyQualifiedTypeName name="GestureChallengeScene.CircularShieldPhysicsScene"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
+<fullyQualifiedTypeName name="org.mt4j.MTApplication"/>
+<fullyQualifiedTypeName name="GestureChallengeScene.GestureChallengeScene"/>
+<fullyQualifiedTypeName name="org.mt4j.input.inputSources.MacTrackpadSource"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsShield2"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsRectangle"/>
+<fullyQualifiedTypeName name="org.mt4j.components.TransformSpace"/>
+<fullyQualifiedTypeName name="util.PhysicsHelper"/>
+</qualifiedTypeNameHistroy>
