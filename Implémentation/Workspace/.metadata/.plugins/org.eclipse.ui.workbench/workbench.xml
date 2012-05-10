@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="18" version="2.0">
+<workbench progressCount="20" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="4" y="22">
 <fastViewData fastViewLocation="1024"/>
@@ -18,7 +18,7 @@
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -41,11 +41,13 @@
 <part id="9"/>
 <part id="10"/>
 <part id="11"/>
+<part id="12"/>
+<part id="13"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GestureChallengeScene.java" partName="GestureChallengeScene.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" title="GestureChallengeScene.java" tooltip="GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GestureChallengeScene.java" partName="GestureChallengeScene.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" title="GestureChallengeScene.java" tooltip="GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5646" selectionTopPixel="1542"/>
 </editor>
@@ -93,13 +95,18 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="735" selectionTopPixel="0"/>
 </editor>
+<editor id="org.eclipse.jdt.ui.ClassFileEditor" name="GestureEventSupport.class" partName="GestureEventSupport.class" title="GestureEventSupport.class" tooltip="org.mt4j.input.GestureEventSupport" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.input(GestureEventSupport.class"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameModel.java" partName="GameModel.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GameModel/GameModel.java" title="GameModel.java" tooltip="GestureChallenge/src/GameModel/GameModel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/GameModel/GameModel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="83" selectionTopPixel="0"/>
+</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings (7 items)"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -146,7 +153,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -270,16 +277,10 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/physicsShapes/PhysicsShield2.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.input(GestureEventSupport.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/GameModel/GameModel.java"/>
 </editors>
-<item historyLabel="PhysicsShield.java" index="0">
-<position info="not_deleted" x="11188" y="0"/>
-</item>
-<item historyLabel="PhysicsShield.java" index="0">
-<position info="not_deleted" x="980" y="0"/>
-</item>
-<item historyLabel="PhysicsPolygon.java" index="2">
-<position info="not_deleted" x="1051" y="142"/>
-</item>
 <item historyLabel="PhysicsShield.java" index="0">
 <position info="not_deleted" x="1381" y="126"/>
 </item>
@@ -418,8 +419,17 @@
 <item historyLabel="PhysicsShield.java" index="8">
 <position info="not_deleted" x="9301" y="449"/>
 </item>
-<item active="true" historyLabel="GestureChallengeScene.java" index="9">
+<item historyLabel="GestureChallengeScene.java" index="9">
 <position info="not_deleted" x="6083" y="0"/>
+</item>
+<item historyLabel="GestureEventSupport.class" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="PlayerGoal.java" index="11">
+<position info="not_deleted" x="735" y="0"/>
+</item>
+<item active="true" historyLabel="GameModel.java" index="12">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -438,6 +448,12 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameModel.java" tooltip="GestureChallenge/src/GameModel/GameModel.java">
+<persistable path="/GestureChallenge/src/GameModel/GameModel.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="GestureEventSupport.class" tooltip="org.mt4j.input.GestureEventSupport">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.input(GestureEventSupport.class"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerGoal.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerGoal.java">
 <persistable path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
 </file>
