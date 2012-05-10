@@ -140,7 +140,7 @@ public class GestureChallengeScene extends AbstractScene {
 	createScreenBorders(physicsContainer);
 	
 	PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
-	//physicsContainer.addChild(pG);
+	physicsContainer.addChild(pG);
 	//add bouncing circle
 	PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
 	MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
@@ -148,7 +148,7 @@ public class GestureChallengeScene extends AbstractScene {
 	c.setStrokeColor(col1);
 	PhysicsHelper.addDragJoint(world, c, c.getBody().isDynamic(), scale);
 	c.setDepthBufferDisabled(true);
-	physicsContainer.addChild(c);
+	//physicsContainer.addChild(c);
 	
 		
 	}

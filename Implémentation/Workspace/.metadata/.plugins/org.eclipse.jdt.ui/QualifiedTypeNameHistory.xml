@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="org.mt4j.sceneManagement.AbstractScene"/>
 <fullyQualifiedTypeName name="GestureChallengeScene.CircularShieldPhysicsScene"/>
-<fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
 <fullyQualifiedTypeName name="org.mt4j.MTApplication"/>
 <fullyQualifiedTypeName name="GestureChallengeScene.GestureChallengeScene"/>
 <fullyQualifiedTypeName name="org.mt4j.input.inputSources.MacTrackpadSource"/>
@@ -10,4 +9,6 @@
 <fullyQualifiedTypeName name="physicsShapes.PhysicsRectangle"/>
 <fullyQualifiedTypeName name="org.mt4j.components.TransformSpace"/>
 <fullyQualifiedTypeName name="util.PhysicsHelper"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
+<fullyQualifiedTypeName name="PlayerInterface.PlayerGoal"/>
 </qualifiedTypeNameHistroy>

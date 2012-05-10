@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="/Users/etiennegirot/Desktop/UTC/NF28/Projet/Implémentation/Workspace/mt4j-desktop/lib/whirlylib" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/mt4j-desktop/examples/advanced/physics/lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>

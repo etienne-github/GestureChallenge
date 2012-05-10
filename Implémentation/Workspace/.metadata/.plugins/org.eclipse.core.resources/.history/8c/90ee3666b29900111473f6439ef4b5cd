@@ -20,8 +20,6 @@ import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 import org.mt4j.util.math.Vertex;
 
-import PlayerInterface.PlayerGoal;
-
 import physicsShapes.PhysicsCircle;
 import physicsShapes.PhysicsPolygon;
 import physicsShapes.PhysicsRectangle;
@@ -139,8 +137,8 @@ public class GestureChallengeScene extends AbstractScene {
 	//shieldPoly.rotateZ(new Vertex(shieldPoly.getCenterPointLocal().x,shieldPoly.getCenterPointLocal().y-(bigRadius-smallRadius)/2f), 90, TransformSpace.LOCAL);	
 	createScreenBorders(physicsContainer);
 	
-	PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
-	//physicsContainer.addChild(pG);
+	
+	
 	//add bouncing circle
 	PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
 	MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
