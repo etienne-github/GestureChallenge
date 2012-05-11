@@ -1,0 +1,25 @@
+package PlayerInterface;
+
+import org.mt4j.util.MTColor;
+
+import GestureChallengeScene.GestureChallengeScene;
+
+public class PlayerInterface {
+
+	MTColor myColor;
+	int myNumber;
+	GestureChallengeScene myGCS;
+	PlayerGoal myPG;
+	
+	public PlayerInterface(MTColor color, int playerNumber,GestureChallengeScene gCS){
+		
+		//init
+		myColor=color;
+		myNumber=playerNumber;
+		myGCS = gCS;
+		
+		//creation
+		myPG=new PlayerGoal(gCS.getMTApplication(), centerPoint, gCS.getWorld(), worldScale, myColor);
+		
+	}
+}

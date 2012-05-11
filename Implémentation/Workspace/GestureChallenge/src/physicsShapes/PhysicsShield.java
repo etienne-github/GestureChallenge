@@ -35,7 +35,7 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 	private float restituion;
 	
 	public PhysicsShield(int bigRadius,int smallRadius, int smallDef,int bigDef, float coveredAngle, Vector3D position, PApplet applet,
-			World world, float density, float friction, float restitution, float worldScale
+			World world, float density, float friction, float restitution, float worldScale,MTColor color
 	){
 		super(applet, new GeometryInfo(applet, new Vertex[]{}), false);
 		this.angle = 0;
@@ -63,6 +63,8 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 			//c = new PhysicsCircle(app, shieldVertices[i+j], 2, world, 0, 0, 0, scale);
 			//physicsContainer.addChild(c);
 		}
+		
+		//vertices[smallDef+bigDef]=vertices[0];
 		
 		//shieldVertices[smallDef+bigDef]=shieldVertices[0];
 		
@@ -213,13 +215,24 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
     		this.body.setUserData(this);
     		this.setUserData("box2d", this.body); //TODO rename userData
     	}
-    	MTColor polyCol = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
-		this.setFillColor(polyCol);
-		this.setStrokeColor(polyCol);
+    	
+    	//MTColor polyCol = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
+		this.setFillColor(color);
+		MTColor darker = new MTColor(color.getR()/2f, color.getG()/2f, color.getB()/2f);
+		this.setStrokeColor(darker);
+		this.setStrokeWeight(4);
 		//PhysicsHelper.addDragJoint(world, shieldPoly, shieldPoly.getBody().isDynamic(), scale);
 		//For an anti-aliased outline
+
+		
+		Vertex[] tr = new Vertex[smallDef+bigDef+1];
+		for(int k =0; k<smallDef+bigDef;k++){
+			tr[k]=vertices[k];
+		}
+		tr[smallDef+bigDef]=vertices[0];
+		
 		List<Vertex[]> contours = new ArrayList<Vertex[]>();
-		contours.add(vertices);
+		contours.add(tr);
 		this.setOutlineContours(contours);
 		this.setNoStroke(false);
 //    	p.destroy();

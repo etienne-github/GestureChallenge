@@ -1,0 +1,14 @@
+package PlayerInterface;
+
+import org.mt4j.util.MTColor;
+
+public class PlayerInterface {
+
+	MTColor myColor;
+	int myNumber;
+	
+	public PlayerInterface(MTColor color, int playerNumber){
+		myColor=color;
+		myNumber=playerNumber;
+	}
+}

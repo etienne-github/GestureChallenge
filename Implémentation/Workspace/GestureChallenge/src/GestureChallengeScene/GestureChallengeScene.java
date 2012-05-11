@@ -1,5 +1,6 @@
 package GestureChallengeScene;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.jbox2d.dynamics.World;
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
 import org.mt4j.components.TransformSpace;
+import org.mt4j.components.visibleComponents.shapes.MTRectangle;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
@@ -65,12 +67,18 @@ public class GestureChallengeScene extends AbstractScene {
 		//Update the positions of the components according the the physics simulation each frame
 		this.registerPreDrawAction(new UpdatePhysicsAction(world, timeStep, constraintIterations, scale));
 		
+		MTRectangle bck = new MTRectangle(app,app.loadImage("."+((String)File.separator)+"src"+((String)File.separator)+"GestureChallengeScene"+((String)File.separator)+"data"+((String)File.separator)+"bkgrnd.jpg"));
+		this.getCanvas().addChild(bck);
+		bck.removeAllGestureEventListeners();
+		bck.setPositionGlobal(new Vector3D(app.width/2f,app.height/2f));
+		
 		physicsContainer = new MTComponent(app);
 		//Scale the physics container. Physics calculations work best when the dimensions are small (about 0.1 - 10 units)
 		//So we make the display of the container bigger and add in turn make our physics object smaller
 		physicsContainer.scale(scale, scale, 1, Vector3D.ZERO_VECTOR);
 		this.getCanvas().addChild(physicsContainer);
-		
+
+		//physicsContainer.
 		//Create borders around the screen
 		//this.createScreenBorders(physicsContainer);
 		
@@ -87,10 +95,10 @@ public class GestureChallengeScene extends AbstractScene {
 		
 		
 		//SHIELD CREATION
-		PhysicsShield pS = new PhysicsShield(bigRadius, smallRadius, smallDef,bigDef,(float) coveredAngle, new Vector3D(app.width/2f,app.height/2f), app, world, 0f, 0f, 0f, scale);
-		physicsContainer.addChild(pS);
+		//PhysicsShield pS = new PhysicsShield(bigRadius, smallRadius, smallDef,bigDef,(float) coveredAngle, new Vector3D(app.width/2f,app.height/2f), app, world, 0f, 0f, 0f, scale);
+		//physicsContainer.addChild(pS);
 
-		pS.registerInputProcessor(new TapProcessor(app));
+		//pS.registerInputProcessor(new TapProcessor(app));
 		
 		
 		 //MARQUAGE CENTRE
@@ -101,7 +109,7 @@ public class GestureChallengeScene extends AbstractScene {
 		
 		
 		//TEST ROTATION
-		pS.addGestureListener(TapProcessor.class, new IGestureEventListener(){
+		/*pS.addGestureListener(TapProcessor.class, new IGestureEventListener(){
 
 			
 			
@@ -135,12 +143,13 @@ public class GestureChallengeScene extends AbstractScene {
 				return false;
 			}
 			
-		});
+		});*/
 	//shieldPoly.rotateZ(new Vertex(shieldPoly.getCenterPointLocal().x,shieldPoly.getCenterPointLocal().y-(bigRadius-smallRadius)/2f), 90, TransformSpace.LOCAL);	
 	createScreenBorders(physicsContainer);
 	
-	PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
+	//PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
 	//physicsContainer.addChild(pG);
+	
 	//add bouncing circle
 	PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
 	MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
@@ -192,6 +201,8 @@ public class GestureChallengeScene extends AbstractScene {
 						pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 					}
 					pR.setDepthBufferDisabled(true);
+					pR.setNoFill(true);
+					pR.setNoStroke(true);
 					parent.addChild(pR);
 				}
 				//Add last segment
@@ -203,6 +214,8 @@ public class GestureChallengeScene extends AbstractScene {
 				pR = new PhysicsRectangle(new Vertex(emptyCircleVertices[def-1].x+halfAB.x,emptyCircleVertices[def-1].y+halfAB.y), l, 8, app, world, 0, 0, 0, scale);
 				pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 				pR.setDepthBufferDisabled(true);
+				pR.setNoFill(true);
+				pR.setNoStroke(true);
 				parent.addChild(pR);	
 			
 	}
@@ -211,6 +224,42 @@ public class GestureChallengeScene extends AbstractScene {
 	}
 	
 	public void onLeave() {	
+	}
+
+
+
+	public World getWorld() {
+		return world;
+	}
+
+
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+
+
+	public MTComponent getPhysicsContainer() {
+		return physicsContainer;
+	}
+
+
+
+	public void setPhysicsContainer(MTComponent physicsContainer) {
+		this.physicsContainer = physicsContainer;
+	}
+
+
+
+	public float getScale() {
+		return scale;
+	}
+
+
+
+	public void setScale(float scale) {
+		this.scale = scale;
 	}
 
 }

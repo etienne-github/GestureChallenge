@@ -1,0 +1,16 @@
+package GameModel;
+
+public class Constants {
+	public static int radiusCenterGoals=290;
+	public static int radiusGoals=45;
+	
+	
+	public static int shieldSmallRadius=100;
+	public static int shieldSmallDef=25;
+	public static int shieldBigRadius=200;
+	public static int shieldBigDef=25;
+	public static int shieldDistance = (int) ((shieldSmallRadius+shieldBigRadius)/2f);
+	public static float shieldCoveredAngle= (float) Math.toRadians(50);
+
+}
+

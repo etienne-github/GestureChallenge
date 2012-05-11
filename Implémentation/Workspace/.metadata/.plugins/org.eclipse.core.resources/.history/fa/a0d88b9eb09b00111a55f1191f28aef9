@@ -1,0 +1,44 @@
+package GameModel;
+
+import org.mt4j.util.MTColor;
+
+import GestureChallengeScene.GestureChallengeScene;
+import PlayerInterface.PlayerInterface;
+
+public class GameModel {
+	int playerNumber;
+	int levelNumber;
+	MTColor[] playerColors;
+	GestureChallengeScene myGCS;
+	PlayerInterface[] myPI;
+	
+	public GameModel(GestureChallengeScene gCS){
+		myPI = new PlayerInterface[4];
+		playerColors= new MTColor[4];
+		playerColors[0]=new MTColor(188f,140f,255f); //Purple
+		playerColors[1]=new MTColor(255f,190f,0f);
+		playerColors[2]=new MTColor(0f,217f,255f);
+		playerColors[3]=new MTColor(136f,255f,89f);
+		myGCS = gCS;
+	}
+	
+	public void createInterfaces(){
+		for(int i=0;i<playerNumber;i++){
+			myPI[i]=new PlayerInterface(playerColors[i],i);
+		}
+	}
+	
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
+	public int getLevelNumber() {
+		return levelNumber;
+	}
+	public void setLevelNumber(int levelNumber) {
+		this.levelNumber = levelNumber;
+	}
+	
+}
