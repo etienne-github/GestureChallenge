@@ -3,12 +3,20 @@
 <fullyQualifiedTypeName name="org.mt4j.sceneManagement.AbstractScene"/>
 <fullyQualifiedTypeName name="GestureChallengeScene.CircularShieldPhysicsScene"/>
 <fullyQualifiedTypeName name="org.mt4j.MTApplication"/>
-<fullyQualifiedTypeName name="GestureChallengeScene.GestureChallengeScene"/>
 <fullyQualifiedTypeName name="org.mt4j.input.inputSources.MacTrackpadSource"/>
 <fullyQualifiedTypeName name="physicsShapes.PhysicsShield2"/>
 <fullyQualifiedTypeName name="physicsShapes.PhysicsRectangle"/>
-<fullyQualifiedTypeName name="org.mt4j.components.TransformSpace"/>
 <fullyQualifiedTypeName name="util.PhysicsHelper"/>
 <fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
+<fullyQualifiedTypeName name="org.mt4j.components.visibleComponents.shapes.MTRectangle"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="PlayerInterface.PlayerInterface"/>
+<fullyQualifiedTypeName name="org.mt4j.util.MTColor"/>
+<fullyQualifiedTypeName name="GestureChallengeScene.GestureChallengeScene"/>
 <fullyQualifiedTypeName name="PlayerInterface.PlayerGoal"/>
+<fullyQualifiedTypeName name="org.mt4j.util.math.Vector3D"/>
+<fullyQualifiedTypeName name="GameModel.GameModel"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsShield"/>
+<fullyQualifiedTypeName name="GameModel.Constants"/>
+<fullyQualifiedTypeName name="org.mt4j.components.TransformSpace"/>
 </qualifiedTypeNameHistroy>
