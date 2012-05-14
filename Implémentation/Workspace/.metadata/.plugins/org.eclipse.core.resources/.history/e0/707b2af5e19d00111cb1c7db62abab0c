@@ -1,0 +1,5 @@
+package PlayerInterface;
+
+public class PlayerBullet {
+
+}

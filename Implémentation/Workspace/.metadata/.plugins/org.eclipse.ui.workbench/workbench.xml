@@ -17,6 +17,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.browser.editor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -44,17 +45,20 @@
 <part id="12"/>
 <part id="13"/>
 <part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GestureChallengeScene.java" partName="GestureChallengeScene.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" title="GestureChallengeScene.java" tooltip="GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java"/>
-<editorState selectionHorizontalPixel="72" selectionLength="16" selectionOffset="3349" selectionTopPixel="1305"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6665" selectionTopPixel="1775"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="main.java" partName="main.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/main/main.java" title="main.java" tooltip="GestureChallenge/src/main/main.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/main/main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="606" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="865" selectionTopPixel="74"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsCircle.java" partName="PhysicsCircle.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsCircle.java" title="PhysicsCircle.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsCircle.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsCircle.java"/>
@@ -64,13 +68,13 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/IPhysicsComponent.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="22" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsPolygon.java" partName="PhysicsPolygon.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsPolygon.java" title="PhysicsPolygon.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsPolygon.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsPolygon.java" partName="PhysicsPolygon.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsPolygon.java" title="PhysicsPolygon.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsPolygon.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsPolygon.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1024" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="6" selectionOffset="5799" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsRectangle.java" partName="PhysicsRectangle.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsRectangle.java" title="PhysicsRectangle.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsRectangle.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsRectangle.java" partName="PhysicsRectangle.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsRectangle.java" title="PhysicsRectangle.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsRectangle.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsRectangle.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="28" selectionOffset="1009" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="7" selectionLength="0" selectionOffset="1173" selectionTopPixel="151"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsSphere.java" partName="PhysicsSphere.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsSphere.java" title="PhysicsSphere.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsSphere.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsSphere.java"/>
@@ -84,36 +88,51 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/Settings.txt"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield.java" partName="PhysicsShield.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsShield.java" title="PhysicsShield.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
-<editorState selectionHorizontalPixel="28" selectionLength="0" selectionOffset="9627" selectionTopPixel="2934"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield2.java" partName="PhysicsShield2.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsShield2.java" title="PhysicsShield2.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield2.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsShield2.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2119" selectionTopPixel="42"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerGoal.java" partName="PlayerGoal.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/PlayerInterface/PlayerGoal.java" title="PlayerGoal.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerGoal.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="877" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1463" selectionTopPixel="216"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameModel.java" partName="GameModel.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GameModel/GameModel.java" title="GameModel.java" tooltip="GestureChallenge/src/GameModel/GameModel.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameModel.java" partName="GameModel.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GameModel/GameModel.java" title="GameModel.java" tooltip="GestureChallenge/src/GameModel/GameModel.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/GameModel/GameModel.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="826" selectionTopPixel="251"/>
+<editorState selectionHorizontalPixel="0" selectionLength="75" selectionOffset="753" selectionTopPixel="112"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerInterface.java" partName="PlayerInterface.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/PlayerInterface/PlayerInterface.java" title="PlayerInterface.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerInterface.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerInterface.java" partName="PlayerInterface.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/PlayerInterface/PlayerInterface.java" title="PlayerInterface.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerInterface.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/PlayerInterface/PlayerInterface.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="517" selectionTopPixel="292"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3460" selectionTopPixel="1167"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Constants.java" partName="Constants.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/GameModel/Constants.java" title="Constants.java" tooltip="GestureChallenge/src/GameModel/Constants.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/GameModel/Constants.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="244" selectionTopPixel="0"/>
 </editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UpdatePhysicsAction.java" partName="UpdatePhysicsAction.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/util/UpdatePhysicsAction.java" title="UpdatePhysicsAction.java" tooltip="GestureChallenge/src/util/UpdatePhysicsAction.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/util/UpdatePhysicsAction.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1425" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield.java" partName="PhysicsShield.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/physicsShapes/PhysicsShield.java" title="PhysicsShield.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1412" selectionTopPixel="2851"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.ClassFileEditor" name="MTTriangleMesh.class" partName="MTTriangleMesh.class" title="MTTriangleMesh.class" tooltip="org.mt4j.components.visibleComponents.shapes.mesh.MTTriangleMesh" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.components.visibleComponents.shapes.mesh(MTTriangleMesh.class"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerBullet.java" partName="PlayerBullet.java" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/src/PlayerInterface/PlayerBullet.java" title="PlayerBullet.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerBullet.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GestureChallenge/src/PlayerInterface/PlayerBullet.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1226" selectionTopPixel="87"/>
+</editor>
 </editors>
 <views>
+<view id="org.eclipse.jdt.callhierarchy.view" partName="Call Hierarchy">
+<viewState search_scope_type="1"/>
+</view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (8 items)"/>
+<category IMemento.internal.id="Warnings (26 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -159,7 +178,9 @@
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
-<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
+<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc">
+<viewState/>
+</view>
 </views>
 <perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
@@ -213,9 +234,10 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
-<view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.jdt.callhierarchy.view"/>
+<view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -241,12 +263,13 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="254" ratioRight="762" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.68550724" ratioLeft="473" ratioRight="217" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.6115942" ratioLeft="422" ratioRight="268" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
-<page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.jdt.callhierarchy.view" label="Call Hierarchy"/>
+<page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
@@ -255,6 +278,7 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
@@ -275,163 +299,163 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/GestureChallengeScene/GestureChallengeScene.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerInterface.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/main/main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/GameModel/Constants.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerBullet.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerBullet.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/PlayerInterface/PlayerGoal.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/GestureChallenge/src/GameModel/GameModel.java"/>
 </editors>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9879" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="894" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9891" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="589" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9918" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="894" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9930" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="727" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9781" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="725" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9918" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="589" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1155" y="0"/>
+<item historyLabel="PhysicsShield.java" index="1">
+<position info="not_deleted" x="1412" y="0"/>
 </item>
-<item historyLabel="PlayerGoal.java" index="0">
-<position info="not_deleted" x="774" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="725" y="0"/>
 </item>
-<item historyLabel="PlayerGoal.java" index="0">
-<position info="not_deleted" x="877" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="756" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9918" y="0"/>
+<item historyLabel="PlayerBullet.java" index="2">
+<position info="not_deleted" x="1226" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9515" y="0"/>
+<item historyLabel="PhysicsShield.java" index="1">
+<position info="not_deleted" x="1412" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1205" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="589" y="0"/>
 </item>
-<item historyLabel="PlayerGoal.java" index="0">
-<position info="not_deleted" x="877" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="3296" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2430" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1143" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2535" y="0"/>
 </item>
-<item historyLabel="Constants.java" index="4">
-<position info="not_deleted" x="407" y="26"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2558" y="0"/>
 </item>
-<item historyLabel="Constants.java" index="4">
-<position info="not_deleted" x="365" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1153" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2354" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1153" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="3254" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1872" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="GestureChallengeScene.java" index="1">
-<position info="not_deleted" x="3349" y="16"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1872" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1785" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="Constants.java" index="4">
-<position info="not_deleted" x="365" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1789" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="4596" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1789" y="0"/>
+<item historyLabel="PlayerBullet.java" index="3">
+<position info="not_deleted" x="1226" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PhysicsShield.java" index="4">
+<position info="not_deleted" x="1412" y="0"/>
 </item>
-<item historyLabel="Constants.java" index="4">
-<position info="not_deleted" x="244" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1560" y="0"/>
+<item historyLabel="PlayerGoal.java" index="5">
+<position info="not_deleted" x="1615" y="0"/>
 </item>
-<item historyLabel="Constants.java" index="4">
-<position info="not_deleted" x="244" y="0"/>
+<item historyLabel="PlayerGoal.java" index="5">
+<position info="not_deleted" x="1788" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1560" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="3254" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="659" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2792" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="1600" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1312" y="0"/>
+<item historyLabel="PlayerGoal.java" index="5">
+<position info="not_deleted" x="1788" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PlayerGoal.java" index="5">
+<position info="not_deleted" x="1786" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
+<item historyLabel="PlayerGoal.java" index="5">
+<position info="not_deleted" x="1463" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="1312" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2104" y="0"/>
 </item>
-<item historyLabel="main.java" index="3">
-<position info="not_deleted" x="606" y="0"/>
+<item historyLabel="PhysicsShield.java" index="4">
+<position info="not_deleted" x="1412" y="0"/>
 </item>
-<item historyLabel="PhysicsShield.java" index="5">
-<position info="not_deleted" x="9627" y="0"/>
-</item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="543" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="2104" y="0"/>
 </item>
 <item historyLabel="GameModel.java" index="6">
-<position info="not_deleted" x="826" y="0"/>
+<position info="not_deleted" x="678" y="0"/>
 </item>
-<item historyLabel="PlayerInterface.java" index="2">
-<position info="not_deleted" x="517" y="0"/>
+<item historyLabel="GameModel.java" index="6">
+<position info="not_deleted" x="753" y="75"/>
 </item>
-<item active="true" historyLabel="GameModel.java" index="6">
-<position info="not_deleted" x="826" y="0"/>
+<item historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="3594" y="0"/>
+</item>
+<item active="true" historyLabel="PlayerInterface.java" index="0">
+<position info="not_deleted" x="3841" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -439,12 +463,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="right"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -452,11 +470,28 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerBullet.java" tooltip="GestureChallenge/src/PlayerInterface/PlayerBullet.java">
+<persistable path="/GestureChallenge/src/PlayerInterface/PlayerBullet.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="MTTriangleMesh.class" tooltip="org.mt4j.components.visibleComponents.shapes.mesh.MTTriangleMesh">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.components.visibleComponents.shapes.mesh(MTTriangleMesh.class"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Body.class" tooltip="org.jbox2d.dynamics.Body">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-desktop\/examples\/advanced\/physics\/lib\/jbox2d.jar&lt;org.jbox2d.dynamics(Body.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield.java">
+<persistable path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UpdatePhysicsAction.java" tooltip="GestureChallenge/src/util/UpdatePhysicsAction.java">
+<persistable path="/GestureChallenge/src/util/UpdatePhysicsAction.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="MTComponent.class" tooltip="org.mt4j.components.MTComponent">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=GestureChallenge/\/Users\/etiennegirot\/Desktop\/UTC\/NF28\/Projet\/GestureChallenge\/Implémentation\/Workspace\/mt4j-core\/lib\/mt4j-core.jar&lt;org.mt4j.components(MTComponent.class"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Constants.java" tooltip="GestureChallenge/src/GameModel/Constants.java">
 <persistable path="/GestureChallenge/src/GameModel/Constants.java"/>
 </file>
@@ -475,12 +510,6 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield2.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield2.java">
 <persistable path="/GestureChallenge/src/physicsShapes/PhysicsShield2.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsShield.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsShield.java">
-<persistable path="/GestureChallenge/src/physicsShapes/PhysicsShield.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UpdatePhysicsAction.java" tooltip="GestureChallenge/src/util/UpdatePhysicsAction.java">
-<persistable path="/GestureChallenge/src/util/UpdatePhysicsAction.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsHelper.java" tooltip="GestureChallenge/src/util/PhysicsHelper.java">
 <persistable path="/GestureChallenge/src/util/PhysicsHelper.java"/>
 </file>
@@ -489,18 +518,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsRectangle.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsRectangle.java">
 <persistable path="/GestureChallenge/src/physicsShapes/PhysicsRectangle.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsPolygon.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsPolygon.java">
-<persistable path="/GestureChallenge/src/physicsShapes/PhysicsPolygon.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="IPhysicsComponent.java" tooltip="GestureChallenge/src/physicsShapes/IPhysicsComponent.java">
-<persistable path="/GestureChallenge/src/physicsShapes/IPhysicsComponent.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PhysicsCircle.java" tooltip="GestureChallenge/src/physicsShapes/PhysicsCircle.java">
-<persistable path="/GestureChallenge/src/physicsShapes/PhysicsCircle.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="main.java" tooltip="GestureChallenge/src/main/main.java">
-<persistable path="/GestureChallenge/src/main/main.java"/>
 </file>
 </mruList>
 </workbench>

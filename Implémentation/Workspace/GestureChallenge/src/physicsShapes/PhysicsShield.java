@@ -69,7 +69,7 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 		//shieldVertices[smallDef+bigDef]=shieldVertices[0];
 		
 		for(int k=0;k<bigDef+smallDef;k++){
-			System.out.println("V["+k+"]=("+vertices[k].x+" "+vertices[k].y+")");
+			//System.out.println("V["+k+"]=("+vertices[k].x+" "+vertices[k].y+")");
 		}
 		
 		
@@ -249,19 +249,26 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 	
 	
 	//@Override
-	public void rotateZGlobal(Vector3D rotationPoint, float degree) {
-		angle += degree;
-		super.rotateZGlobal(rotationPoint, degree);
+	public void rotateZGlobal(Vector3D rotationPoint, float degree) {		
+		if(degree!=0){
+			angle += degree;
+			super.rotateZGlobal(rotationPoint, degree);
+		}
+
 	}
 	public float getAngle() {
 		return angle;
 	}
 	public void setCenterRotation(float angle){
-		float degreeAngle = AbstractMTApplication.degrees(angle);
-		float oldAngle = this.getAngle();
-		float diff = degreeAngle-oldAngle;
-		//System.out.println("Old angle: " + oldAngle + " new angle:" + degreeAngle + " diff->" +  diff);
-		this.rotateZGlobal(this.getCenterPointGlobal(), diff);
+		if(angle!=0){
+			Body body = this.getBody();
+			//System.out.println("angle CenterRot: "+angle);			
+			float degreeAngle = AbstractMTApplication.degrees(angle);
+			float oldAngle = this.getAngle();
+			float diff = degreeAngle-oldAngle;
+		//	System.out.println("Old angle: " + oldAngle + " new angle:" + degreeAngle + " diff->" +  diff);
+			this.rotateZGlobal(this.getCenterPointGlobal(), diff);
+		}	
 	}
 	
 	//@Override

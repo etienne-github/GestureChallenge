@@ -157,7 +157,13 @@ public class GestureChallengeScene extends AbstractScene {
 	c.setStrokeColor(col1);
 	PhysicsHelper.addDragJoint(world, c, c.getBody().isDynamic(), scale);
 	c.setDepthBufferDisabled(true);
+	//c.getBody().getShapeList().m_filter.categoryBits=0x0002;
+	c.getBody().getShapeList().m_filter.maskBits=17;
+	//c.getBody().getShapeList().m_filter.groupIndex=0x0004;
 	physicsContainer.addChild(c);
+	System.out.println("c : "+c.getBody().getShapeList().m_filter.categoryBits+" / "+ c.getBody().getShapeList().m_filter.groupIndex);
+
+	
 	
 		
 	}
@@ -183,7 +189,7 @@ public class GestureChallengeScene extends AbstractScene {
 					test.setFillColor(MTColor.WHITE);
 					test.setStrokeColor(MTColor.RED);
 					//physicsContainer.addChild(test);
-					System.out.println("added en "+emptyCircleVertices[i].x+" "+emptyCircleVertices[i].y);
+					//System.out.println("added en "+emptyCircleVertices[i].x+" "+emptyCircleVertices[i].y);
 				}
 				Vertex AB;
 				Vertex halfAB;
@@ -195,13 +201,25 @@ public class GestureChallengeScene extends AbstractScene {
 					float l = (float) Math.sqrt(Math.pow(AB.x, 2)+Math.pow(AB.y, 2));
 					halfAB = new Vertex(AB.x/2f,AB.y/2f);
 					pR = new PhysicsRectangle(new Vertex(emptyCircleVertices[i].x+halfAB.x,emptyCircleVertices[i].y+halfAB.y), l, 8, app, world, 0, 0, 0, scale);
+					
 					if((i>def/4)&&(i<3*(def/4))){
-						pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS))*-1, TransformSpace.LOCAL);
+						
+						pR.getBody().setXForm(
+								pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS)*-1)
+								/*((float) Math.toDegrees(angle))*/
+						);
+						
+						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS))*-1, TransformSpace.LOCAL);
 					}else{
-						pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
+						pR.getBody().setXForm(
+								pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS))
+								/*((float) Math.toDegrees(angle))*/
+						);
+						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 					}
+					pR.getBody().getShapeList().getFilterData().categoryBits=1;
 					pR.setDepthBufferDisabled(true);
-					pR.setNoFill(true);
+					//pR.setNoFill(true);
 					pR.setNoStroke(true);
 					parent.addChild(pR);
 				}
@@ -212,9 +230,14 @@ public class GestureChallengeScene extends AbstractScene {
 				float l = (float) Math.sqrt(Math.pow(AB.x, 2)+Math.pow(AB.y, 2));
 				halfAB = new Vertex(AB.x/2f,AB.y/2f);
 				pR = new PhysicsRectangle(new Vertex(emptyCircleVertices[def-1].x+halfAB.x,emptyCircleVertices[def-1].y+halfAB.y), l, 8, app, world, 0, 0, 0, scale);
-				pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
+				pR.getBody().setXForm(
+						pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS))
+						/*((float) Math.toDegrees(angle))*/
+				);
+				pR.getBody().getShapeList().getFilterData().categoryBits=1;
+				//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 				pR.setDepthBufferDisabled(true);
-				pR.setNoFill(true);
+				//pR.setNoFill(true);
 				pR.setNoStroke(true);
 				parent.addChild(pR);	
 			
