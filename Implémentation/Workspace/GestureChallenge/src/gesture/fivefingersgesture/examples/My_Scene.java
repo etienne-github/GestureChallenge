@@ -4,6 +4,7 @@ import gesture.fivefingersgesture.FiveFingersGestureEvent;
 import gesture.fivefingersgesture.FiveFingersGestureProcessor;
 
 import org.mt4j.AbstractMTApplication;
+import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.shapes.AbstractShape;
 import org.mt4j.components.visibleComponents.shapes.MTEllipse;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
@@ -41,7 +42,11 @@ public class My_Scene extends AbstractScene{
 		this.registerGlobalInputProcessor(new CursorTracer(app, this));
 		AbstractShape.createDefaultGestures = false;
 		
-		myPlot = new MTRectangle(800, 750, mtApplication);
+		myPlot = new MTRectangle(700, 700, mtApplication);
+		myPlot.setPositionGlobal(new Vector3D(app.width/2f/*-myPlot.getWidthXY(TransformSpace.GLOBAL)/2f*/,app.height/2f/*-myPlot.getHeightXY(TransformSpace.GLOBAL)/2f*/));
+		myPlot.setFillColor(MTColor.LIME);
+		myPlot.setNoStroke(false);
+		myPlot.setStrokeWeight(4);
 		myPlot.setStrokeColor(MTColor.GREEN);
 		this.getCanvas().addChild(myPlot);
 		
@@ -51,7 +56,7 @@ public class My_Scene extends AbstractScene{
 		
 		
 		
-		myPlot.translate(new Vector3D(200, 300));
+		//myPlot.translate(new Vector3D(200, 300));
 		myPlot.registerInputProcessor(new FiveFingersGestureProcessor(mtApplication));
 		myPlot.addGestureListener(FiveFingersGestureProcessor.class, new IGestureEventListener() {
 			public boolean processGestureEvent(MTGestureEvent ge) {
@@ -59,8 +64,8 @@ public class My_Scene extends AbstractScene{
 				//Vector3D barycenter = evt.getBarycenter();
 				//myEllipse.setPositionRelativeToParent(barycenter);
 				float angle = evt.getRotationAngle();
-				//System.out.println(angle);
-				System.out.println(angle*360/(2*Math.PI));
+				System.out.println(Math.toDegrees(angle));
+				//System.out.println(angle*360/(2*Math.PI));
 				myPlot.rotateZ(myPlot.getCenterPointGlobal(), (float)(angle*360/(2*Math.PI)));
 				return false;
 			}

@@ -1,20 +1,17 @@
-#Tue May 15 14:16:51 CEST 2012
-content_assist_proposals_foreground=0,0,0
-spelling_locale_initialized=true
-org.eclipse.jdt.ui.text.templates_migrated=true
-useAnnotationsPrefPage=true
-eclipse.preferences.version=1
-org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
-tabWidthPropagated=true
-org.eclipse.jdt.ui.editor.tab.width=
-fontPropagated=true
-org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
-org.eclipse.jdt.ui.javadoclocations.migrated=true
-proposalOrderMigrated=true
-org.eclipse.jdt.ui.formatterprofiles.version=12
-content_assist_proposals_background=255,255,255
-content_assist_number_of_computers=13
+#Tue May 15 23:14:28 CEST 2012
 useQuickDiffPrefPage=true
+org.eclipse.jdt.ui.text.templates_migrated=true
+proposalOrderMigrated=true
+tabWidthPropagated=true
+content_assist_proposals_background=255,255,255
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+useAnnotationsPrefPage=true
+org.eclipse.jface.textfont=1|Monaco|11.0|0|COCOA|1|;
+org.eclipse.jdt.ui.editor.tab.width=
+org.eclipse.jdt.ui.formatterprofiles.version=12
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
-content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="physicsShapes.PhysicsCircle"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="physicsShapes.IPhysicsComponent"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.visibleComponents.shapes.MTEllipse"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.visibleComponents.shapes.MTPolygon"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.visibleComponents.shapes.MTCSSStylableShape"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.css.util.CSSStylableComponent"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.visibleComponents.shapes.AbstractShape"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.input.inputProcessors.componentProcessors.lassoProcessor.ILassoable"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.interfaces.IMTComponent3D"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.interfaces.IMTComponent"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.visibleComponents.AbstractVisibleComponent"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.components.MTComponent"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.input.IMTInputEventListener"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="org.mt4j.input.inputProcessors.IGestureEventListener"><rhs name\="PlayerInterface.PlayerGoal"/><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="PlayerInterface.PlayerGoal"><rhs name\="PlayerInterface.PlayerGoal"/></lhs><lhs name\="java.lang.Enum"><rhs name\="org.mt4j.components.TransformSpace"/></lhs><lhs name\="org.mt4j.components.visibleComponents.widgets.MTTextArea"><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/></lhs><lhs name\="org.mt4j.components.visibleComponents.widgets.keyboard.ITextInputListener"><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/></lhs><lhs name\="org.mt4j.components.visibleComponents.shapes.MTRectangle"><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/></lhs><lhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"><rhs name\="org.mt4j.components.visibleComponents.widgets.MTTextField"/></lhs><lhs name\="PlayerInterface.PlayerBullet"><rhs name\="PlayerInterface.PlayerBullet"/></lhs><lhs name\="PlayerInterface.PlayerBulletLoader"><rhs name\="PlayerInterface.PlayerBulletLoader"/></lhs></history>
-org.eclipse.jdt.ui.text.code_templates_migrated=true
+content_assist_number_of_computers=13
+spelling_locale_initialized=true
+eclipse.preferences.version=1
+content_assist_proposals_foreground=0,0,0
+fontPropagated=true
