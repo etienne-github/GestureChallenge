@@ -1,6 +1,0 @@
-package GameModel;
-
-public class Constants {
-	public static int radiusCenterGoals=280;
-	public static int radiusGoals=45;
-}
