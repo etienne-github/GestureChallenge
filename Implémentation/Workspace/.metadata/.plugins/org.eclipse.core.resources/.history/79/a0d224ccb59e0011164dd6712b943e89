@@ -25,7 +25,7 @@ public class main extends MTApplication {
 		GestureChallengeScene GCS = new GestureChallengeScene(this, "GestureChallenge");
 		addScene(GCS);
 		GameModel GM = new GameModel(GCS);
-		GM.setPlayerNumber(8);
+		GM.setPlayerNumber(4);
 		GM.createInterfaces();
 		//PhysicsRectangle r = new PhysicsRectangle(new Vector3D(this.width/2f+50,this.height/2f), 30,30, this, GCS.getWorld(), 0f, 0f, 0f, GCS.getScale());
 		//GCS.getPhysicsContainer().addChild(r);

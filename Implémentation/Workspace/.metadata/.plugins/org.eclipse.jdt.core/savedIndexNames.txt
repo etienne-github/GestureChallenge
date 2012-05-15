@@ -46,7 +46,6 @@ INDEX VERSION 1.126+/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge
 801087527.index
 2081806102.index
 2326659272.index
-4046145607.index
 3098724832.index
 2545238116.index
 2489756651.index

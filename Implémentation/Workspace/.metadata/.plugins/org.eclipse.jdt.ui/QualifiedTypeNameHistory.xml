@@ -13,7 +13,6 @@
 <fullyQualifiedTypeName name="PlayerInterface.PlayerGoal"/>
 <fullyQualifiedTypeName name="GameModel.GameModel"/>
 <fullyQualifiedTypeName name="physicsShapes.PhysicsShield"/>
-<fullyQualifiedTypeName name="GameModel.Constants"/>
 <fullyQualifiedTypeName name="org.mt4j.components.TransformSpace"/>
 <fullyQualifiedTypeName name="physicsShapes.PhysicsRectangle"/>
 <fullyQualifiedTypeName name="org.mt4j.util.math.Vector3D"/>
@@ -21,10 +20,14 @@
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="org.mt4j.util.font.FontManager"/>
 <fullyQualifiedTypeName name="org.mt4j.components.visibleComponents.widgets.MTTextField"/>
-<fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
-<fullyQualifiedTypeName name="org.mt4j.util.MTColor"/>
 <fullyQualifiedTypeName name="org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor"/>
 <fullyQualifiedTypeName name="org.mt4j.input.inputProcessors.IGestureEventListener"/>
 <fullyQualifiedTypeName name="org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent"/>
+<fullyQualifiedTypeName name="org.jbox2d.collision.shapes.Shape"/>
 <fullyQualifiedTypeName name="org.jbox2d.common.Vec2"/>
+<fullyQualifiedTypeName name="PlayerInterface.PlayerBullet"/>
+<fullyQualifiedTypeName name="PlayerInterface.PlayerBulletLoader"/>
+<fullyQualifiedTypeName name="physicsShapes.PhysicsCircle"/>
+<fullyQualifiedTypeName name="GameModel.Constants"/>
+<fullyQualifiedTypeName name="org.mt4j.util.MTColor"/>
 </qualifiedTypeNameHistroy>
