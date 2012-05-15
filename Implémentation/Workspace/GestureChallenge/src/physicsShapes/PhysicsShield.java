@@ -140,6 +140,9 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
     		pd.density 		= density;
     		pd.friction 	= friction;
     		pd.restitution 	= restituion;
+    		/*pd.filter.categoryBits=2;
+    		pd.filter.groupIndex=0;
+    		pd.filter.maskBits=2;*/
 		}
     	
 		//Create polygon body
@@ -148,6 +151,7 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 		dymBodyDef.position = new Vec2(position.x , position.y );
 		this.bodyDefB4CreationCallback(dymBodyDef);
 		this.body = world.createBody(dymBodyDef);
+
 		
 //    	GluTrianglulator triangulator = new GluTrianglulator(applet);
 //		List<Vertex> physicsTris = triangulator.tesselate(vertices, GLU.GLU_TESS_WINDING_NONZERO);
@@ -165,6 +169,9 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
     		this.body.setMassFromShapes();
     		this.body.setUserData(this);
 	    	this.setUserData("box2d", this.body); //TODO rename userData
+	    	/*this.body.getShapeList().m_filter.categoryBits=2;
+	    	this.body.getShapeList().m_filter.groupIndex=0;
+	    	this.body.getShapeList().m_filter.maskBits=2;*/
 			//Performance hit! but prevents object from sticking to another sometimes
 //			theBody.setBullet(true);
     	}else{
@@ -196,6 +203,9 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
     				polyDef.density 		= density;
     				polyDef.friction 		= friction;
     				polyDef.restitution 	= restituion;
+    				/*polyDef.filter.categoryBits=2;
+    				polyDef.filter.groupIndex=0;
+    				polyDef.filter.maskBits=2;*/
     			}
     			this.polyDefB4CreationCallback(polyDef); //FIXME TEST
     			
@@ -207,13 +217,18 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
     			polyDef.addVertex(new Vec2(vertex2.x, vertex2.y));
     			polyDef.addVertex(new Vec2(vertex3.x, vertex3.y));
     			//Add poly to body
+
     			this.body.createShape(polyDef);
+
     		}
     		this.body.setMassFromShapes();
     		//FIXME TEST - performance hit!?
     		//theBody.setBullet(true);
     		this.body.setUserData(this);
     		this.setUserData("box2d", this.body); //TODO rename userData
+	    	/*this.body.getShapeList().m_filter.categoryBits=2;
+	    	this.body.getShapeList().m_filter.groupIndex=0;
+	    	this.body.getShapeList().m_filter.maskBits=2;*/
     	}
     	
     	//MTColor polyCol = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
@@ -236,6 +251,10 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 		this.setOutlineContours(contours);
 		this.setNoStroke(false);
 //    	p.destroy();
+		/*
+		this.body.m_shapeList.m_filter.categoryBits=2;
+		this.body.m_shapeList.m_filter.groupIndex=0;
+		this.body.m_shapeList.m_filter.maskBits=2;*/
 	}
 	
 	

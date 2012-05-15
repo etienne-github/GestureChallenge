@@ -151,14 +151,25 @@ public class GestureChallengeScene extends AbstractScene {
 	//physicsContainer.addChild(pG);
 	
 	//add bouncing circle
-	PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
+	/*PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
 	MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
 	c.setFillColor(col1);
 	c.setStrokeColor(col1);
 	PhysicsHelper.addDragJoint(world, c, c.getBody().isDynamic(), scale);
 	c.setDepthBufferDisabled(true);
 	//c.getBody().getShapeList().m_filter.categoryBits=0x0002;
-	c.getBody().getShapeList().m_filter.maskBits=17;
+	c.getBody().getShapeList().m_filter.maskBits=15;
+	c.getBody().getShapeList().m_filter.categoryBits=15;
+	c.getBody().getShapeList().m_filter.groupIndex=0;*/
+	
+	boolean collideWall = (c.getBody().getShapeList().m_filter.maskBits & 1) != 0 && (c.getBody().getShapeList().m_filter.categoryBits & 1) != 0;
+
+
+	boolean collideArc = (c.getBody().getShapeList().m_filter.maskBits & 2) != 0 && (c.getBody().getShapeList().m_filter.categoryBits & 2) != 0;
+	
+	System.out.println("bullet collides with walls ? "+collideWall);
+	System.out.println("bullet collides with arcs ? "+collideArc);
+	
 	//c.getBody().getShapeList().m_filter.groupIndex=0x0004;
 	physicsContainer.addChild(c);
 	System.out.println("c : "+c.getBody().getShapeList().m_filter.categoryBits+" / "+ c.getBody().getShapeList().m_filter.groupIndex);
@@ -217,7 +228,9 @@ public class GestureChallengeScene extends AbstractScene {
 						);
 						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 					}
+					pR.getBody().getShapeList().getFilterData().maskBits=1;
 					pR.getBody().getShapeList().getFilterData().categoryBits=1;
+					pR.getBody().getShapeList().getFilterData().groupIndex=0;
 					pR.setDepthBufferDisabled(true);
 					//pR.setNoFill(true);
 					pR.setNoStroke(true);
@@ -234,7 +247,9 @@ public class GestureChallengeScene extends AbstractScene {
 						pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS))
 						/*((float) Math.toDegrees(angle))*/
 				);
+				pR.getBody().getShapeList().getFilterData().maskBits=1;
 				pR.getBody().getShapeList().getFilterData().categoryBits=1;
+				pR.getBody().getShapeList().getFilterData().groupIndex=0;
 				//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 				pR.setDepthBufferDisabled(true);
 				//pR.setNoFill(true);

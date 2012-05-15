@@ -1,0 +1,34 @@
+package PlayerInterface;
+
+import org.jbox2d.common.Vec2;
+
+import GameModel.Constants;
+
+public class PlayerBulletLoader {
+	Vec2 goalCenter;
+	float angle;
+	PlayerInterface myPI;
+	int bulletsNumber;
+	int reloadDelay_ms;
+	
+	public PlayerBulletLoader(PlayerInterface pI){
+		myPI = pI;
+		bulletsNumber = Constants.loaderBulletsNumber;
+		reloadDelay_ms = Constants.loaderReloadDelay_ms;
+	}
+	
+	public void reload(){
+		float interangle = 90/(float)bulletsNumber;
+		for(int i=0;i<bulletsNumber;i++){
+			Vec2 pos = new Vec2();
+			pos.x=(float) (
+					myPI.getMyPG().getBody().getPosition().x+
+					Math.cos(0)*Constants.loaderBulletDistance
+					);
+			pos.y=(float) (
+					myPI.getMyPG().getBody().getPosition().y+
+					Math.sin(0)*Constants.loaderBulletDistance
+					);
+		}
+	}
+}

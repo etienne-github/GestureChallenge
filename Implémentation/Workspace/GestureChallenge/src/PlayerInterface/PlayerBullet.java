@@ -16,12 +16,15 @@ public class PlayerBullet extends PhysicsCircle {
 			float worldScale, PlayerInterface sender) {
 		super(applet, centerPoint, radius, world, density, friction, restitution,
 				worldScale);
+		mySender=sender;
 		this.setFillColor(mySender.getMyColor());
 		MTColor darker = new MTColor(mySender.getMyColor().getR()/2f,mySender.getMyColor().getG()/2f,mySender.getMyColor().getB()/2f);
 		this.setStrokeColor(darker);
 		this.setStrokeWeight(4);
 		mySender = sender;
-		this.getBody().getShapeList().getFilterData().maskBits=1+mySender.getMyCollisionID();
+		this.getBody().getShapeList().m_filter.categoryBits=mySender.getMyBulletMask();
+		this.getBody().getShapeList().m_filter.maskBits=mySender.getMyBulletMask();
+		this.getBody().getShapeList().m_filter.groupIndex=0;
 		// TODO Auto-generated constructor stub
 	}
 	

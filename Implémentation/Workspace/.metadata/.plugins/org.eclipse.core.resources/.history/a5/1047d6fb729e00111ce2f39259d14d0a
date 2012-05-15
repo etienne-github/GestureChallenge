@@ -1,0 +1,13 @@
+package PlayerInterface;
+
+import org.jbox2d.common.Vec2;
+
+public class PlayerBulletLoader {
+	Vec2 goalCenter;
+	float angle;
+	PlayerInterface myPI;
+	
+	public PlayerBulletLoader(PlayerInterface pI){
+		myPI = pI;
+	}
+}

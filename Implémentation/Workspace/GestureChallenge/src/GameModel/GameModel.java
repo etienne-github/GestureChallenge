@@ -1,6 +1,7 @@
 package GameModel;
 
 import org.mt4j.util.MTColor;
+import org.mt4j.util.math.ToolsMath;
 
 import GestureChallengeScene.GestureChallengeScene;
 import PlayerInterface.PlayerInterface;
@@ -13,7 +14,7 @@ public class GameModel {
 	PlayerInterface[] myPI;
 	
 	public GameModel(GestureChallengeScene gCS){
-		myPI = new PlayerInterface[4];
+		
 		playerColors= new MTColor[4];
 		playerColors[0]=new MTColor(188f,140f,255f); //Purple
 		playerColors[1]=new MTColor(255f,190f,0f);
@@ -23,9 +24,16 @@ public class GameModel {
 	}
 	
 	public void createInterfaces(){
+		myPI = new PlayerInterface[playerNumber];
 		for(int i=0;i<playerNumber;i++){
-			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));			
-			myPI[i]=new PlayerInterface(playerColors[i],i,angle,myGCS,playerNumber);
+			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));		
+			if(i<4){
+				myPI[i]=new PlayerInterface(playerColors[i],i,angle,myGCS,playerNumber);
+			}else{
+				MTColor col = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
+				myPI[i]=new PlayerInterface(col,i,angle,myGCS,playerNumber);
+			}
+			
 		}
 	}
 	

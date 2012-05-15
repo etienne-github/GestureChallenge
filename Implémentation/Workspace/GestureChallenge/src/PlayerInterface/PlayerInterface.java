@@ -1,6 +1,7 @@
 package PlayerInterface;
 
 import org.jbox2d.collision.FilterData;
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
 import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.widgets.MTTextField;
@@ -24,12 +25,32 @@ public class PlayerInterface {
 	GestureChallengeScene myGCS;
 	PlayerGoal myPG;
 	PhysicsShield myPS;
-	float angle;
+	PlayerBulletLoader myBL;
+	float myAngle;
 	int playerNumber;
 	int myCollisionID;
+	int myBulletMask;
 	
 	
 	
+	public GestureChallengeScene getMyGCS() {
+		return myGCS;
+	}
+
+
+
+	public PlayerGoal getMyPG() {
+		return myPG;
+	}
+
+
+
+	public int getMyBulletMask() {
+		return myBulletMask;
+	}
+
+
+
 	public MTColor getMyColor() {
 		return myColor;
 	}
@@ -48,6 +69,7 @@ public class PlayerInterface {
 		myColor=color;
 		myNumber=playerID;
 		myGCS = gCS;
+		myAngle=angle;
 		this.playerNumber = playerNumber;
 		
 		
@@ -96,23 +118,52 @@ public class PlayerInterface {
 			}
 			
 		});
+
+		
+		//Avoid collision between playerInterface and its own bullets
+		
+
+		myCollisionID = (int) Math.pow(2, this.myNumber+1);
+		
+		myBulletMask =0;
+		for(int i =0;i<=playerNumber;i++){
+			myBulletMask+=(int) Math.pow(2, i);
+		}
+		
+		myBulletMask-=myCollisionID;
+		
+		System.out.println("P"+myNumber+" mask:"+myBulletMask);
+		
+		
+		myPS.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
+		myPS.getBody().getShapeList().m_filter.maskBits=myCollisionID;
+		myPS.getBody().getShapeList().m_filter.groupIndex=0;
+		System.out.println("PS"+myNumber+" cat("+myPS.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPS.getBody().getShapeList().m_filter.maskBits+")/group("+myPS.getBody().getShapeList().m_filter.groupIndex+")");
+		System.out.println("PS"+myNumber+" cat("+myPS.getBody().m_shapeList.m_filter.categoryBits+")/mask("+myPS.getBody().m_shapeList.m_filter.maskBits+")/group("+myPS.getBody().m_shapeList.m_filter.groupIndex+")");
+		Shape shape;
+		shape=myPS.getBody().getShapeList();
+		for (Shape s = myPS.getBody().getShapeList();
+			     s != null;
+			     s = s.getNext()){
+			s.m_filter.categoryBits=myCollisionID;
+			s.m_filter.maskBits=myCollisionID;
+			s.m_filter.groupIndex=0;
+			//System.out.println(i);
+		}
+		
+		myPG.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
+		myPG.getBody().getShapeList().m_filter.maskBits=myCollisionID;
+		myPG.getBody().getShapeList().m_filter.groupIndex=0;
+		System.out.println("PG"+myNumber+" cat("+myPG.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPG.getBody().getShapeList().m_filter.maskBits+")");
+	
 		
 		//Creation bullets
-		//TODO
+		myBL = new PlayerBulletLoader(this);
 		
 		//Creation mobileShield area
 		//TODO
 
-		
-		
-		//Collision filters
-		myCollisionID = (int) Math.pow(2, this.myNumber+1);
-		myPS.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
-		//myPS.getBody().m_shapeList.getNext().m_filter.categoryBits=myCollisionID;
-		//myPS.getBody().m_shapeList.m_filter.categoryBits=myCollisionID;
-		//myPS.getBody().synchronizeTransform();
-		//myPS.getBody().synchronizeShapes();
-		//myPS.getBody().setXForm(myPS.getBody().getPosition(), myPS.getBody().getAngle());
-		myPG.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
+
+	
 	}
 }
