@@ -22,7 +22,6 @@ import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 import org.mt4j.util.math.Vertex;
 
-import GameModel.Constants;
 import PlayerInterface.PlayerGoal;
 
 import physicsShapes.PhysicsCircle;
@@ -184,7 +183,7 @@ public class GestureChallengeScene extends AbstractScene {
 	
 	private void createScreenBorders(MTComponent parent){
 		//Create empty circle
-				int radius = Constants.areaRadius;
+				int radius = 400;
 				int def = 96;
 				float twoPi = (float) (Math.PI*2);
 				/*

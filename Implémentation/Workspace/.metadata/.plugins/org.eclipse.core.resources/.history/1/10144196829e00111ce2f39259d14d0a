@@ -80,11 +80,6 @@ public class PlayerInterface {
 		//creation Goal
 		float x = myGCS.getMTApplication().width/2f +(float) (Math.cos(angle)*Constants.radiusCenterGoals);
 		float y = myGCS.getMTApplication().height/2f +(float) (Math.sin(angle)*Constants.radiusCenterGoals);
-		
-		//Creation mobileShield area
-		mySA = new PlayerMovableShieldArea(this, new Vector3D(x,y));
-		this.myGCS.getPhysicsContainer().addChild(mySA);
-		
 		myPG=new PlayerGoal(myGCS.getMTApplication(), new Vector3D(x,y), myGCS.getWorld(), myGCS.getScale(), myColor,this.myNumber+1,angle);
 		myGCS.getPhysicsContainer().addChild(myPG);
 
@@ -162,7 +157,8 @@ public class PlayerInterface {
 		myPG.getBody().getShapeList().m_filter.groupIndex=0;
 		System.out.println("PG"+myNumber+" cat("+myPG.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPG.getBody().getShapeList().m_filter.maskBits+")");
 	
-
+		//Creation mobileShield area
+		mySA = new PlayerMovableShieldArea(this);
 		
 		//Creation bullets
 		myBL = new PlayerBulletLoader(this);

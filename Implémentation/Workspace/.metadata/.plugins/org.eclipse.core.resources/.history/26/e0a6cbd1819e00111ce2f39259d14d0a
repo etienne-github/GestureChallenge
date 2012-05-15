@@ -1,0 +1,26 @@
+package PlayerInterface;
+
+import org.jbox2d.dynamics.World;
+import org.mt4j.util.math.Vector3D;
+
+import physicsShapes.PhysicsCircle;
+import processing.core.PApplet;
+
+public class PlayerMovableShieldArea extends PhysicsCircle {
+
+	public PlayerMovableShieldArea(PApplet applet, PlayerInterface PI, World world, float worldScale) {
+		super(applet, new Vector3D(
+				PI.getMyPG().getBody().getPosition().x*PI.getMyGCS().getScale(),
+				PI.getMyPG().getBody().getPosition().y*PI.getMyGCS().getScale()
+				),
+				radius,
+				world,
+				0f,
+				0f,
+				0f,
+				worldScale
+			);
+		// TODO Auto-generated constructor stub
+	}
+
+}

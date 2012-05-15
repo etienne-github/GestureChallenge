@@ -1,7 +1,6 @@
 package GameModel;
 
 public class Constants {
-	public static int areaRadius=400;
 	public static int radiusCenterGoals=290;
 	public static int radiusGoals=45;
 	
@@ -15,6 +14,5 @@ public class Constants {
 	public static int loaderBulletsNumber=4;
 	public static int loaderReloadDelay_ms=2000;
 	public static int loaderBulletDistance=  radiusGoals+(int) ((shieldSmallRadius-radiusGoals)/2f);
-	public static int movableShieldAreaRadius = areaRadius-radiusCenterGoals+shieldBigRadius+20;
 }
 
