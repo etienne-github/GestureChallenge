@@ -7,4 +7,16 @@ Conception/UML/ressources/.DS_Store
 
 */.DS_Store
 
+*.index
+
+*.snap
+
 Implémentation/Workspace/.metadata/
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.history/
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/GestureChallenge/.indexes/*/*/*/*/
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/

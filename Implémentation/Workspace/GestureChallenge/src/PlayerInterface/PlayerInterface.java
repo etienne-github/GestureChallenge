@@ -83,6 +83,7 @@ public class PlayerInterface {
 		
 		//Creation mobileShield area
 		mySA = new PlayerMovableShieldArea(this, new Vector3D(x,y));
+		mySA.removeAllGestureEventListeners();
 		this.myGCS.getPhysicsContainer().addChild(mySA);
 		
 		myPG=new PlayerGoal(myGCS.getMTApplication(), new Vector3D(x,y), myGCS.getWorld(), myGCS.getScale(), myColor,this.myNumber+1,angle);
