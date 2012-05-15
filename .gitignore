@@ -12,3 +12,13 @@ Implémentation/Workspace/.metadata
 Implémentation/Workspace/.metadata/*
 Implémentation/Workspace/.metadata/*.*
 Implémentation/Workspace/.metadata/.log
+
+*.index 
+*.dat 
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.history/*/*
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/*.index
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/*.*
+
+
