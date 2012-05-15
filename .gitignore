@@ -5,18 +5,29 @@ Conception/UML/ressources/.DS_Store
 
 .DS_Store
 
-*/.DS_Store
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
-*.index
+# External tool builders
+.externalToolBuilders/
 
-*.snap
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-Implémentation/Workspace/.metadata/
+# CDT-specific
+.cproject
 
-Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.history/
-
-Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/GestureChallenge/.indexes/*/*/*/*/
-
-Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/
-
-Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/
+# PDT-specific
+.buildpath
