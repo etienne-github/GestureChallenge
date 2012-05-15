@@ -21,6 +21,15 @@ Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/*.index
 
 Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/*.*
 
-
+.*.snap
+*.snap
 
 Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/GestureChallenge/.indexes/e4/b9/history.index
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/GestureChallenge/.*.snap
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.core.resources/.*/org.eclipse.core.*
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/*
+
+Implémentation/Workspace/.metadata/.plugins/org.eclipse.jdt.core/*.*
