@@ -4,14 +4,17 @@ import gesture.fivefingersgesture.FiveFingersGestureEvent;
 import gesture.fivefingersgesture.FiveFingersGestureProcessor;
 
 import org.mt4j.AbstractMTApplication;
+import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.shapes.AbstractShape;
 import org.mt4j.components.visibleComponents.shapes.MTEllipse;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
+import org.mt4j.components.visibleComponents.widgets.MTTextArea;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
 import org.mt4j.input.inputProcessors.globalProcessors.CursorTracer;
 import org.mt4j.sceneManagement.AbstractScene;
 import org.mt4j.util.MTColor;
+import org.mt4j.util.font.FontManager;
 import org.mt4j.util.logging.ILogger;
 import org.mt4j.util.logging.MTLoggerFactory;
 import org.mt4j.util.math.Vector3D;
@@ -42,13 +45,24 @@ public class My_Scene extends AbstractScene{
 		AbstractShape.createDefaultGestures = false;
 
 		myPlot = new MTRectangle(700, 700, mtApplication);
-		myPlot.setStrokeColor(MTColor.GREEN);
+		myPlot.setPositionGlobal(new Vector3D(app.width/2f,app.height/2f));
+		//myPlot.setStrokeColor(MTColor.GREEN);
+		myPlot.setStrokeWeight(4);
+		myPlot.setStrokeColor(MTColor.WHITE);
+		myPlot.setFillColor(MTColor.LIME);
 		this.getCanvas().addChild(myPlot);
+		MTTextArea tA = new MTTextArea(myPlot.getWidthXY(TransformSpace.GLOBAL)/2f-230,myPlot.getHeightXY(TransformSpace.GLOBAL)/2f-25,460f,50f,FontManager.getInstance().createFont(app, "arial", 40),app);
+		tA.setText("Rotate me with 5 fingers !");
+		tA.setNoFill(true);
+		tA.removeAllGestureEventListeners();
+		tA.setPickable(false);
+		tA.setNoStroke(true);
+		myPlot.addChild(tA);
 
 
 
 
-		myPlot.translate(new Vector3D(200, 300));
+
 		myPlot.registerInputProcessor(new FiveFingersGestureProcessor(mtApplication));
 		myPlot.addGestureListener(FiveFingersGestureProcessor.class, new IGestureEventListener() {
 			public boolean processGestureEvent(MTGestureEvent ge) {
