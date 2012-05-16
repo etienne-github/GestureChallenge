@@ -1,12 +1,13 @@
-package PlayerInterface;
+package playerinterface;
+
+import model.Constants;
 
 import org.jbox2d.dynamics.World;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.Vector3D;
 
-import GameModel.Constants;
 
-import physicsShapes.PhysicsCircle;
+import physic.shape.PhysicsCircle;
 import processing.core.PApplet;
 
 public class PlayerMovableShieldArea extends PhysicsCircle {

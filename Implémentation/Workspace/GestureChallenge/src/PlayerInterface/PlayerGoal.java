@@ -1,4 +1,6 @@
-package PlayerInterface;
+package playerinterface;
+
+import model.Constants;
 
 import org.jbox2d.dynamics.World;
 import org.mt4j.components.TransformSpace;
@@ -8,9 +10,8 @@ import org.mt4j.util.font.FontManager;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 
-import GameModel.Constants;
 
-import physicsShapes.PhysicsCircle;
+import physic.shape.PhysicsCircle;
 import processing.core.PApplet;
 
 public class PlayerGoal extends PhysicsCircle {

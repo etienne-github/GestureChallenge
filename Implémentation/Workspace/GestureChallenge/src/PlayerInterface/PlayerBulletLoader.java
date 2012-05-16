@@ -1,12 +1,14 @@
-package PlayerInterface;
+package playerinterface;
+
+import model.Constants;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.mt4j.util.math.Vector3D;
 
-import util.PhysicsHelper;
+import physic.shape.util.PhysicsHelper;
 
-import GameModel.Constants;
+
 
 public class PlayerBulletLoader {
 	Vec2 goalCenter;
