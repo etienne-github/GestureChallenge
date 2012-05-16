@@ -66,7 +66,7 @@ public class GestureChallengeScene extends AbstractScene {
 		//Update the positions of the components according the the physics simulation each frame
 		this.registerPreDrawAction(new UpdatePhysicsAction(world, timeStep, constraintIterations, scale));
 		
-		MTRectangle bck = new MTRectangle(app,app.loadImage("."+((String)File.separator)+"src"+((String)File.separator)+"GestureChallengeScene"+((String)File.separator)+"data"+((String)File.separator)+"bkgrnd.jpg"));
+		MTRectangle bck = new MTRectangle(app,app.loadImage("."+((String)File.separator)+"src"+((String)File.separator)+"scene"+((String)File.separator)+"data"+((String)File.separator)+"bkgrnd.jpg"));
 		this.getCanvas().addChild(bck);
 		bck.removeAllGestureEventListeners();
 		bck.setPositionGlobal(new Vector3D(app.width/2f,app.height/2f));
