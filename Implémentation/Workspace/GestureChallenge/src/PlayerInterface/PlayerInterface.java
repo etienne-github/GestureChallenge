@@ -1,4 +1,6 @@
-package PlayerInterface;
+package playerinterface;
+
+import model.Constants;
 
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.Shape;
@@ -13,10 +15,9 @@ import org.mt4j.util.MTColor;
 import org.mt4j.util.font.FontManager;
 import org.mt4j.util.math.Vector3D;
 
-import physicsShapes.PhysicsShield;
+import physic.shape.PhysicsShield;
+import scene.GestureChallengeScene;
 
-import GameModel.Constants;
-import GestureChallengeScene.GestureChallengeScene;
 
 public class PlayerInterface {
 
