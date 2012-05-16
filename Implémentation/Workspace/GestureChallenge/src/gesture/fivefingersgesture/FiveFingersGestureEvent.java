@@ -7,7 +7,7 @@ import org.mt4j.util.math.Vector3D;
 
 
 public class FiveFingersGestureEvent extends MTGestureEvent{
-	
+
 	private float rotationAngle;
 	public FiveFingersGestureEvent(IInputProcessor source, int id,
 			IMTComponent3D targetComponent, float rotAngle) {
@@ -15,9 +15,12 @@ public class FiveFingersGestureEvent extends MTGestureEvent{
 		this.rotationAngle = rotAngle;
 	}
 
-	public float getRotationAngle() {
+	public float getRotationAngleRadian() {
 		return rotationAngle;
 	}
-	
+
+	public float getRotationAngleDegree() {
+		return (float)Math.round((rotationAngle*360)/(2*Math.PI));
+	}
 
 }
