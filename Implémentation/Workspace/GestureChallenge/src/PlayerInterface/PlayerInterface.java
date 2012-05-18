@@ -138,8 +138,17 @@ public class PlayerInterface {
 			myBulletMask+=(int) Math.pow(2, i);
 		}
 		
+		
+		
 		myBulletMask-=myCollisionID;
 		
+		for(int i =0;i<=playerNumber;i++){
+			if(i!=myNumber){
+				myCollisionID+=((int) Math.pow(2, playerNumber+i+1));
+			}
+		}
+		
+				
 		System.out.println("P"+myNumber+" mask:"+myBulletMask);
 		
 		

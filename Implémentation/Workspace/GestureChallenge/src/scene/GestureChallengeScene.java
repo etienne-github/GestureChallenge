@@ -182,6 +182,11 @@ public class GestureChallengeScene extends AbstractScene {
 	
 	private void createScreenBorders(MTComponent parent){
 		//Create empty circle
+			int mask = 0;
+			
+			for(int ind=0;ind<16;ind++){
+				mask+=Math.pow(2, ind);
+			}
 				int radius = Constants.areaRadius;
 				int def = 96;
 				float twoPi = (float) (Math.PI*2);
@@ -211,6 +216,8 @@ public class GestureChallengeScene extends AbstractScene {
 					float l = (float) Math.sqrt(Math.pow(AB.x, 2)+Math.pow(AB.y, 2));
 					halfAB = new Vertex(AB.x/2f,AB.y/2f);
 					pR = new PhysicsRectangle(new Vertex(emptyCircleVertices[i].x+halfAB.x,emptyCircleVertices[i].y+halfAB.y), l, 8, app, world, 0, 0, 0, scale);
+
+					
 					
 					if((i>def/4)&&(i<3*(def/4))){
 						
@@ -227,7 +234,7 @@ public class GestureChallengeScene extends AbstractScene {
 						);
 						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 					}
-					pR.getBody().getShapeList().getFilterData().maskBits=1;
+					pR.getBody().getShapeList().getFilterData().maskBits=mask;
 					pR.getBody().getShapeList().getFilterData().categoryBits=1;
 					pR.getBody().getShapeList().getFilterData().groupIndex=0;
 					pR.setDepthBufferDisabled(true);
@@ -246,7 +253,7 @@ public class GestureChallengeScene extends AbstractScene {
 						pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS))
 						/*((float) Math.toDegrees(angle))*/
 				);
-				pR.getBody().getShapeList().getFilterData().maskBits=1;
+				pR.getBody().getShapeList().getFilterData().maskBits=mask;
 				pR.getBody().getShapeList().getFilterData().categoryBits=1;
 				pR.getBody().getShapeList().getFilterData().groupIndex=0;
 				//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
