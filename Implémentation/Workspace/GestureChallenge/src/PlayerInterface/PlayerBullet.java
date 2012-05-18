@@ -1,5 +1,7 @@
 package playerinterface;
 
+import model.Constants;
+
 import org.jbox2d.dynamics.World;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.Vector3D;
@@ -10,6 +12,8 @@ import processing.core.PApplet;
 public class PlayerBullet extends PhysicsCircle {
 
 	PlayerInterface mySender;
+	int reboundleft;
+	int myScore;
 	
 	public PlayerBullet(PApplet applet, Vector3D centerPoint, float radius,
 			World world, float density, float friction, float restitution,
@@ -17,6 +21,7 @@ public class PlayerBullet extends PhysicsCircle {
 		super(applet, centerPoint, radius, world, density, friction, restitution,
 				worldScale);
 		mySender=sender;
+		reboundleft=Constants.bulletMaxRebound;
 		this.setFillColor(mySender.getMyColor());
 		MTColor darker = new MTColor(mySender.getMyColor().getR()/2f,mySender.getMyColor().getG()/2f,mySender.getMyColor().getB()/2f);
 		this.setStrokeColor(darker);
@@ -29,7 +34,7 @@ public class PlayerBullet extends PhysicsCircle {
 		// TODO Auto-generated constructor stub
 		
 		
-		boolean collide_wall = (this.getBody().getShapeList().m_filter.maskBits & 1) != 0 && (this.getBody().getShapeList().m_filter.categoryBits & 1) != 0;
+		/*boolean collide_wall = (this.getBody().getShapeList().m_filter.maskBits & 1) != 0 && (this.getBody().getShapeList().m_filter.categoryBits & 1) != 0;
 		boolean collide_P1 = (this.getBody().getShapeList().m_filter.maskBits & 2) != 0 && (this.getBody().getShapeList().m_filter.categoryBits & 2) != 0;
 		boolean collide_P2 = (this.getBody().getShapeList().m_filter.maskBits & 4) != 0 && (this.getBody().getShapeList().m_filter.categoryBits & 4) != 0;
 		boolean collide_P3 = (this.getBody().getShapeList().m_filter.maskBits & 8) != 0 && (this.getBody().getShapeList().m_filter.categoryBits & 8) != 0;
@@ -43,7 +48,9 @@ public class PlayerBullet extends PhysicsCircle {
 		System.out.println("bullet P"+mySender.myNumber+" collide with P3 : "+collide_P3);
 		System.out.println("bullet P"+mySender.myNumber+" collide with PP1 : "+collide_PP1);
 		System.out.println("bullet P"+mySender.myNumber+" collide with PP2 : "+collide_PP2);
-		System.out.println("bullet P"+mySender.myNumber+" collide with PP3 : "+collide_PP3);
+		System.out.println("bullet P"+mySender.myNumber+" collide with PP3 : "+collide_PP3);*/
+		this.setName("PlayerBullet");
+		this.myScore=Constants.bulletScore;
 		
 	}
 	
@@ -52,6 +59,23 @@ public class PlayerBullet extends PhysicsCircle {
 		this.setFillColor(mySender.getMyColor());
 		MTColor darker = new MTColor(mySender.getMyColor().getR()/2f,mySender.getMyColor().getG()/2f,mySender.getMyColor().getB()/2f);
 		this.setStrokeColor(darker);
+		
+		//FIXME Change also category and mask for collision rule 
 	}
+	
+	public void score(){
+		this.mySender.score(myScore);
+		
+	}
+	
+	public void bounce(){
+		reboundleft--;
+	}
+
+	public int getReboundleft() {
+		return reboundleft;
+	}
+	
+
 
 }

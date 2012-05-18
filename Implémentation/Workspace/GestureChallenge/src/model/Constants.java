@@ -16,5 +16,7 @@ public class Constants {
 	public static int loaderReloadDelay_ms=2000;
 	public static int loaderBulletDistance=  radiusGoals+(int) ((shieldSmallRadius-radiusGoals)/2f);
 	public static int movableShieldAreaRadius = areaRadius-radiusCenterGoals+shieldBigRadius+20;
+	public static int bulletMaxRebound=3;
+	public static int bulletScore=10;
 }
 

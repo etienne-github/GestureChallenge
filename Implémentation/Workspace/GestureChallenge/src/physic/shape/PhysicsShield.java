@@ -44,6 +44,7 @@ public class PhysicsShield extends MTTriangleMesh implements IPhysicsComponent {
 		this.friction = friction;
 		this.restituion = restitution;
 		
+		this.setName("PlayerShield");
 		this.setGestureAllowance(ScaleProcessor.class, false);
 		this.setGestureAllowance(RotateProcessor.class, false);
 		

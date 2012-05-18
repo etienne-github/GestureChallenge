@@ -24,7 +24,7 @@ public class PlayerGoal extends PhysicsCircle {
 				worldScale);
 		//MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
 		
-		
+		this.setName("playerGoal");
 		this.setFillColor(color);
 		//color = MTColor.WHITE;
 		MTColor darker = new MTColor(color.getR()/2f, color.getG()/2f, color.getB()/2f);

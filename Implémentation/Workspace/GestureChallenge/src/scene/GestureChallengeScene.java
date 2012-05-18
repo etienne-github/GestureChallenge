@@ -7,8 +7,13 @@ import java.util.List;
 import model.Constants;
 
 import org.jbox2d.collision.AABB;
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.ContactListener;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.contacts.ContactPoint;
+import org.jbox2d.dynamics.contacts.ContactResult;
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
 import org.mt4j.components.TransformSpace;
@@ -23,12 +28,15 @@ import org.mt4j.util.MTColor;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 import org.mt4j.util.math.Vertex;
+
+import physic.shape.IPhysicsComponent;
 import physic.shape.PhysicsCircle;
 import physic.shape.PhysicsPolygon;
 import physic.shape.PhysicsRectangle;
 import physic.shape.PhysicsShield;
 import physic.shape.util.PhysicsHelper;
 import physic.shape.util.UpdatePhysicsAction;
+import playerinterface.PlayerBullet;
 import playerinterface.PlayerGoal;
 
 
@@ -145,7 +153,7 @@ public class GestureChallengeScene extends AbstractScene {
 		});*/
 	//shieldPoly.rotateZ(new Vertex(shieldPoly.getCenterPointLocal().x,shieldPoly.getCenterPointLocal().y-(bigRadius-smallRadius)/2f), 90, TransformSpace.LOCAL);	
 	createScreenBorders(physicsContainer);
-	
+	addWorldContactListener(world);
 	//PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
 	//physicsContainer.addChild(pG);
 	
@@ -240,6 +248,7 @@ public class GestureChallengeScene extends AbstractScene {
 					pR.setDepthBufferDisabled(true);
 					//pR.setNoFill(true);
 					pR.setNoStroke(true);
+					pR.setName("Wall");
 					parent.addChild(pR);
 				}
 				//Add last segment
@@ -260,6 +269,7 @@ public class GestureChallengeScene extends AbstractScene {
 				pR.setDepthBufferDisabled(true);
 				//pR.setNoFill(true);
 				pR.setNoStroke(true);
+				pR.setName("Wall");
 				parent.addChild(pR);	
 			
 	}
@@ -305,5 +315,209 @@ public class GestureChallengeScene extends AbstractScene {
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
+	
+	
+	private MTComponent isHit(String componentName, MTComponent comp1, MTComponent comp2){
+		MTComponent hitComp = null;
+		if (comp1.getName() != null && comp1.getName().equalsIgnoreCase(componentName)){
+			hitComp = comp1;
+		}else if (comp2.getName() != null && comp2.getName().equalsIgnoreCase(componentName)){
+			hitComp = comp2;
+		}
+		return hitComp;
+	}
+	
+	private void addWorldContactListener(final World world){
+		world.setContactListener(new ContactListener(){
+
+			@Override
+			public void add(ContactPoint point) {
+				Shape shape1 = point.shape1;
+				Shape shape2 = point.shape2;
+				final Body body1 = shape1.getBody();
+				final Body body2 = shape2.getBody();
+				Object userData1 = body1.getUserData();
+				Object userData2 = body2.getUserData();
+				if (userData1 instanceof IPhysicsComponent  && userData2 instanceof IPhysicsComponent) { //Check for ball/star collision
+					IPhysicsComponent physObj1 = (IPhysicsComponent) userData1;
+					IPhysicsComponent physObj2 = (IPhysicsComponent) userData2;
+//					System.out.println("Collided: " + mt4jObj1 + " with " + mt4jObj2);
+					if (physObj1 instanceof MTComponent && physObj2 instanceof MTComponent) {
+						MTComponent comp1 = (MTComponent) physObj1;
+						MTComponent comp2 = (MTComponent) physObj2;
+
+						//Check if one of the components is the BALL
+						MTComponent bullet = isHit("PlayerBullet", comp1, comp2);
+						if(bullet!=null){
+							PlayerBullet aBullet = (PlayerBullet) bullet;
+							MTComponent other = isHit("Wall",comp1,comp2);
+							if((other = isHit("Wall",comp1,comp2))!=null){
+								System.out.println("met a wall");
+								aBullet.bounce();
+								if(aBullet.getReboundleft()<=0){
+									physicsContainer.removeChild(aBullet);
+								}
+							}else if((other = isHit("PlayerGoal",comp1,comp2))!=null){
+								System.out.println("met a goal");
+								aBullet.score();
+								world.destroyBody(aBullet.getBody());
+								physicsContainer.removeChild(aBullet);
+								aBullet.destroy();
+								aBullet=null;
+								//FIXME la bullet semble supprimŽe mais elle ne l'est pas...
+							}else if((other = isHit("PlayerShield",comp1,comp2))!=null){
+								System.out.println("met a shield");
+								aBullet.bounce();
+								if(aBullet.getReboundleft()<=0){
+									
+									world.destroyBody(aBullet.getBody());
+									physicsContainer.removeChild(aBullet);			
+									aBullet.destroy();
+
+								}
+							}
+						}
+						
+						
+						
+						
+						
+					}
+				}	
+			}
+
+			@Override
+			public void persist(ContactPoint arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void remove(ContactPoint arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void result(ContactResult arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+	}
+	
+	
+	/*private void addWorldContactListener(World world){
+		world.setContactListener(new ContactListener() {
+			
+			public void result(ContactResult point) {
+//				System.out.println("Result contact");
+			}
+			//@Override
+			public void remove(ContactPoint point) {
+//				System.out.println("remove contact");
+			}
+			//@Override
+			public void persist(ContactPoint point) {
+//				System.out.println("persist contact");
+			}
+			//@Override
+			public void add(ContactPoint point) {
+//				/*
+				Shape shape1 = point.shape1;
+				Shape shape2 = point.shape2;
+				final Body body1 = shape1.getBody();
+				final Body body2 = shape2.getBody();
+				Object userData1 = body1.getUserData();
+				Object userData2 = body2.getUserData();
+				
+				if (userData1 instanceof IPhysicsComponent  && userData2 instanceof IPhysicsComponent) { //Check for ball/star collision
+					IPhysicsComponent physObj1 = (IPhysicsComponent) userData1;
+					IPhysicsComponent physObj2 = (IPhysicsComponent) userData2;
+//					System.out.println("Collided: " + mt4jObj1 + " with " + mt4jObj2);
+					if (physObj1 instanceof MTComponent && physObj2 instanceof MTComponent) {
+						MTComponent comp1 = (MTComponent) physObj1;
+						MTComponent comp2 = (MTComponent) physObj2;
+
+						//Check if one of the components is the BALL
+						MTComponent ball = isHit("ball", comp1, comp2);
+						final MTComponent theBall = ball;
+						
+						//Check if one of the components is the GOAL
+						MTComponent goal1 = isHit("goal1", comp1, comp2);
+						MTComponent goal2 = isHit("goal2", comp1, comp2);
+						
+						//Check if a puck was involved
+						MTComponent bluePuck = isHit("blue", comp1, comp2);
+						MTComponent redPuck = isHit("red", comp1, comp2);
+						
+						//Check if a border was hit
+						MTComponent border = null;
+						if (comp1.getName() != null && comp1.getName().startsWith("border")){
+							border = comp1;
+						}else if (comp2.getName() != null && comp2.getName().startsWith("border")){
+							border = comp2;
+						}
+						
+						if (ball != null){
+							//CHECK IF BALL HIT A PADDLE
+							if (enableSound && (bluePuck != null || redPuck != null)){
+//								System.out.println("PUCK HIT BALL!");
+								
+							}
+							
+							
+							//Check if BALL HIT A GOAL 
+							if (goal1 != null || goal2 != null){
+								//BALL HIT A GOAL
+								if (goal1 != null){
+									System.out.println("GOAL FOR PLAYER 2!");
+									scorePlayer2++;
+								}else if (goal2 != null){
+									System.out.println("GOAL FOR PLAYER 1!");
+									scorePlayer1++;
+								}
+								
+								//Update scores
+								updateScores();
+								//Play goal sound
+//								triggerSound(goalHit);
+								
+								if (scorePlayer1 >= 15 || scorePlayer2 >= 15){
+									reset();
+								}else{
+								
+								//Reset ball
+								if (theBall.getUserData("resetted") == null){ //To make sure that we call destroy only once
+									theBall.setUserData("resetted", true); 
+									app.invokeLater(new Runnable() {
+										public void run() {
+											IPhysicsComponent a = (IPhysicsComponent)theBall;
+											a.getBody().setXForm(new Vec2(getMTApplication().width/2f/scale, getMTApplication().height/2f/scale), a.getBody().getAngle());
+//											a.getBody().setLinearVelocity(new Vec2(0,0));
+											a.getBody().setLinearVelocity(new Vec2(ToolsMath.getRandom(-8, 8),ToolsMath.getRandom(-8, 8)));
+											a.getBody().setAngularVelocity(0);
+											theBall.setUserData("resetted", null); 
+										}
+									});
+								}
+								}
+								
+							}
+							
+							//If ball hit border Play sound
+							if (enableSound && border != null){
+								
+							}
+						}
+					}
+				}else{ //if at lest one if the colliding bodies' userdata is not a physics shape
+					
+				}
+//				
+			}
+		});
+	}*/
 
 }

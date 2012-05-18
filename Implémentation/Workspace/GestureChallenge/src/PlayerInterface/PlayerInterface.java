@@ -23,6 +23,7 @@ public class PlayerInterface {
 
 	MTColor myColor;
 	int myNumber;
+	int myScore;
 	GestureChallengeScene myGCS;
 	PlayerGoal myPG;
 	PhysicsShield myPS;
@@ -73,6 +74,7 @@ public class PlayerInterface {
 		myGCS = gCS;
 		myAngle=angle;
 		this.playerNumber = playerNumber;
+		myScore=0;
 		
 		
 
@@ -179,8 +181,13 @@ public class PlayerInterface {
 		myBL = new PlayerBulletLoader(this);
 		
 
-
+		
 
 	
+	}
+	
+	public void score(int score){
+		myScore+=score;
+		System.out.println("P"+(myNumber+1)+" : scored "+score+" points !");
 	}
 }
