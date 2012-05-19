@@ -26,8 +26,11 @@ public class StartGestureChallengeScene extends MTApplication {
 		GestureChallengeScene GCS = new GestureChallengeScene(this, "GestureChallenge");
 		addScene(GCS);
 		GameModel GM = new GameModel(GCS);
+		GCS.setGM(GM);
 		GM.setPlayerNumber(3);
 		GM.createInterfaces();
+		GM.subscribeInterfaces();
+		GM.initGame();
 		//PhysicsRectangle r = new PhysicsRectangle(new Vector3D(this.width/2f+50,this.height/2f), 30,30, this, GCS.getWorld(), 0f, 0f, 0f, GCS.getScale());
 		//GCS.getPhysicsContainer().addChild(r);
 		//r.rotateZGlobal(r.getCenterPointGlobal(), (float) Math.toDegrees(Math.PI/3f));

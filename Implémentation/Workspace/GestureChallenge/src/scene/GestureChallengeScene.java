@@ -1,10 +1,13 @@
 package scene;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Constants;
+import model.GameModel;
 
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.shapes.Shape;
@@ -55,6 +58,7 @@ public class GestureChallengeScene extends AbstractScene {
 	private World world;
 	PhysicsCircle c;
 	private MTComponent physicsContainer;
+	GameModel myGM;
 	
 	public GestureChallengeScene(AbstractMTApplication mtApplication, String name) {
 		super(mtApplication, name);
@@ -346,11 +350,14 @@ public class GestureChallengeScene extends AbstractScene {
 						MTComponent comp1 = (MTComponent) physObj1;
 						MTComponent comp2 = (MTComponent) physObj2;
 
-						//Check if one of the components is the BALL
+						//Check if one of the components is a BULLET
 						MTComponent bullet = isHit("PlayerBullet", comp1, comp2);
 						if(bullet!=null){
 							final PlayerBullet aBullet = (PlayerBullet) bullet;
-							MTComponent other = isHit("Wall",comp1,comp2);
+							
+							
+						//Check what is OTHER an act in accordance	
+							MTComponent other;
 							if((other = isHit("Wall",comp1,comp2))!=null){
 								System.out.println("met a wall");
 								aBullet.bounce();
@@ -360,6 +367,8 @@ public class GestureChallengeScene extends AbstractScene {
 							}else if((other = isHit("PlayerGoal",comp1,comp2))!=null){
 								System.out.println("met a goal");
 								aBullet.score();
+								myGM.updateRanking();
+								//destroy
 								app.invokeLater(new Runnable() {
 									public void run() {
 										world.destroyBody(aBullet.getBody());
@@ -410,7 +419,17 @@ public class GestureChallengeScene extends AbstractScene {
 			
 		});
 	}
+
+
+
+	public void setGM(GameModel gm){
+		myGM=gm;
+	}
 	
+
+	public void subscribe(){
+		myGM.subscribeInterfaces();
+	}
 	
 	/*private void addWorldContactListener(World world){
 		world.setContactListener(new ContactListener() {

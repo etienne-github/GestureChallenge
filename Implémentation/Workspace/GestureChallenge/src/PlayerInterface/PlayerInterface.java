@@ -1,5 +1,8 @@
 package playerinterface;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import model.Constants;
 
 import org.jbox2d.collision.FilterData;
@@ -19,7 +22,7 @@ import physic.shape.PhysicsShield;
 import scene.GestureChallengeScene;
 
 
-public class PlayerInterface {
+public class PlayerInterface implements PropertyChangeListener {
 
 	MTColor myColor;
 	int myNumber;
@@ -33,6 +36,7 @@ public class PlayerInterface {
 	int myCollisionID;
 	int myBulletMask;
 	PlayerMovableShieldArea mySA;
+	PlayerDisplay myPD;
 	
 	
 	
@@ -179,6 +183,8 @@ public class PlayerInterface {
 		
 		//Creation bullets
 		myBL = new PlayerBulletLoader(this);
+		myPD = new PlayerDisplay(this);
+		
 		
 
 		
@@ -188,6 +194,48 @@ public class PlayerInterface {
 	
 	public void score(int score){
 		myScore+=score;
-		System.out.println("P"+(myNumber+1)+" : scored "+score+" points !");
+		myPD.score.setText(myScore+" pts");
+
 	}
+
+
+
+	public int getMyScore() {
+		return myScore;
+	}
+
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if(evt.getPropertyName().compareTo("ranking"+myNumber)==0){
+			switch(Integer.parseInt((String) evt.getNewValue())){
+				case 1:
+					this.myPD.rank.setText("1st");
+					this.myPD.rank.setFontColor(MTColor.GREEN);
+					break;
+				case 2:
+					this.myPD.rank.setText("2st");
+					this.myPD.rank.setFontColor(MTColor.BLACK);
+					break;
+				case 3:
+					this.myPD.rank.setText("3rd");
+					this.myPD.rank.setFontColor(MTColor.BLACK);
+					break;
+				default:
+					this.myPD.rank.setText(((String) evt.getNewValue())+"th");
+					this.myPD.rank.setFontColor(MTColor.BLACK);
+					break;
+			}
+		}else if(evt.getPropertyName().compareTo("time")==0){
+			String time = (String) evt.getNewValue();
+			this.myPD.time.setText(time);
+			if(time.compareTo("0'10''")==0){
+				myPD.time.setFontColor(MTColor.RED);
+			}
+		}
+		
+	}
+	
+	
 }

@@ -70,6 +70,17 @@ public class PlayerBullet extends PhysicsCircle {
 	
 	public void bounce(){
 		reboundleft--;
+		MTColor myFillColor = this.getFillColor();
+		MTColor myStrokeColor = this.getStrokeColor();
+		float alpha = myFillColor.getAlpha();
+		alpha/=(float)Constants.bulletMaxRebound;
+		alpha+=20;
+		MTColor newFillCol = new MTColor(myFillColor.getR(),myFillColor.getG(),myFillColor.getB());
+		newFillCol.setAlpha(alpha);
+		MTColor newStrokeCol=new MTColor(myStrokeColor.getR(),myStrokeColor.getG(),myStrokeColor.getB());
+		newStrokeCol.setAlpha(alpha);
+		this.setStrokeColor(newStrokeCol);
+		this.setFillColor(newFillCol);
 	}
 
 	public int getReboundleft() {
