@@ -349,7 +349,7 @@ public class GestureChallengeScene extends AbstractScene {
 						//Check if one of the components is the BALL
 						MTComponent bullet = isHit("PlayerBullet", comp1, comp2);
 						if(bullet!=null){
-							PlayerBullet aBullet = (PlayerBullet) bullet;
+							final PlayerBullet aBullet = (PlayerBullet) bullet;
 							MTComponent other = isHit("Wall",comp1,comp2);
 							if((other = isHit("Wall",comp1,comp2))!=null){
 								System.out.println("met a wall");
@@ -360,19 +360,23 @@ public class GestureChallengeScene extends AbstractScene {
 							}else if((other = isHit("PlayerGoal",comp1,comp2))!=null){
 								System.out.println("met a goal");
 								aBullet.score();
-								world.destroyBody(aBullet.getBody());
-								physicsContainer.removeChild(aBullet);
-								aBullet.destroy();
-								aBullet=null;
-								//FIXME la bullet semble supprimée mais elle ne l'est pas...
+								app.invokeLater(new Runnable() {
+									public void run() {
+										world.destroyBody(aBullet.getBody());
+										physicsContainer.removeChild(aBullet);
+									}
+								});
 							}else if((other = isHit("PlayerShield",comp1,comp2))!=null){
 								System.out.println("met a shield");
 								aBullet.bounce();
 								if(aBullet.getReboundleft()<=0){
 									
-									world.destroyBody(aBullet.getBody());
-									physicsContainer.removeChild(aBullet);			
-									aBullet.destroy();
+									app.invokeLater(new Runnable() {
+										public void run() {
+											world.destroyBody(aBullet.getBody());
+											physicsContainer.removeChild(aBullet);
+										}
+									});
 
 								}
 							}
