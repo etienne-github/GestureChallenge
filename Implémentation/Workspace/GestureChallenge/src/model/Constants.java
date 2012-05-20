@@ -31,8 +31,10 @@ public class Constants {
 	//Display parameters
 	public static int displayFontSize=14;
 	public static String displatFontName = new String("arial");
+	public static int displayNotificationTime = 2;
 	
 	//Game model parameters
 	public static int gameTime=1*60+30;
+	
 }
 

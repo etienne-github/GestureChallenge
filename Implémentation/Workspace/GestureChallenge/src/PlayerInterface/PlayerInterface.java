@@ -195,6 +195,7 @@ public class PlayerInterface implements PropertyChangeListener {
 	public void score(int score){
 		myScore+=score;
 		myPD.score.setText(myScore+" pts");
+		myPD.addNotification("+"+score+" pts !",MTColor.FUCHSIA);
 
 	}
 
@@ -228,8 +229,18 @@ public class PlayerInterface implements PropertyChangeListener {
 					break;
 			}
 		}else if(evt.getPropertyName().compareTo("time")==0){
-			String time = (String) evt.getNewValue();
-			this.myPD.time.setText(time);
+			final String time = (String) evt.getNewValue();
+			
+			this.getMyGCS().getMTApplication().invokeLater(new Runnable(){
+
+				@Override
+				public void run() {
+					myPD.time.setText(time);
+					
+				}
+				
+			});
+			
 			if(time.compareTo("0'10''")==0){
 				myPD.time.setFontColor(MTColor.RED);
 			}
