@@ -1,24 +1,23 @@
 package playerinterface;
 
+import gesture.threefingersgesture.ThreeFingersGestureEvent;
+import gesture.threefingersgesture.ThreeFingersGestureProcessor;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import model.Constants;
 
-import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
-import org.mt4j.components.TransformSpace;
-import org.mt4j.components.visibleComponents.widgets.MTTextField;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
+import org.mt4j.input.inputProcessors.componentProcessors.panProcessor.PanProcessorTwoFingers;
+import org.mt4j.input.inputProcessors.componentProcessors.panProcessor.PanTwoFingerEvent;
 import org.mt4j.util.MTColor;
-import org.mt4j.util.font.FontManager;
 import org.mt4j.util.math.Vector3D;
 
-import physic.shape.PhysicsShield;
+import physic.shape.util.PhysicsHelper;
 import scene.GestureChallengeScene;
 
 
@@ -29,14 +28,17 @@ public class PlayerInterface implements PropertyChangeListener {
 	int myScore;
 	GestureChallengeScene myGCS;
 	PlayerGoal myPG;
-	PhysicsShield myPS;
+	PlayerRotableShield myPS;
 	PlayerBulletLoader myBL;
 	float myAngle;
 	int playerNumber;
 	int myCollisionID;
 	int myBulletMask;
+	int myBulletCat;
 	PlayerMovableShieldArea mySA;
 	PlayerDisplay myPD;
+	PlayerPanShield myPanShield;
+	
 	
 	
 	
@@ -51,6 +53,9 @@ public class PlayerInterface implements PropertyChangeListener {
 	}
 
 
+	public int getMyBulletCat(){
+		return myBulletCat;
+	}
 
 	public int getMyBulletMask() {
 		return myBulletMask;
@@ -101,37 +106,29 @@ public class PlayerInterface implements PropertyChangeListener {
 		x = x -(float) (Math.cos(angle)*Constants.shieldDistance);
 		y = y -(float) (Math.sin(angle)*Constants.shieldDistance);
 		float coveredAngle = (float) Math.toRadians(180/(float)playerNumber);
-		myPS=new PhysicsShield(Constants.shieldBigRadius,Constants.shieldSmallRadius,Constants.shieldSmallDef,Constants.shieldBigDef,coveredAngle,new Vector3D(x,y),myGCS.getMTApplication(),myGCS.getWorld(),0f,0f,0f,myGCS.getScale(),color);
+		//myPS=new PhysicsShield(Constants.shieldBigRadius,Constants.shieldSmallRadius,Constants.shieldSmallDef,Constants.shieldBigDef,coveredAngle,new Vector3D(x,y),myGCS.getMTApplication(),myGCS.getWorld(),0f,0f,0f,myGCS.getScale(),color);
+		myPS = new PlayerRotableShield(new Vector3D(x,y),this);
 		myGCS.getPhysicsContainer().addChild(myPS);		
 		myPS.getBody().setXForm(
 				myPS.getBody().getPosition(), (float) (angle+Math.PI/2f)
 		);
 		
-		//Rotating shield gesture listener
-		myPG.registerInputProcessor(new TapProcessor(myGCS.getMTApplication()));
-		myPG.addGestureListener(TapProcessor.class, new IGestureEventListener(){
-
-			@Override
-			public boolean processGestureEvent(MTGestureEvent arg0) {
-				TapEvent te = (TapEvent) arg0;
-				if(te!=null){
-					if(te.isTapped()){						
-						float angle = (float) (myPS.getBody().getAngle()+Math.PI/2f/*(float) (myPS.getBody().getAngle()+ Math.toRadians(90))*/);
-						System.out.println("angle:"+angle);
-						System.out.println("trig: "+Math.cos(angle)+"/"+Math.sin(angle));
-						Vec2 newPos = new Vec2();
-						Vec2 diff = new Vec2();
-						diff = myPG.getBody().getPosition().sub(myPS.getBody().getPosition());
-						newPos.x+=myPG.getBody().getPosition().x+Math.cos(angle)*diff.length();
-						newPos.y+=myPG.getBody().getPosition().y+Math.sin(angle)*diff.length();
-						float test = myPS.getBody().getAngle();
-						myPS.getBody().setXForm(newPos, (float) (test+ Math.toRadians(10)));
-					}					
-				}
+		
+		myPG.registerInputProcessor(new ThreeFingersGestureProcessor(myGCS.getMTApplication()));
+		myPG.addGestureListener(ThreeFingersGestureProcessor.class, new IGestureEventListener() {
+			public boolean processGestureEvent(MTGestureEvent ge) {
+				ThreeFingersGestureEvent evt = (ThreeFingersGestureEvent) ge;
+				float angle = evt.getRotationAngleRadian();
+				float beta = myPS.getBody().getAngle();
+				Vector3D center = myPG.getCenterPointGlobal();
+				Vec2 newPos = new Vec2(PhysicsHelper.scaleDown((float)(center.x-Constants.shieldDistance*Math.sin(angle+beta)), myGCS.getScale()),PhysicsHelper.scaleDown((float)(center.y+Constants.shieldDistance*Math.cos(angle+beta)), myGCS.getScale()));
+				myPS.getBody().setXForm(newPos, angle+myPS.getBody().getAngle());
 				return false;
 			}
-			
 		});
+		
+		
+
 
 		
 		//Avoid collision between playerInterface and its own bullets
@@ -147,6 +144,7 @@ public class PlayerInterface implements PropertyChangeListener {
 		
 		
 		myBulletMask-=myCollisionID;
+		myBulletCat=(int) Math.pow(2,this.playerNumber+this.myNumber+1);
 		
 		for(int i =0;i<=playerNumber;i++){
 			if(i!=myNumber){
@@ -155,14 +153,14 @@ public class PlayerInterface implements PropertyChangeListener {
 		}
 		
 				
-		System.out.println("P"+myNumber+" mask:"+myBulletMask);
+		//System.out.println("P"+myNumber+" mask:"+myBulletMask);
 		
 		
 		myPS.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
 		myPS.getBody().getShapeList().m_filter.maskBits=myCollisionID;
 		myPS.getBody().getShapeList().m_filter.groupIndex=0;
-		System.out.println("PS"+myNumber+" cat("+myPS.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPS.getBody().getShapeList().m_filter.maskBits+")/group("+myPS.getBody().getShapeList().m_filter.groupIndex+")");
-		System.out.println("PS"+myNumber+" cat("+myPS.getBody().m_shapeList.m_filter.categoryBits+")/mask("+myPS.getBody().m_shapeList.m_filter.maskBits+")/group("+myPS.getBody().m_shapeList.m_filter.groupIndex+")");
+		//System.out.println("PS"+myNumber+" cat("+myPS.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPS.getBody().getShapeList().m_filter.maskBits+")/group("+myPS.getBody().getShapeList().m_filter.groupIndex+")");
+		//System.out.println("PS"+myNumber+" cat("+myPS.getBody().m_shapeList.m_filter.categoryBits+")/mask("+myPS.getBody().m_shapeList.m_filter.maskBits+")/group("+myPS.getBody().m_shapeList.m_filter.groupIndex+")");
 		Shape shape;
 		shape=myPS.getBody().getShapeList();
 		for (Shape s = myPS.getBody().getShapeList();
@@ -177,7 +175,7 @@ public class PlayerInterface implements PropertyChangeListener {
 		myPG.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
 		myPG.getBody().getShapeList().m_filter.maskBits=myCollisionID;
 		myPG.getBody().getShapeList().m_filter.groupIndex=0;
-		System.out.println("PG"+myNumber+" cat("+myPG.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPG.getBody().getShapeList().m_filter.maskBits+")");
+		//System.out.println("PG"+myNumber+" cat("+myPG.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPG.getBody().getShapeList().m_filter.maskBits+")");
 	
 
 		
@@ -185,7 +183,35 @@ public class PlayerInterface implements PropertyChangeListener {
 		myBL = new PlayerBulletLoader(this);
 		myPD = new PlayerDisplay(this);
 		
-		
+		// Add pan listener in order to create a temporary shield between the two cursors
+				final PlayerInterface PI = this;
+				mySA.registerInputProcessor(new PanProcessorTwoFingers(myGCS.getMTApplication()));
+				mySA.addGestureListener(PanProcessorTwoFingers.class, new IGestureEventListener() {
+					public boolean processGestureEvent(MTGestureEvent ge) {
+						PanTwoFingerEvent evt = (PanTwoFingerEvent)ge;
+						switch(evt.getId()){
+						case MTGestureEvent.GESTURE_STARTED:
+							myPanShield = new PlayerPanShield(PI, evt.getFirstCursor(), evt.getSecondCursor(), myCollisionID);
+							myGCS.getCanvas().addChild(myPanShield);
+							break;
+						case MTGestureEvent.GESTURE_ENDED:
+							myGCS.getCanvas().removeChild(myPanShield);
+							myPanShield.destroy();
+							break;
+						case MTGestureEvent.GESTURE_UPDATED:
+							if(mySA.containsPointGlobal(evt.getFirstCursor().getPosition()) && mySA.containsPointGlobal(evt.getSecondCursor().getPosition())){
+								myGCS.getCanvas().removeChild(myPanShield);
+								myPanShield.destroy();
+								myPanShield = new PlayerPanShield(PI, evt.getFirstCursor(), evt.getSecondCursor(), myCollisionID);
+								myGCS.getCanvas().addChild(myPanShield);
+								//Avoid collision with own bullets
+							}					
+							//myPanShield.move(mySA, evt.getFirstCursor(), evt.getSecondCursor());
+							break;
+						}
+						return false;
+					}
+				});
 
 		
 
@@ -195,7 +221,7 @@ public class PlayerInterface implements PropertyChangeListener {
 	public void score(int score){
 		myScore+=score;
 		myPD.score.setText(myScore+" pts");
-		myPD.addNotification("+"+score+" pts !",MTColor.FUCHSIA);
+		myPD.addNotification("+"+score+" pts !",MTColor.YELLOW);
 
 	}
 

@@ -39,7 +39,7 @@ public class PlayerGoal extends PhysicsCircle {
 		jdisp.setInnerPadding(0);
 		this.addChild(jdisp);
 		jdisp.setPositionGlobal(new Vector3D(this.getCenterPointGlobal().x,this.getCenterPointGlobal().y));
-		System.out.println("disp = "+jdisp.getPosition(TransformSpace.GLOBAL));
+	//	System.out.println("disp = "+jdisp.getPosition(TransformSpace.GLOBAL));
 		jdisp.setFontColor(MTColor.BLACK);
 		jdisp.setNoFill(true);
 		jdisp.setNoStroke(true);

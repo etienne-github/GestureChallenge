@@ -1,4 +1,4 @@
-package gesture.fivefingersgesture.examples;
+package gesture.threefingersgesture.examples;
 
 import org.mt4j.MTApplication;
 import org.mt4j.input.inputSources.MacTrackpadSource;

@@ -115,7 +115,7 @@ public class GameModel {
 
 public void fireRanks(){
 	for(int i=0;i<playerNumber;i++){
-		System.out.println("firing : ranking"+i);
+		//System.out.println("firing : ranking"+i);
 		support.firePropertyChange("ranking"+i,null,String.valueOf(ranking[i]));
 	}
 }
@@ -157,11 +157,11 @@ public void fireRanks(){
 				}
 				if(secI/10==0){
 					support.firePropertyChange("time", null, String.valueOf(min)+"'"+"0"+String.valueOf(secI)+"''");
-					System.out.println(String.valueOf(min)+"'"+"0"+String.valueOf(secI)+"''");
+					//System.out.println(String.valueOf(min)+"'"+"0"+String.valueOf(secI)+"''");
 
 				}else{
 					support.firePropertyChange("time", null, String.valueOf(min)+"'"+String.valueOf(secI)+"''");
-					System.out.println(String.valueOf(min)+"'"+String.valueOf(secI)+"''");
+					//System.out.println(String.valueOf(min)+"'"+String.valueOf(secI)+"''");
 
 				}
 				

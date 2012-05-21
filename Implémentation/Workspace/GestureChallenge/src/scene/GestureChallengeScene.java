@@ -41,6 +41,7 @@ import physic.shape.util.PhysicsHelper;
 import physic.shape.util.UpdatePhysicsAction;
 import playerinterface.PlayerBullet;
 import playerinterface.PlayerGoal;
+import playerinterface.PlayerRotableShield;
 
 
 
@@ -359,27 +360,36 @@ public class GestureChallengeScene extends AbstractScene {
 						//Check what is OTHER an act in accordance	
 							MTComponent other;
 							if((other = isHit("Wall",comp1,comp2))!=null){
-								System.out.println("met a wall");
+								//System.out.println("met a wall");
 								aBullet.bounce();
 								if(aBullet.getReboundleft()<=0){
-									physicsContainer.removeChild(aBullet);
+									app.invokeLater(new Runnable() {
+										public void run() {
+											aBullet.die();
+											world.destroyBody(aBullet.getBody());
+											physicsContainer.removeChild(aBullet);
+										}
+									});
+
 								}
 							}else if((other = isHit("PlayerGoal",comp1,comp2))!=null){
-								System.out.println("met a goal");
+								//System.out.println("met a goal");
 								aBullet.score();
 								myGM.updateRanking();
 								//destroy
 								app.invokeLater(new Runnable() {
 									public void run() {
+										aBullet.die();
 										world.destroyBody(aBullet.getBody());
 										physicsContainer.removeChild(aBullet);
 									}
 								});
 							}else if((other = isHit("PlayerShield",comp1,comp2))!=null){
-								System.out.println("met a shield");
-								aBullet.bounce();
+								//System.out.println("met a shield");
+								PlayerRotableShield pS = (PlayerRotableShield ) other;
+								aBullet.changeSender(pS.getMyPI());
+								/*aBullet.bounce();
 								if(aBullet.getReboundleft()<=0){
-									
 									app.invokeLater(new Runnable() {
 										public void run() {
 											world.destroyBody(aBullet.getBody());
@@ -387,7 +397,7 @@ public class GestureChallengeScene extends AbstractScene {
 										}
 									});
 
-								}
+								}*/
 							}
 						}
 						

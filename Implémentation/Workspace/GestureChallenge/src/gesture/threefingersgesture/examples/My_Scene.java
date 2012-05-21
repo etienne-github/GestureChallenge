@@ -1,7 +1,7 @@
-package gesture.fivefingersgesture.examples;
+package gesture.threefingersgesture.examples;
 
-import gesture.fivefingersgesture.FiveFingersGestureEvent;
-import gesture.fivefingersgesture.FiveFingersGestureProcessor;
+import gesture.threefingersgesture.ThreeFingersGestureEvent;
+import gesture.threefingersgesture.ThreeFingersGestureProcessor;
 
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.TransformSpace;
@@ -63,10 +63,10 @@ public class My_Scene extends AbstractScene{
 
 
 
-		myPlot.registerInputProcessor(new FiveFingersGestureProcessor(mtApplication));
-		myPlot.addGestureListener(FiveFingersGestureProcessor.class, new IGestureEventListener() {
+		myPlot.registerInputProcessor(new ThreeFingersGestureProcessor(mtApplication));
+		myPlot.addGestureListener(ThreeFingersGestureProcessor.class, new IGestureEventListener() {
 			public boolean processGestureEvent(MTGestureEvent ge) {
-				FiveFingersGestureEvent evt = (FiveFingersGestureEvent) ge;
+				ThreeFingersGestureEvent evt = (ThreeFingersGestureEvent) ge;
 				float angle = evt.getRotationAngleDegree();
 				System.out.println(angle);
 				myPlot.rotateZ(myPlot.getCenterPointGlobal(), angle);

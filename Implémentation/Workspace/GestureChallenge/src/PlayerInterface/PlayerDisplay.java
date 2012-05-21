@@ -98,7 +98,7 @@ public class PlayerDisplay {
 	class Notification extends MTTextField{
 			Timer myTimer;
 			TimerTask myTask;
-			int maxAnimationFrames=10;
+			int maxAnimationFrames=Constants.displayNotificationAnimationFrames;
 			int animationFrames=maxAnimationFrames;
 			MTColor myColor;
 			PlayerInterface myPI;
@@ -130,7 +130,7 @@ public class PlayerDisplay {
 
 				@Override
 				public void run() {
-					System.err.println("Animation");
+					//System.err.println("Animation");
 					animationFrames--;
 					float alpha = myColor.getAlpha();
 					alpha*=(animationFrames/(float)maxAnimationFrames);

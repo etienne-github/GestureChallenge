@@ -1,21 +1,17 @@
-package gesture.fivefingersgesture;
+package gesture.threefingersgesture;
 
-
-import java.util.ArrayList;
-
-import javax.xml.stream.Location;
 
 import org.mt4j.input.inputData.AbstractCursorInputEvt;
 import org.mt4j.input.inputData.InputCursor;
 import org.mt4j.input.inputProcessors.IInputProcessor;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.AbstractCursorProcessor;
-import org.mt4j.input.inputProcessors.componentProcessors.rotateProcessor.RotateEvent;
 import org.mt4j.util.math.Vector3D;
 
 import processing.core.PApplet;
+import util.math.Geometry;
 
-public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
+public class ThreeFingersGestureProcessor extends AbstractCursorProcessor {
 
 
 	/** The applet. */
@@ -34,7 +30,7 @@ public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
 	 * 
 	 * @param app the app
 	 */
-	public FiveFingersGestureProcessor(PApplet app) {
+	public ThreeFingersGestureProcessor(PApplet app) {
 		this.applet = applet;
 		//TODO A tester dans le jeu pour déterminer quelle propriété mettre
 		this.setLockPriority(5);
@@ -49,7 +45,7 @@ public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
 
 	public void cursorUnlocked(InputCursor cursor) {
 		InputCursor[] locked = getLockedCursorsArray();
-		if(locked.length<5 && canLock(cursor)){
+		if(locked.length<3 && canLock(cursor)){
 			if(getLock(cursor)){
 				System.out.println("A cursor freed by another processor has just been locked");
 			}
@@ -62,10 +58,10 @@ public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
 	 */
 	public void cursorStarted(InputCursor newCursor, AbstractCursorInputEvt positionEvent) {
 		InputCursor[] locked = getLockedCursorsArray();
-		if (locked.length >= 5){
+		if (locked.length >= 3){
 			System.out.println(this.getName() + " has already enough cursors for this gesture - adding to unused ID:" + newCursor.getId());
 		}
-		else if(locked.length == 4){
+		else if(locked.length == 2){
 			if(canLock(newCursor)){
 				if(getLock(newCursor)){
 					this.justStarted = true;
@@ -93,16 +89,16 @@ public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
 	public void cursorUpdated(InputCursor inputCursor, AbstractCursorInputEvt currentEvent) {	
 		InputCursor[] locked = getLockedCursorsArray();
 		Vector3D barycenter = getBarycenter(locked);
-		if(locked.length==5){
+		if(locked.length==3){
 			if(this.justStarted == true){
 				this.justStarted = false;
 				InputCursor mainCursor = locked[0];
 				mainCursorID = mainCursor.getId();
 				referenceSegment = new Vector3D(mainCursor.getCurrentEvtPosX()-barycenter.x, mainCursor.getCurrentEvtPosY()-barycenter.y);
-				this.fireGestureEvent(new FiveFingersGestureEvent(this, MTGestureEvent.GESTURE_STARTED, currentEvent.getCurrentTarget(), getRotationAngle(locked)));
+				this.fireGestureEvent(new ThreeFingersGestureEvent(this, MTGestureEvent.GESTURE_STARTED, currentEvent.getCurrentTarget(), getRotationAngle(locked)));
 			}
 			else{
-				this.fireGestureEvent(new FiveFingersGestureEvent(this, MTGestureEvent.GESTURE_UPDATED, currentEvent.getCurrentTarget(), getRotationAngle(locked)));
+				this.fireGestureEvent(new ThreeFingersGestureEvent(this, MTGestureEvent.GESTURE_UPDATED, currentEvent.getCurrentTarget(), getRotationAngle(locked)));
 				InputCursor mainCursor = getMainCursor(locked);
 				referenceSegment = new Vector3D(mainCursor.getCurrentEvtPosX()-barycenter.x, mainCursor.getCurrentEvtPosY()-barycenter.y);
 			}
@@ -134,19 +130,11 @@ public class FiveFingersGestureProcessor extends AbstractCursorProcessor {
 		InputCursor mainCursor = getMainCursor(cursors);
 		Vector3D barycenter = getBarycenter(cursors);
 		Vector3D relativeSegment = new Vector3D(mainCursor.getCurrentEvtPosX()-barycenter.x,mainCursor.getCurrentEvtPosY()-barycenter.y);
-		float cosinus = dotProduct(referenceSegment,relativeSegment);
-		float sinus = crossProduct(referenceSegment,relativeSegment);
-		return (float) Math.atan2(sinus, cosinus);
+		return Geometry.orientedRadianAngleBetween(referenceSegment, relativeSegment);
 	}
 
 
-	private float dotProduct(Vector3D refSeg, Vector3D newSeg){
-		return (refSeg.x*newSeg.x)+(refSeg.y*newSeg.y);
-	}
 
-	private float crossProduct(Vector3D refSeg, Vector3D newSeg){
-		return (refSeg.x*newSeg.y)-(refSeg.y*newSeg.x);
-	}
 
 	private InputCursor getMainCursor(InputCursor[] cursors){
 		for(int i=0;i<cursors.length;i++){
