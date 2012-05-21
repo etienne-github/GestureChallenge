@@ -32,7 +32,7 @@ public class PlayerBullet extends PhysicsCircle {
 		this.getBody().getShapeList().m_filter.categoryBits=mySender.getMyBulletCat();
 		this.getBody().getShapeList().m_filter.maskBits=mySender.getMyBulletMask();
 		this.getBody().getShapeList().m_filter.groupIndex=0;
-
+		System.out.println("PP"+mySender.myNumber+" cat("+mySender.getMyBulletCat()+")/mask("+mySender.getMyBulletMask()+")");
 		this.setName("PlayerBullet");
 		this.myScore=Constants.bulletScore;
 		

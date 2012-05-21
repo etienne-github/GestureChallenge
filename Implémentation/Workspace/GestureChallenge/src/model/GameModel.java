@@ -80,14 +80,14 @@ public class GameModel {
 			i=false;
 		}
 		
-		System.out.println("scores are: "+Arrays.toString(scores));	
-		System.out.println("orderedScores are: "+Arrays.toString(sortedscores));
+		//System.out.println("scores are: "+Arrays.toString(scores));	
+		//System.out.println("orderedScores are: "+Arrays.toString(sortedscores));
 		
 		for(int i=0;i<playerNumber;i++){
 			for(int j=0;j<playerNumber;j++){
 				if(!assigned[j]){
 					if(sortedscores[i]==scores[j]){
-						System.out.println("score "+sortedscores[i]+" found for P"+j);
+						//System.out.println("score "+sortedscores[i]+" found for P"+j);
 						if(scores[j]>lastworse){
 							lastworse=scores[j];
 							rank-=equals;
@@ -95,7 +95,7 @@ public class GameModel {
 						}else{
 							equals++;
 						}
-						System.out.println("assigning rank "+rank+" to P"+j);
+						//System.out.println("assigning rank "+rank+" to P"+j);
 						ranking[j]=rank;
 						assigned[j]=true;
 					}
@@ -105,7 +105,7 @@ public class GameModel {
 			
 		}
 
-		System.out.println("ranks are: "+Arrays.toString(ranking));
+		//System.out.println("ranks are: "+Arrays.toString(ranking));
 		fireRanks();
 	}
 

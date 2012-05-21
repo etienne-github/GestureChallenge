@@ -248,7 +248,7 @@ public class GestureChallengeScene extends AbstractScene {
 						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 					}
 					pR.getBody().getShapeList().getFilterData().maskBits=mask;
-					pR.getBody().getShapeList().getFilterData().categoryBits=1;
+					pR.getBody().getShapeList().getFilterData().categoryBits=(int) Math.pow(2, 10);
 					pR.getBody().getShapeList().getFilterData().groupIndex=0;
 					pR.setDepthBufferDisabled(true);
 					//pR.setNoFill(true);
@@ -268,7 +268,7 @@ public class GestureChallengeScene extends AbstractScene {
 						/*((float) Math.toDegrees(angle))*/
 				);
 				pR.getBody().getShapeList().getFilterData().maskBits=mask;
-				pR.getBody().getShapeList().getFilterData().categoryBits=1;
+				pR.getBody().getShapeList().getFilterData().categoryBits=(int) Math.pow(2, 10);
 				pR.getBody().getShapeList().getFilterData().groupIndex=0;
 				//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS)), TransformSpace.LOCAL);
 				pR.setDepthBufferDisabled(true);

@@ -14,7 +14,7 @@ public class My_Application extends MTApplication{
 	}
 	public void startUp() {
 		getInputManager().registerInputSource(new MacTrackpadSource(this));
-		this.addScene(new My_Scene(this, "Test RŽmy"));
+		this.addScene(new My_Scene_Average(this, "Test RŽmy"));
 	}
 
 }

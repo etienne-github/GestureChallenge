@@ -1,5 +1,6 @@
 package playerinterface;
 
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
 import org.mt4j.input.inputData.InputCursor;
 import org.mt4j.util.MTColor;
@@ -32,7 +33,7 @@ public class PlayerPanShield extends PhysicsRectangle{
 	public PlayerPanShield(PlayerInterface PI, InputCursor startPoint, InputCursor endPoint, int avoidCollision) {
 		super(new Vector3D(Math.abs(startPoint.getCurrentEvtPosX()+endPoint.getCurrentEvtPosX())/2,Math.abs(startPoint.getCurrentEvtPosY()+endPoint.getCurrentEvtPosY())/2), 
 				(float) Math.sqrt(Math.pow(startPoint.getCurrentEvtPosX()-endPoint.getCurrentEvtPosX(), 2)+Math.pow(startPoint.getCurrentEvtPosY()-endPoint.getCurrentEvtPosY(), 2)),
-				3.0f,
+				2.0f,
 				PI.myGCS.getMTApplication(),
 				PI.myGCS.getWorld(),
 				0f,
@@ -42,30 +43,78 @@ public class PlayerPanShield extends PhysicsRectangle{
 				);
 		//Avoid collision with our bullets
 		//FIXME Avoid some collisions but not every of them
-		this.getBody().getShapeList().m_filter.categoryBits=avoidCollision;
+		/*this.getBody().getShapeList().m_filter.categoryBits=avoidCollision;
 		this.getBody().getShapeList().m_filter.maskBits=avoidCollision;
-		this.getBody().getShapeList().m_filter.groupIndex=0;
+		this.getBody().getShapeList().m_filter.groupIndex=0;*/
+
+		//System.out.println("P"+PI.myNumber+" movableShieldSuper("+super.getBody().getShapeList().m_filter.categoryBits+")("+super.getBody().getShapeList().m_filter.maskBits+")");
+
+Shape shape=super.getBody().getShapeList();
 		
+		for (Shape s = super.getBody().getShapeList();
+			     s != null;
+			     s = s.getNext()){
+			s.m_filter.categoryBits=avoidCollision;
+			s.m_filter.maskBits=avoidCollision;
+			s.m_filter.groupIndex=0;
+			//System.out.println(i);
+		}
 		
-		//myScale = PI.myGCS.getScale();
-		this.setWidthXYGlobal((float) Math.sqrt(Math.pow(startPoint.getCurrentEvtPosX()-endPoint.getCurrentEvtPosX(), 2)+Math.pow(startPoint.getCurrentEvtPosY()-endPoint.getCurrentEvtPosY(), 2)));
+
+		shape=this.getBody().getShapeList();
+		for (Shape s = this.getBody().getShapeList();
+			     s != null;
+			     s = s.getNext()){
+			s.m_filter.categoryBits=avoidCollision;
+			s.m_filter.maskBits=avoidCollision;
+			s.m_filter.groupIndex=0;
+			//System.out.println(i);
+		}
+		
 		
 		//The shield is now horizontal, we have to rotate it to replace it
 		//between the two fingers
 		referenceSegment = new Vector3D(1,0);
 		relativeSegment = new Vector3D(startPoint.getCurrentEvtPosX()-endPoint.getCurrentEvtPosX(), startPoint.getCurrentEvtPosY()-endPoint.getCurrentEvtPosY());
+		
+		//this.getBody().setXForm(new Vec2(Math.abs(startPoint.getCurrentEvtPosX()+endPoint.getCurrentEvtPosX())/2,Math.abs(startPoint.getCurrentEvtPosY()+endPoint.getCurrentEvtPosY())/2), Geometry.orientedRadianAngleBetween(referenceSegment, relativeSegment));
+
 		this.getBody().setXForm(this.getBody().getPosition(), Geometry.orientedRadianAngleBetween(referenceSegment, relativeSegment));
 		referenceSegment = relativeSegment;
 		
 		//We use the color of the player to draw the component
-		//myColor = PI.myColor;
 		setFillColor(PI.myColor);
-		setStrokeColor(PI.myColor);
+		//setStrokeColor(PI.myColor);
+		setNoStroke(true);
+		
+
+		
+		shape=super.getBody().getShapeList();
+		
+		for (Shape s = super.getBody().getShapeList();
+			     s != null;
+			     s = s.getNext()){
+			s.m_filter.categoryBits=avoidCollision;
+			s.m_filter.maskBits=avoidCollision;
+			s.m_filter.groupIndex=0;
+			//System.out.println(i);
+		}
+		
+
+		shape=this.getBody().getShapeList();
+		for (Shape s = this.getBody().getShapeList();
+			     s != null;
+			     s = s.getNext()){
+			s.m_filter.categoryBits=avoidCollision;
+			s.m_filter.maskBits=avoidCollision;
+			s.m_filter.groupIndex=0;
+			//System.out.println(i);
+		}
+		
+
+		
 	}
 	
-	public void drawComponent(PGraphics g){		
-		super.drawComponent(g);
-	}
 /*
 	public void move(PlayerMovableShieldArea myArea, InputCursor startPoint, InputCursor endPoint){
 		if(myArea.containsPointGlobal(startPoint.getPosition()) && myArea.containsPointGlobal(endPoint.getPosition())){

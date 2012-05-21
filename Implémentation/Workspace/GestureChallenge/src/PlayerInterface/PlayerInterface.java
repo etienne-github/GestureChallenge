@@ -128,6 +128,7 @@ public class PlayerInterface implements PropertyChangeListener {
 		});
 		
 		
+		//PhysicsHelper.addDragJoint(this.getMyGCS().getWorld(), myPS, myPS.getBody().isDynamic(), this.getMyGCS().getScale());
 
 
 		
@@ -135,20 +136,22 @@ public class PlayerInterface implements PropertyChangeListener {
 		
 
 		myCollisionID = (int) Math.pow(2, this.myNumber+1);
+
 		
 		myBulletMask =0;
 		for(int i =0;i<=playerNumber;i++){
-			myBulletMask+=(int) Math.pow(2, i);
+			myBulletMask+=(int) Math.pow(2, i+1);
 		}
 		
+		myBulletMask+=Math.pow(2, 10); //wall
 		
 		
 		myBulletMask-=myCollisionID;
-		myBulletCat=(int) Math.pow(2,this.playerNumber+this.myNumber+1);
+		myBulletCat=(int) Math.pow(2,this.playerNumber+this.myNumber+1+1);
 		
 		for(int i =0;i<=playerNumber;i++){
 			if(i!=myNumber){
-				myCollisionID+=((int) Math.pow(2, playerNumber+i+1));
+				myCollisionID+=((int) Math.pow(2, playerNumber+i+1+1));
 			}
 		}
 		
@@ -172,6 +175,8 @@ public class PlayerInterface implements PropertyChangeListener {
 			//System.out.println(i);
 		}
 		
+		System.out.println("P"+myNumber+" rotableShield("+myPS.getBody().getShapeList().m_filter.categoryBits+")("+myPS.getBody().getShapeList().m_filter.maskBits+")");
+		
 		myPG.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
 		myPG.getBody().getShapeList().m_filter.maskBits=myCollisionID;
 		myPG.getBody().getShapeList().m_filter.groupIndex=0;
@@ -192,20 +197,29 @@ public class PlayerInterface implements PropertyChangeListener {
 						switch(evt.getId()){
 						case MTGestureEvent.GESTURE_STARTED:
 							myPanShield = new PlayerPanShield(PI, evt.getFirstCursor(), evt.getSecondCursor(), myCollisionID);
-							myGCS.getCanvas().addChild(myPanShield);
+							myGCS.getPhysicsContainer().addChild(myPanShield);
+	
+							
+							//System.out.println("P"+myNumber+" movableShield("+myPanShield.getBody().getShapeList().m_filter.categoryBits+")("+myPanShield.getBody().getShapeList().m_filter.maskBits+")");
+
 							break;
 						case MTGestureEvent.GESTURE_ENDED:
-							myGCS.getCanvas().removeChild(myPanShield);
+							
+							myGCS.getWorld().destroyBody(myPanShield.getBody());
+							myGCS.getPhysicsContainer().removeChild(myPanShield);
 							myPanShield.destroy();
 							break;
 						case MTGestureEvent.GESTURE_UPDATED:
+							
 							if(mySA.containsPointGlobal(evt.getFirstCursor().getPosition()) && mySA.containsPointGlobal(evt.getSecondCursor().getPosition())){
-								myGCS.getCanvas().removeChild(myPanShield);
+								myGCS.getWorld().destroyBody(myPanShield.getBody());
+								myGCS.getPhysicsContainer().removeChild(myPanShield);
 								myPanShield.destroy();
 								myPanShield = new PlayerPanShield(PI, evt.getFirstCursor(), evt.getSecondCursor(), myCollisionID);
-								myGCS.getCanvas().addChild(myPanShield);
+								myGCS.getPhysicsContainer().addChild(myPanShield);
 								//Avoid collision with own bullets
-							}					
+							}	
+										
 							//myPanShield.move(mySA, evt.getFirstCursor(), evt.getSecondCursor());
 							break;
 						}
