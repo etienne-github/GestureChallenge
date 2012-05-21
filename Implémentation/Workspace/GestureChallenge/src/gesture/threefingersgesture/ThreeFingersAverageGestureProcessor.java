@@ -154,10 +154,25 @@ public class ThreeFingersAverageGestureProcessor extends AbstractCursorProcessor
 		float averageAngle2= Geometry.orientedRadianAngleBetween(referenceSegment2, relativeSegment2);
 		float averageAngle3=Geometry.orientedRadianAngleBetween(referenceSegment3, relativeSegment3);
 		System.out.println("angles "+averageAngle1+" "+averageAngle2+" "+averageAngle3);
-		float averageAngle = averageAngle1+averageAngle2+averageAngle3;
-		averageAngle/=3f;
-		System.out.println("angle av "+averageAngle);
-		return averageAngle;
+		
+		//RETURN AVERAGE
+		/*float averageAngle = averageAngle1+averageAngle2+averageAngle3;
+		averageAngle/=3f;*/
+		
+		//RETURN MAX ABSOLUTE
+		if(Math.abs(averageAngle1)>Math.abs(averageAngle2)){
+			if(Math.abs(averageAngle1)>Math.abs(averageAngle3)){
+				return averageAngle1;
+			}else{
+				return averageAngle3;
+			}
+		}else{
+			if(Math.abs(averageAngle2)>Math.abs(averageAngle3)){
+				return averageAngle2;
+			}else{
+				return averageAngle3;
+			}
+		}
 	}
 	
 	private float getRotationAngle(InputCursor[] cursors){

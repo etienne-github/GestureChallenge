@@ -174,6 +174,20 @@ public class PlayerDisplay {
 					)
 			);
 		}
+
+		public void cancelTimer() {
+			myTask.cancel();
+			myTimer.cancel();
+			
+		}
+		
+	}
+
+	public void cancelTimers() {
+		Iterator it = notifList.iterator();
+		while(it.hasNext()){
+			((Notification)it.next()).cancelTimer();
+		}
 		
 	}
 }

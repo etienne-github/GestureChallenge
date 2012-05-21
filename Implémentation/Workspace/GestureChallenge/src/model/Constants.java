@@ -15,6 +15,8 @@ public class Constants {
 	public static int shieldBigDef=25;
 	public static int shieldDistance = (int) ((shieldSmallRadius+shieldBigRadius)/2f);
 	public static float shieldCoveredAngle= (float) Math.toRadians(50);
+	public static int rotableShieldAreaRadius = radiusGoals+100;/*+20*/
+
 	
 	//Bullet loader parameters
 	public static int loaderBulletsNumber=4;
@@ -24,6 +26,7 @@ public class Constants {
 	
 	//Movable shield parameters
 	public static int movableShieldAreaRadius = areaRadius-radiusCenterGoals+shieldBigRadius+20;
+	
 	
 	//Bullet parameters
 	public static int bulletMaxRebound=10;
@@ -36,7 +39,7 @@ public class Constants {
 	public static int displayNotificationAnimationFrames=10;
 	
 	//Game model parameters
-	public static int gameTime=1*60+30;
+	public static int gameTime=0*60+10;
 	
 }
 

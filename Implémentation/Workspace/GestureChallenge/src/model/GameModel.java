@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.jbox2d.collision.shapes.Shape;
+import org.jbox2d.dynamics.Body;
+import org.mt4j.components.MTComponent;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.ToolsMath;
 
@@ -127,6 +130,75 @@ public void fireRanks(){
 		
 	}
 	
+	public void emptyScene(){
+		
+
+
+		//Empty world
+		for (Body b=myGCS.getWorld().getBodyList();
+			     b != null;
+			     b = b.getNext()){
+			
+			final Body ba=b;
+			myGCS.getMTApplication().invokeLater(new Runnable(){
+
+				@Override
+				public void run() {
+					myGCS.getWorld().destroyBody(ba);
+					
+				}
+				
+			});
+			
+			
+		}
+		
+		//Empty physic Container
+		MTComponent[] m = myGCS.getPhysicsContainer().getChildren();
+		for(MTComponent c:m){
+			final MTComponent ca=c;
+			myGCS.getMTApplication().invokeLater(new Runnable(){
+
+				@Override
+				public void run() {
+					myGCS.getPhysicsContainer().removeChild(ca);
+					
+				}
+				
+			});
+			
+		}
+		
+		//remove texts from scene
+		m = myGCS.getCanvas().getChildren();
+		for(MTComponent c:m){
+			final MTComponent ca=c;
+			//System.out.println("Found : "+ca.getClass().getName().toString());
+			if(ca.getClass().getName().compareTo("org.mt4j.components.visibleComponents.widgets.MTTextField")==0){
+				myGCS.getMTApplication().invokeLater(new Runnable(){
+
+					@Override
+					public void run() {
+						myGCS.getCanvas().removeChild(ca);
+						
+					}
+					
+				});
+			}
+			
+			
+		}
+		
+		
+	}
+	
+	public void cancelGameTimers(){
+		for(PlayerInterface PI:myPI){
+			PI.cancelTimers();
+		}
+	}
+	
+	
 	public void initGame(){
 		fireRanks();
 		myTimer = new Timer();
@@ -135,6 +207,30 @@ public void fireRanks(){
 			@Override
 			public void run() {
 				System.err.println("TIME'UP");
+				
+				
+				
+				myGCS.getMTApplication().invokeLater(new Runnable(){
+
+					@Override
+					public void run() {
+						infoTimeleft.cancel();
+						endGame.cancel();
+						myTimer.cancel();
+						cancelGameTimers();
+						
+					}
+					
+				});
+
+				for(PlayerInterface PI:myPI){
+					support.removePropertyChangeListener(PI);
+				}
+				
+				emptyScene();
+				
+				
+				
 				
 			}
 			
