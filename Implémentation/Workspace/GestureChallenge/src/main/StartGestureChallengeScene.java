@@ -7,6 +7,7 @@ import org.mt4j.input.inputSources.MacTrackpadSource;
 import org.mt4j.util.math.Vector3D;
 
 import physic.shape.PhysicsRectangle;
+import popup.Popup;
 import scene.GestureChallengeScene;
 
 
@@ -27,14 +28,19 @@ public class StartGestureChallengeScene extends MTApplication {
 		addScene(GCS);
 		GameModel GM = new GameModel(GCS);
 		GCS.setGM(GM);
+		
+		GM.newGame();
+		/*
 		GM.setPlayerNumber(3);
 		GM.createInterfaces();
 		GM.subscribeInterfaces();
 		GM.initGame();
-		//PhysicsRectangle r = new PhysicsRectangle(new Vector3D(this.width/2f+50,this.height/2f), 30,30, this, GCS.getWorld(), 0f, 0f, 0f, GCS.getScale());
-		//GCS.getPhysicsContainer().addChild(r);
-		//r.rotateZGlobal(r.getCenterPointGlobal(), (float) Math.toDegrees(Math.PI/3f));
-		//r.setCenterRotation((float) Math.PI/3f);
+		Popup p = new Popup<Integer>("player_number","Number of players ?", GCS, GM, new Vector3D(GCS.getMTApplication().width/2f,GCS.getMTApplication().height/2f), 300);
+		
+		p.addPopupItem("2 players", 2);
+		p.addPopupItem("3 players", 3);
+		p.addPopupItem("4 players", 4);*/
+
 	}
 
 }

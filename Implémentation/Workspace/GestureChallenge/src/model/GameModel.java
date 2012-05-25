@@ -10,12 +10,15 @@ import org.jbox2d.dynamics.Body;
 import org.mt4j.components.MTComponent;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.ToolsMath;
+import org.mt4j.util.math.Vector3D;
 
 import playerinterface.PlayerInterface;
+import popup.PopUpCreator;
+import popup.Popup;
 import scene.GestureChallengeScene;
 
 
-public class GameModel {
+public class GameModel implements PopUpCreator {
 	PropertyChangeSupport support=new PropertyChangeSupport(this);
 	int playerNumber;
 	int levelNumber;
@@ -199,6 +202,18 @@ public void fireRanks(){
 	}
 	
 	
+	public void newGame(){
+
+		
+		
+		
+		Popup p = new Popup<Integer>("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+		
+		p.addPopupItem("2 players", 2);
+		p.addPopupItem("3 players", 3);
+		p.addPopupItem("4 players", 4);
+	}
+	
 	public void initGame(){
 		fireRanks();
 		myTimer = new Timer();
@@ -268,6 +283,33 @@ public void fireRanks(){
 		
 		myTimer.schedule(endGame,(Constants.gameTime)*1000);
 		myTimer.schedule(infoTimeleft,0, 1000);
+	}
+
+	@Override
+	public void reactToPopUpResponse(String PopUpName, Object o) {
+		
+		if(PopUpName.compareTo("player_number")==0){
+			setPlayerNumber((Integer)o);
+			System.out.println("playerNumber set");
+			
+			Popup p = new Popup<Integer>("level_number","Difficulty level ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+			
+			p.addPopupItem("Beginner", 1);
+			p.addPopupItem("Intermediate", 2);
+			p.addPopupItem("Advanced", 3);
+			p.addPopupItem("Free game", 4);
+			
+			
+			
+			
+		}else if(PopUpName.compareTo("level_number")==0){
+			setLevelNumber((Integer)o);
+			System.out.println("levelNumber set");
+			this.createInterfaces();
+			this.subscribeInterfaces();
+			this.initGame();
+		}
+		
 	}
 	
 }
