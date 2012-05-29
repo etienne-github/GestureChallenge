@@ -101,6 +101,7 @@ public class Popup<O> extends MTEllipse {
 			tF.setNoStroke(true);
 			tF.setNoFill(true);
 			tF.removeAllGestureEventListeners();
+			this.removeAllGestureEventListeners();
 			tF.registerInputProcessor(new TapProcessor(scene.getMTApplication()));
 			tF.addGestureListener(TapProcessor.class, new IGestureEventListener() {
 				
