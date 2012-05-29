@@ -15,6 +15,8 @@ import org.mt4j.util.math.Vector3D;
 import playerinterface.PlayerInterface;
 import popup.PopUpCreator;
 import popup.Popup;
+import popup.touch.PopupNbPlayers;
+
 import scene.GestureChallengeScene;
 
 
@@ -207,11 +209,16 @@ public void fireRanks(){
 		
 		
 		
-		Popup p = new Popup<Integer>("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+	/*	Popup p = new Popup<Integer>("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
 		
 		p.addPopupItem("2 players", 2);
 		p.addPopupItem("3 players", 3);
-		p.addPopupItem("4 players", 4);
+		p.addPopupItem("4 players", 4);*/
+		
+		Popup p = new PopupNbPlayers("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+
+		
+		
 	}
 	
 	public void initGame(){

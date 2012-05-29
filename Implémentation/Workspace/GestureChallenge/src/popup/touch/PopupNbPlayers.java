@@ -3,6 +3,7 @@ package popup.touch;
 import java.io.File;
 
 import org.mt4j.AbstractMTApplication;
+import org.mt4j.components.visibleComponents.shapes.MTEllipse;
 import org.mt4j.components.visibleComponents.widgets.MTTextArea;
 import org.mt4j.components.visibleComponents.widgets.buttons.MTImageButton;
 import org.mt4j.input.IMTInputEventListener;
@@ -10,25 +11,119 @@ import org.mt4j.input.gestureAction.TapAndHoldVisualizer;
 import org.mt4j.input.inputData.MTInputEvent;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapAndHoldProcessor.TapAndHoldEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapAndHoldProcessor.TapAndHoldProcessor;
+
+
 import org.mt4j.util.MTColor;
+import org.mt4j.util.font.FontManager;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 
 import physic.shape.PhysicsCircle;
 import physic.shape.util.PhysicsHelper;
+import popup.PopUpCreator;
+import popup.Popup;
+
+import popup.touch.gestureAction.TapAndHoldCentralVizualizer;
+import popup.touch.gestureEvent.TapAndHoldCountEvent;
+import popup.touch.gestureProcessor.TapAndHoldCountProcessor;
 import processing.core.PApplet;
 import scene.GestureChallengeScene;
 
 
 
 public class PopupNbPlayers extends Popup {
+	
+	MTEllipse myTouchArea;
+
+	public PopupNbPlayers(String name, String content, GestureChallengeScene s,
+			PopUpCreator PC, Vector3D centerPosition, float radius) {
+		super(name, content, s, PC, centerPosition, radius);
+		
+		myTouchArea = new MTEllipse(s.getMTApplication(),this.getCenterPointLocal(),radius*5/10f,radius*5/10f);
+		myTouchArea.removeAllGestureEventListeners();
+		myTouchArea.setNoFill(true);
+		myTouchArea.setStrokeColor(MTColor.PURPLE);
+		this.addChild(myTouchArea);
+		myTouchArea.registerInputProcessor(new TapAndHoldCountProcessor(s.getMTApplication(), 2000));
+		myTouchArea.addGestureListener(TapAndHoldCountProcessor.class, new TapAndHoldCentralVizualizer(s.getMTApplication(), s.getCanvas(), myTouchArea));
+		myTouchArea.addGestureListener(TapAndHoldCountProcessor.class, new WaitEndOfHoldTapAndCountCursorsListener());
+		
+		//Put and hold one finger per player on this area;
+		
+		
+		int policeSize = (int) (radius)/15;
+		//System.out.println("police size = "+policeSize);
+		float l = (float) Math.sqrt(2*Math.pow(radius*5/10f, 2));
+		MTTextArea textArea = new MTTextArea(s.getMTApplication(), 100, 100, l, l, FontManager.getInstance().createFont(s.getMTApplication(),"arial",(int) policeSize,MTColor.BLACK, MTColor.BLACK));
+		textArea.setText("\n\n\n         Put and hold\n   one finger per player\n           in this area.");
+		textArea.setNoFill(true);
+		textArea.removeAllGestureEventListeners();
+		textArea.setPositionRelativeToOther(myTouchArea,myTouchArea.getCenterPointLocal());
+		textArea.setNoStroke(true);
+		textArea.setPickable(false);
+		myTouchArea.addChild(textArea);
+			
+		}	
+	
+
+	class  WaitEndOfHoldTapAndCountCursorsListener implements IGestureEventListener{
+
+		@Override
+		public boolean processGestureEvent(MTGestureEvent ge) {
+		TapAndHoldCountEvent th = (TapAndHoldCountEvent)ge;
+		switch (th.getId()) {
+		case TapAndHoldCountEvent.GESTURE_STARTED:
+			//textArea.setText("Peut être quelqu'un de plus dans la partie..." );
+			break;
+		case TapAndHoldCountEvent.GESTURE_UPDATED:
+
+			break;
+		case TapAndHoldCountEvent.GESTURE_CANCELED:
+			//textArea.setText(nbPlayers + " joueur ose relever le challenge !" );
+			break;
+			
+		case TapAndHoldCountEvent.GESTURE_ENDED:
+			if (th.isHoldComplete()){
+				PopupNbPlayers.this.myTouchArea.unregisterAllInputProcessors();
+				PopupNbPlayers.this.myTouchArea.removeAllGestureEventListeners();
+				PC.reactToPopUpResponse(name,th.getAvailableCursors());
+				
+			
+				
+				PopupNbPlayers.this.scene.getMTApplication().invokeLater(new Runnable(){
+
+					@Override
+					public void run() {
+						PopupNbPlayers.this.removeFromParent();
+						
+					}
+					
+				});
+				
+				
+
+			}
+			break;
+		default:
+			break;
+		}
+		return false;
+	}
+	
+	
+	}
 
 	
-	private int nbPlayers = 0;
+	
+	
+	/*private int nbPlayers = 0;
 	private float scale = 20;
 	private PApplet applet;
+	
+	
+	player1.registerInputProcessor(new TapAndHoldProcessor((AbstractMTApplication) applet, 2000));
+	player1.addGestureListener(TapAndHoldProcessor.class, new TapAndHoldVisualizer((AbstractMTApplication) applet, super.scene.getCanvas()));
+	player1.addGestureListener(TapAndHoldProcessor.class, gl);
 	
 	public PopupNbPlayers(String content, GestureChallengeScene s,
 			Vector3D centerPosition, float width, float height, final PApplet applet) {
@@ -116,7 +211,7 @@ public class PopupNbPlayers extends Popup {
 		player2.setStrokeColor(textAreaColor);
 		player2.setText("Cliquez et maintenez pour jouer ! ");
 		player2.registerInputProcessor(new TapAndHoldProcessor((AbstractMTApplication) applet, 2000));
-		player2.addGestureListener(TapAndHoldProcessor.class, new TapAndHoldVisualizer((AbstractMTApplication) applet, super.scene.getCanvas()));
+		player2.addGestureListener(TapAndHoldProcessor.class, new TapAndHoldCentralVizualizer((AbstractMTApplication) applet, super.scene.getCanvas(),player2));
 		player2.addGestureListener(TapAndHoldProcessor.class, gl);
 		
 		scene.getCanvas().addChild(player1);
@@ -130,6 +225,6 @@ public class PopupNbPlayers extends Popup {
 
 
 		
-	}
+	}*/
 
 }

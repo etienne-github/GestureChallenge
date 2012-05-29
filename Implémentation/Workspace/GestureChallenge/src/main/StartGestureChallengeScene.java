@@ -7,8 +7,6 @@ import org.mt4j.input.inputSources.MacTrackpadSource;
 import org.mt4j.util.math.Vector3D;
 
 import physic.shape.PhysicsRectangle;
-import popup.Popup;
-import popup.touch.PopupNbPlayers;
 import scene.GestureChallengeScene;
 
 
@@ -32,9 +30,7 @@ public class StartGestureChallengeScene extends MTApplication {
 		
 		GM.newGame();
 		
-		//POPUP LOIC
-		//PopupNbPlayers p = new PopupNbPlayers("???", GCS, new Vector3D(GCS.getMTApplication().width/2f,GCS.getMTApplication().height/2f), 200, 200, GCS.getMTApplication());
-		//GCS.getCanvas().addChild(p);
+
 		
 		/*
 		GM.setPlayerNumber(3);

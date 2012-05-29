@@ -9,7 +9,9 @@ import java.util.HashMap;
 import model.GameModel;
 
 import org.jbox2d.dynamics.Body;
+import org.mt4j.components.MTComponent;
 import org.mt4j.components.TransformSpace;
+import org.mt4j.components.interfaces.IMTController;
 import org.mt4j.components.visibleComponents.shapes.MTEllipse;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle.PositionAnchor;
 import org.mt4j.components.visibleComponents.shapes.MTRoundRectangle;
@@ -21,6 +23,7 @@ import org.mt4j.input.gestureAction.InertiaDragAction;
 import org.mt4j.input.inputData.MTInputEvent;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
+import org.mt4j.input.inputProcessors.componentProcessors.dragProcessor.DragEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.dragProcessor.DragProcessor;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
@@ -41,11 +44,10 @@ public class Popup<O> extends MTEllipse {
 	
 	private String textContent;
 	private MTTextArea textArea;
-	private PopUpCreator PC;
-	private MTImageButton OK;
-	private GestureChallengeScene scene;	//acces to the gesturecChallenge scene needed to set ths player number, etc.
+	protected PopUpCreator PC;
+	protected GestureChallengeScene scene;	//acces to the gesturecChallenge scene needed to set ths player number, etc.
 	private HashMap<String,O> hMap;
-	private String name;
+	protected String name;
 	private ArrayList<PopupItem> popupItemList=new ArrayList<PopupItem>();
 	
 	
@@ -79,6 +81,9 @@ public class Popup<O> extends MTEllipse {
 		this.setPositionGlobal(centerPosition);
 		this.removeAllGestureEventListeners();
 		scene.getCanvas().addChild(this);
+		
+		this.registerInputProcessor(new DragProcessor(scene.getMTApplication()));
+		this.addGestureListener(DragProcessor.class, new CircularPopUpDragListener(this));
 	}
 	
 	
@@ -121,7 +126,7 @@ public class Popup<O> extends MTEllipse {
 			tF.setPositionRelativeToOther(this, this.getCenterPointLocal());
 			this.addChild(tF);
 			this.setPositionRelativeToOther(Popup.this, new Vector3D(Popup.this.getCenterPointLocal().x,Popup.this.getCenterPointLocal().y-100+popupItemList.size()*(this.getHeightXY(TransformSpace.GLOBAL)+5)));
-			
+
 		}
 		
 	}
@@ -141,7 +146,124 @@ public class Popup<O> extends MTEllipse {
 	}
 	
 	
+	private class CircularPopUpDragListener implements IGestureEventListener{
+		private MTEllipse theListCellContainer;
+		private Popup p;
+		private Vector3D center;
+		private double angle = 1;
+		
+		private boolean canDrag;
+		
+		/**
+		 * Constructor
+		 * @param c
+		 * @param s
+		 */
+		public CircularPopUpDragListener(Popup p){
 
-	
-	
+			this.p=p;
+			this.center =p.getCenterPointGlobal();
+			
+			//this.canDrag = false;
+		}
+		
+
+		public boolean processGestureEvent(MTGestureEvent ge) {
+			DragEvent de = (DragEvent)ge;
+			
+			Vector3D dir = de.getTranslationVect();
+			dir.transformDirectionVector(p.getGlobalInverseMatrix());
+			Vector3D to = new Vector3D(de.getTo().x -center.x, de.getTo().y - center.y, 0);
+			Vector3D from = new Vector3D(de.getFrom().x - center.x, de.getFrom().y - center.y, 0);
+			
+			if(from.length() > 100)
+			{
+				switch (de.getId()) {
+				case MTGestureEvent.GESTURE_DETECTED:
+				case MTGestureEvent.GESTURE_UPDATED:
+						angle = Math.atan2(to.y,to.x) - Math.atan2(from.y,from.x);
+						System.err.println("angle listener : "+angle);
+						Popup.this.rotateZGlobal(p.getCenterPointGlobal(), (float) Math.toDegrees(angle));
+					break;
+				case MTGestureEvent.GESTURE_ENDED:
+					Vector3D vel = de.getDragCursor().getVelocityVector(140);
+					vel.scaleLocal(0.8f);
+					vel = vel.getLimited(15);
+					IMTController oldController = p.getController();
+					//theListCellContainer.setController(new InertiaListController(theListCellContainer, vel, oldController, (float) (Math.abs(angle)/angle)));
+					p.setController(new InertiaCircularPopUpController(p, vel, oldController, (float) (Math.abs(angle)/angle)));
+
+					break;
+				default:
+					break;
+				}
+			}
+			return false;
+		}
+		
+		
+		
+		
+		
+		/**
+		 * The Class InertiaListController.
+		 * Controller to add an inertia scrolling after scrolling/dragging the list content.
+		 * 
+		 * @author Christopher Ruff
+		 */
+		private class InertiaCircularPopUpController implements IMTController{
+			private MTComponent target;
+			private Vector3D startVelocityVec;
+			private float dampingValue = 0.95f;
+			private float rotationDir;
+//			private float dampingValue = 0.80f;
+			
+			private IMTController oldController;
+			
+			public InertiaCircularPopUpController(MTComponent target, Vector3D startVelocityVec, IMTController oldController, float dir) {
+				super();
+				this.target = target;
+				this.startVelocityVec = startVelocityVec;
+				this.oldController = oldController;
+				this.rotationDir = dir;
+				
+			//	System.err.println("vel :"+startVelocityVec);
+//				System.out.println(startVelocityVec);
+				//Animation inertiaAnim = new Animation("Inertia anim for " + target, new MultiPurposeInterpolator(startVelocityVec.length(), 0, 100, 0.0f, 0.5f, 1), target);
+			}
+			
+			public void update(long timeDelta) {
+				if (false){//
+					//theListCellContainer.isDragging();
+					startVelocityVec.setValues(Vector3D.ZERO_VECTOR);
+					target.setController(oldController);
+					return;
+				}
+				
+				if (Math.abs(startVelocityVec.x) < 0.05f && Math.abs(startVelocityVec.y) < 0.05f){
+					startVelocityVec.setValues(Vector3D.ZERO_VECTOR);
+					target.setController(oldController);
+					return;
+				}
+				startVelocityVec.scaleLocal(dampingValue);
+				
+				Vector3D transVect = new Vector3D(startVelocityVec);
+				transVect.transformDirectionVector(p.getGlobalInverseMatrix());
+				//System.out.println(rotationDir);
+				//theListCellContainer.translate(new Vector3D(0, transVect.y), TransformSpace.LOCAL);
+				float angle=((rotationDir * transVect.length())/2);
+				//System.err.println("angle cont "+angle);
+				if(!Float.isNaN(angle)){
+					Popup.this.rotateZGlobal(Popup.this.getCenterPointGlobal(), angle);
+				}
+				
+				if (oldController != null){
+					oldController.update(timeDelta);
+				}
+			}
+		}
+		
+	}
 }
+	
+	
