@@ -10,7 +10,9 @@ import physic.shape.PhysicsRectangle;
 import scene.GestureChallengeScene;
 
 
-
+//TODO Faire en sorte de pouvoir faire le pan sur toute la surface du joueur -> RŽmy
+//TODO Faire une popup de fin de jeu qui s'affiche pour chaque player avec le classement -> RŽmy
+//TODO Faire un bouton au milieu qui permette la pause et qui affiche une popup new Game/Exit -> Etienne
 
 
 public class StartGestureChallengeScene extends MTApplication {
