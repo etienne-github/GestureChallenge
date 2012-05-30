@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.dynamics.Body;
 import org.mt4j.components.MTComponent;
 import org.mt4j.util.MTColor;
@@ -16,7 +15,6 @@ import playerinterface.PlayerInterface;
 import popup.PopUpCreator;
 import popup.Popup;
 import popup.touch.PopupNbPlayers;
-
 import scene.GestureChallengeScene;
 
 
@@ -49,10 +47,10 @@ public class GameModel implements PopUpCreator {
 		for(int i=0;i<playerNumber;i++){
 			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));		
 			if(i<4){
-				myPI[i]=new PlayerInterface(playerColors[i],i,angle,myGCS,playerNumber);
+				myPI[i]=new PlayerInterface(playerColors[i],i,angle,myGCS,playerNumber, levelNumber);
 			}else{
 				MTColor col = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
-				myPI[i]=new PlayerInterface(col,i,angle,myGCS,playerNumber);
+				myPI[i]=new PlayerInterface(col,i,angle,myGCS,playerNumber, levelNumber);
 			}
 			ranking[i]=playerNumber;
 		}
@@ -295,7 +293,7 @@ public void fireRanks(){
 	@Override
 	public void reactToPopUpResponse(String PopUpName, Object o) {
 		
-		if(PopUpName.compareTo("player_number")==0){
+		if(PopUpName.equals("player_number")){
 			setPlayerNumber((Integer)o);
 			System.out.println("playerNumber set");
 			
@@ -309,7 +307,8 @@ public void fireRanks(){
 			
 			
 			
-		}else if(PopUpName.compareTo("level_number")==0){
+		}
+		else if(PopUpName.equals("level_number")){
 			setLevelNumber((Integer)o);
 			System.out.println("levelNumber set");
 			this.createInterfaces();
