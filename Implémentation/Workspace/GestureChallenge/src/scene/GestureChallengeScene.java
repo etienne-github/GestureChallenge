@@ -21,6 +21,7 @@ import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
 import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
+import org.mt4j.components.visibleComponents.widgets.MTSceneMenu;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
 import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
@@ -42,6 +43,7 @@ import physic.shape.util.UpdatePhysicsAction;
 import playerinterface.PlayerBullet;
 import playerinterface.PlayerGoal;
 import playerinterface.PlayerRotableShield;
+import scene.menu.GCSceneMenu;
 
 
 
@@ -60,6 +62,7 @@ public class GestureChallengeScene extends AbstractScene {
 	PhysicsCircle c;
 	private MTComponent physicsContainer;
 	GameModel myGM;
+	GCSceneMenu centralMenu=null;
 	
 	public GestureChallengeScene(AbstractMTApplication mtApplication, String name) {
 		super(mtApplication, name);
@@ -211,7 +214,7 @@ public class GestureChallengeScene extends AbstractScene {
 				Vertex[] emptyCircleVertices=new Vertex[def];
 				PhysicsCircle test;
 				for(int i=0;i<def;i++){
-					System.out.println(Math.cos((i/(float)def)*twoPi)*radius+" "+Math.sin((i/(float)def)*twoPi)*radius);
+					//System.out.println(Math.cos((i/(float)def)*twoPi)*radius+" "+Math.sin((i/(float)def)*twoPi)*radius);
 					emptyCircleVertices[i]=new Vertex((float) (app.width/2f+Math.cos((i/(float)def)*twoPi)*radius) , (float)(app.height/2f+Math.sin((i/(float)def)*twoPi)*radius));
 					test = new PhysicsCircle(app,emptyCircleVertices[i], 1, world, 0, 0, 0, scale);
 					test.setFillColor(MTColor.WHITE);
@@ -278,6 +281,21 @@ public class GestureChallengeScene extends AbstractScene {
 				parent.addChild(pR);	
 			
 	}
+
+	
+	public void setCentralMenu(GCSceneMenu m) {
+		this.centralMenu=m;
+		this.getCanvas().addChild(m);
+	}
+	
+	public GCSceneMenu getCentralMenu() {
+		return centralMenu;
+	}
+
+
+
+
+
 
 	public void onEnter() {
 	}

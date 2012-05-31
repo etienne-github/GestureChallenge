@@ -186,7 +186,7 @@ public class Popup<O> extends MTEllipse {
 				case MTGestureEvent.GESTURE_DETECTED:
 				case MTGestureEvent.GESTURE_UPDATED:
 						angle = Math.atan2(to.y,to.x) - Math.atan2(from.y,from.x);
-						System.err.println("angle listener : "+angle);
+						//System.err.println("angle listener : "+angle);
 						Popup.this.rotateZGlobal(p.getCenterPointGlobal(), (float) Math.toDegrees(angle));
 					break;
 				case MTGestureEvent.GESTURE_ENDED:
