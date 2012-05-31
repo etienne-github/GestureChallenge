@@ -49,6 +49,8 @@ public class Popup<O> extends MTEllipse {
 	private HashMap<String,O> hMap;
 	protected String name;
 	private ArrayList<PopupItem> popupItemList=new ArrayList<PopupItem>();
+	protected float xStartPopUpItem;
+	protected float yStartPopUpItem;
 	
 	
 	@SuppressWarnings("deprecation")
@@ -84,6 +86,8 @@ public class Popup<O> extends MTEllipse {
 		
 		this.registerInputProcessor(new DragProcessor(scene.getMTApplication()));
 		this.addGestureListener(DragProcessor.class, new CircularPopUpDragListener(this));
+		xStartPopUpItem=this.getCenterPointLocal().x;
+		yStartPopUpItem=this.getCenterPointLocal().y-100;
 	}
 	
 	
@@ -92,9 +96,9 @@ public class Popup<O> extends MTEllipse {
 		
 		MTTextField tF;
 		
-		public PopupItem(final String text, float x, float y, float height,
+		public PopupItem(final String text, float height,
 				 IFont f) {
-			super(x, y,0f,300f,height,10f,10f,scene.getMTApplication());
+			super(0, 0,0f,300f,height,10f,10f,scene.getMTApplication());
 
 			popupItemList.add(this);
 			tF = new MTTextField(scene.getMTApplication(), 0, 0, 200, f.getFontAbsoluteHeight()+2, f);
@@ -125,7 +129,7 @@ public class Popup<O> extends MTEllipse {
 			tF.setAnchor(PositionAnchor.CENTER);
 			tF.setPositionRelativeToOther(this, this.getCenterPointLocal());
 			this.addChild(tF);
-			this.setPositionRelativeToOther(Popup.this, new Vector3D(Popup.this.getCenterPointLocal().x,Popup.this.getCenterPointLocal().y-100+popupItemList.size()*(this.getHeightXY(TransformSpace.GLOBAL)+5)));
+			this.setPositionRelativeToOther(Popup.this, new Vector3D(Popup.this.xStartPopUpItem,Popup.this.yStartPopUpItem+popupItemList.size()*(this.getHeightXY(TransformSpace.GLOBAL)+5)));
 
 		}
 		
@@ -139,7 +143,7 @@ public class Popup<O> extends MTEllipse {
 		IFont f = FontManager.getInstance().createFont(scene.getMTApplication(), "arial", 30);
 
 		
-		PopupItem pI = new PopupItem(text, this.getCenterPointLocal().x-100, this.getCenterPointLocal().y-100, f.getFontAbsoluteHeight()+2, f);
+		PopupItem pI = new PopupItem(text, f.getFontAbsoluteHeight()+2, f);
 		pI.setNoFill(true);
 		pI.setStrokeColor(MTColor.PURPLE);
 		this.addChild(pI);

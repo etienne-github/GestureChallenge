@@ -14,6 +14,7 @@ import org.mt4j.util.math.Vector3D;
 import playerinterface.PlayerInterface;
 import popup.PopUpCreator;
 import popup.Popup;
+import popup.PopupLogo;
 import popup.touch.PopupNbPlayers;
 import scene.GestureChallengeScene;
 
@@ -213,8 +214,9 @@ public void fireRanks(){
 		p.addPopupItem("3 players", 3);
 		p.addPopupItem("4 players", 4);*/
 		
-		Popup p = new PopupNbPlayers("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
-
+		PopupLogo p2 = new PopupLogo<String>("home",myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+		p2.addPopupItem("    New Game", "new_game");
+		p2.addPopupItem("           Quit", "quit");
 		
 		
 	}
@@ -293,10 +295,25 @@ public void fireRanks(){
 	@Override
 	public void reactToPopUpResponse(String PopUpName, Object o) {
 		
-		if(PopUpName.equals("player_number")){
-			setPlayerNumber((Integer)o);
-			System.out.println("playerNumber set");
+		//answers come from home popup
+		if(PopUpName.equals("home")){
+				
+			if(((String)o).compareTo("new_game")==0){
+				//show number of players popup
+				Popup p = new PopupNbPlayers("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+			}else{
+				//quit app
+				this.myGCS.getMTApplication().destroy();
+			}
 			
+		//answers come from player_number popup
+		}else if(PopUpName.equals("player_number")){
+			
+			//set players numbers
+			setPlayerNumber((Integer)o);
+			//System.out.println("playerNumber set");
+			
+			//show level_number pop_up
 			Popup p = new Popup<Integer>("level_number","Difficulty level ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
 			
 			p.addPopupItem("Beginner", 1);
@@ -306,11 +323,14 @@ public void fireRanks(){
 			
 			
 			
+		//answers come from level_number popup	
+		}else if(PopUpName.equals("level_number")){
 			
-		}
-		else if(PopUpName.equals("level_number")){
+			//set level number
 			setLevelNumber((Integer)o);
 			System.out.println("levelNumber set");
+			
+			//start game
 			this.createInterfaces();
 			this.subscribeInterfaces();
 			this.initGame();
