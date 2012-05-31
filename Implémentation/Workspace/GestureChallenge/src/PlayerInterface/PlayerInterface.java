@@ -107,7 +107,7 @@ public class PlayerInterface implements PropertyChangeListener {
 			myGCS.getPhysicsContainer().addChild(myRSA);
 		}
 		
-		myPG=new PlayerGoal(myGCS.getMTApplication(), new Vector3D(x,y), myGCS.getWorld(), myGCS.getScale(), myColor,this.myNumber+1,angle);
+		myPG=new PlayerGoal(myGCS.getMTApplication(), new Vector3D(x,y), myGCS.getWorld(), myGCS.getScale(), myColor,this.myNumber+1,angle,myGCS);
 		myGCS.getPhysicsContainer().addChild(myPG);
 
 		//creation shields
@@ -116,11 +116,15 @@ public class PlayerInterface implements PropertyChangeListener {
 		y = y -(float) (Math.sin(angle)*Constants.shieldDistance);
 		float coveredAngle = (float) Math.toRadians(180/(float)playerNumber);
 		//myPS=new PhysicsShield(Constants.shieldBigRadius,Constants.shieldSmallRadius,Constants.shieldSmallDef,Constants.shieldBigDef,coveredAngle,new Vector3D(x,y),myGCS.getMTApplication(),myGCS.getWorld(),0f,0f,0f,myGCS.getScale(),color);
-		myPS = new PlayerRotableShield(new Vector3D(x,y),this);
-		myGCS.getPhysicsContainer().addChild(myPS);		
-		myPS.getBody().setXForm(
-				myPS.getBody().getPosition(), (float) (angle+Math.PI/2f)
-		);
+		
+		if(level>1){
+			myPS = new PlayerRotableShield(new Vector3D(x,y),this);
+			myGCS.getPhysicsContainer().addChild(myPS);		
+			myPS.getBody().setXForm(
+					myPS.getBody().getPosition(), (float) (angle+Math.PI/2f)
+			);
+		}
+		
 		
 		
 		//TEST WITH ROTABLE SHIELD AREA
@@ -186,24 +190,27 @@ public class PlayerInterface implements PropertyChangeListener {
 				
 		//System.out.println("P"+myNumber+" mask:"+myBulletMask);
 		
-		
-		myPS.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
-		myPS.getBody().getShapeList().m_filter.maskBits=myCollisionID;
-		myPS.getBody().getShapeList().m_filter.groupIndex=0;
-		//System.out.println("PS"+myNumber+" cat("+myPS.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPS.getBody().getShapeList().m_filter.maskBits+")/group("+myPS.getBody().getShapeList().m_filter.groupIndex+")");
-		//System.out.println("PS"+myNumber+" cat("+myPS.getBody().m_shapeList.m_filter.categoryBits+")/mask("+myPS.getBody().m_shapeList.m_filter.maskBits+")/group("+myPS.getBody().m_shapeList.m_filter.groupIndex+")");
-		Shape shape;
-		shape=myPS.getBody().getShapeList();
-		for (Shape s = myPS.getBody().getShapeList();
-			     s != null;
-			     s = s.getNext()){
-			s.m_filter.categoryBits=myCollisionID;
-			s.m_filter.maskBits=myCollisionID;
-			s.m_filter.groupIndex=0;
-			//System.out.println(i);
+		if(level>1){
+			myPS.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
+			myPS.getBody().getShapeList().m_filter.maskBits=myCollisionID;
+			myPS.getBody().getShapeList().m_filter.groupIndex=0;
+			//System.out.println("PS"+myNumber+" cat("+myPS.getBody().getShapeList().m_filter.categoryBits+")/mask("+myPS.getBody().getShapeList().m_filter.maskBits+")/group("+myPS.getBody().getShapeList().m_filter.groupIndex+")");
+			//System.out.println("PS"+myNumber+" cat("+myPS.getBody().m_shapeList.m_filter.categoryBits+")/mask("+myPS.getBody().m_shapeList.m_filter.maskBits+")/group("+myPS.getBody().m_shapeList.m_filter.groupIndex+")");
+			Shape shape;
+			shape=myPS.getBody().getShapeList();
+			for (Shape s = myPS.getBody().getShapeList();
+				     s != null;
+				     s = s.getNext()){
+				s.m_filter.categoryBits=myCollisionID;
+				s.m_filter.maskBits=myCollisionID;
+				s.m_filter.groupIndex=0;
+				//System.out.println(i);
+			}
+			
+			System.out.println("P"+myNumber+" rotableShield("+myPS.getBody().getShapeList().m_filter.categoryBits+")("+myPS.getBody().getShapeList().m_filter.maskBits+")");
+			
 		}
 		
-		System.out.println("P"+myNumber+" rotableShield("+myPS.getBody().getShapeList().m_filter.categoryBits+")("+myPS.getBody().getShapeList().m_filter.maskBits+")");
 		
 		myPG.getBody().getShapeList().m_filter.categoryBits=myCollisionID;
 		myPG.getBody().getShapeList().m_filter.maskBits=myCollisionID;
