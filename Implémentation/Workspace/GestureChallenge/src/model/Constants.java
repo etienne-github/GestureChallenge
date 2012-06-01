@@ -39,7 +39,10 @@ public class Constants {
 	public static int displayNotificationAnimationFrames=10;
 	
 	//Game model parameters
-	public static int gameTime=0*60+10;
+
+	public static int gameTime=0*60+30;
+
+
 	
 }
 

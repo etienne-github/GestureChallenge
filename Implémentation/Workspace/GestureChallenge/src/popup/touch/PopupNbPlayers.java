@@ -37,13 +37,13 @@ public class PopupNbPlayers extends Popup {
 
 	public PopupNbPlayers(String name, String content, GestureChallengeScene s,
 			PopUpCreator PC, Vector3D centerPosition, float radius) {
-		super(name, content, s, PC, centerPosition, radius);
+		super(MTEllipse.class, name, content, s, PC, centerPosition, radius);
 		
-		myTouchArea = new MTEllipse(s.getMTApplication(),this.getCenterPointLocal(),radius*5/10f,radius*5/10f);
+		myTouchArea = new MTEllipse(s.getMTApplication(),this.getMyShape().getCenterPointLocal(),radius*5/10f,radius*5/10f);
 		myTouchArea.removeAllGestureEventListeners();
 		myTouchArea.setNoFill(true);
 		myTouchArea.setStrokeColor(MTColor.PURPLE);
-		this.addChild(myTouchArea);
+		this.getMyShape().addChild(myTouchArea);
 		myTouchArea.registerInputProcessor(new TapAndHoldCountProcessor(s.getMTApplication(), 2000));
 		myTouchArea.addGestureListener(TapAndHoldCountProcessor.class, new TapAndHoldCentralVizualizer(s.getMTApplication(), s.getCanvas(), myTouchArea));
 		myTouchArea.addGestureListener(TapAndHoldCountProcessor.class, new WaitEndOfHoldTapAndCountCursorsListener());
@@ -51,11 +51,12 @@ public class PopupNbPlayers extends Popup {
 		//Put and hold one finger per player on this area;
 		
 		
-		int policeSize = (int) (radius)/15;
+		//int policeSize = (int) (radius)/15;
+		int policeSize = (int) (radius)/12;
 		//System.out.println("police size = "+policeSize);
 		float l = (float) Math.sqrt(2*Math.pow(radius*5/10f, 2));
-		MTTextArea textArea = new MTTextArea(s.getMTApplication(), 100, 100, l, l, FontManager.getInstance().createFont(s.getMTApplication(),"arial",(int) policeSize,MTColor.BLACK, MTColor.BLACK));
-		textArea.setText("\n\n\n         Put and hold\n   one finger per player\n           in this area.");
+		MTTextArea textArea = new MTTextArea(s.getMTApplication(), 100, 100, l, l, FontManager.getInstance().createFont(s.getMTApplication(),"REZ.ttf",(int) policeSize,MTColor.BLACK, MTColor.BLACK));
+		textArea.setText("\n\n\n            Put and hold \none finger per player\n              in this area");
 		textArea.setNoFill(true);
 		textArea.removeAllGestureEventListeners();
 		textArea.setPositionRelativeToOther(myTouchArea,myTouchArea.getCenterPointLocal());
@@ -94,7 +95,7 @@ public class PopupNbPlayers extends Popup {
 
 					@Override
 					public void run() {
-						PopupNbPlayers.this.removeFromParent();
+						PopupNbPlayers.this.getMyShape().removeFromParent();
 						
 					}
 					

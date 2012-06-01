@@ -37,7 +37,7 @@ public class ThreeFingersAverageGestureProcessor extends AbstractCursorProcessor
 	public ThreeFingersAverageGestureProcessor(PApplet app) {
 		this.applet = applet;
 		//TODO A tester dans le jeu pour déterminer quelle propriété mettre
-		this.setLockPriority(5);
+		this.setLockPriority(2);
 		this.justStarted = false;
 	}
 
@@ -123,6 +123,10 @@ public class ThreeFingersAverageGestureProcessor extends AbstractCursorProcessor
 
 
 	public void cursorEnded(InputCursor inputCursor, AbstractCursorInputEvt currentEvent) {
+		InputCursor[] locked = getLockedCursorsArray();
+		if(locked.length==2){
+			this.fireGestureEvent(new ThreeFingersAverageGestureEvent(this, MTGestureEvent.GESTURE_ENDED, currentEvent.getCurrentTarget(), (float) 0.0));
+		}
 	}
 
 
@@ -153,7 +157,7 @@ public class ThreeFingersAverageGestureProcessor extends AbstractCursorProcessor
 		float averageAngle1 = Geometry.orientedRadianAngleBetween(referenceSegment, relativeSegment);
 		float averageAngle2= Geometry.orientedRadianAngleBetween(referenceSegment2, relativeSegment2);
 		float averageAngle3=Geometry.orientedRadianAngleBetween(referenceSegment3, relativeSegment3);
-		System.out.println("angles "+averageAngle1+" "+averageAngle2+" "+averageAngle3);
+		//System.out.println("angles "+averageAngle1+" "+averageAngle2+" "+averageAngle3);
 		
 		//RETURN AVERAGE
 		/*float averageAngle = averageAngle1+averageAngle2+averageAngle3;

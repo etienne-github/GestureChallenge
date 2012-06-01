@@ -9,16 +9,19 @@ import scene.GestureChallengeScene;
 
 public class PopupLogo<O> extends Popup<O> {
 
-	public PopupLogo(String name, GestureChallengeScene s,
+	
+	
+	//Popup(Class<?> sprite, String name,String content, GestureChallengeScene s, PopUpCreator PC, Vector3D centerPosition, float radius)
+	public PopupLogo(Class<?> sprite,String name, GestureChallengeScene s,
 			PopUpCreator PC, Vector3D centerPosition, float radius) {
-		super(name, "", s, PC, centerPosition, radius);
+		super(sprite , name, "", s, PC, centerPosition, radius);
 		MTRectangle logo = new MTRectangle(s.getMTApplication(),s.getMTApplication().loadImage("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"data"+((String)File.separator)+"logo.png"));
-		this.addChild(logo);
-		logo.setPositionRelativeToOther(this, this.getCenterPointLocal());
+		this.getMyShape().addChild(logo);
+		logo.setPositionRelativeToOther(this.getMyShape(), this.getMyShape().getCenterPointLocal());
 		logo.setPickable(false);
 		logo.removeAllGestureEventListeners();
-		xStartPopUpItem=this.getCenterPointLocal().x;
-		yStartPopUpItem=this.getCenterPointLocal().y+75;
+		//xStartPopUpItem=this.getCenterPointLocal().x;
+		//yStartPopUpItem=this.getCenterPointLocal().y+75;
 	}
 
 }

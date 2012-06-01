@@ -48,6 +48,7 @@ import org.mt4j.util.opengl.GLTexture;
 import org.mt4j.util.opengl.GLTexture.WRAP_MODE;
 import org.mt4j.util.opengl.GLTextureSettings;
 
+import playerinterface.PlayerInterface;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -364,8 +365,12 @@ public class GCSceneMenu extends MTRectangle{
 							
 							Vector3D endGameButtonIntersection = endGameButton.getIntersectionGlobal(Tools3D.getCameraPickRay(getRenderer(), endGameButton, cursor.getCurrentEvtPosX(), cursor.getCurrentEvtPosY()));
 							if (endGameButtonIntersection != null){
-								//TODO
-								myModel.endGame();
+
+
+
+								myModel.endGame(true);
+								
+								
 							}
 							
 							endGameButton.setVisible(false);

@@ -2,13 +2,17 @@ package model;
 
 import java.beans.PropertyChangeSupport;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.jbox2d.dynamics.Body;
+import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
-import org.mt4j.components.visibleComponents.widgets.MTSceneMenu;
+import org.mt4j.components.visibleComponents.shapes.MTEllipse;
+import org.mt4j.components.visibleComponents.shapes.MTRoundRectangle;
+import org.mt4j.sceneManagement.Iscene;
 import org.mt4j.util.MTColor;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
@@ -17,6 +21,7 @@ import playerinterface.PlayerInterface;
 import popup.PopUpCreator;
 import popup.Popup;
 import popup.PopupLogo;
+import popup.RankingPopup;
 import popup.touch.PopupNbPlayers;
 import scene.GestureChallengeScene;
 import scene.menu.GCSceneMenu;
@@ -26,6 +31,7 @@ public class GameModel implements PopUpCreator {
 	PropertyChangeSupport support=new PropertyChangeSupport(this);
 	int playerNumber;
 	int levelNumber;
+	boolean explanationActivated;
 	MTColor[] playerColors;
 	GestureChallengeScene myGCS;
 	PlayerInterface[] myPI;
@@ -33,9 +39,9 @@ public class GameModel implements PopUpCreator {
 	Timer myTimer;
 	TimerTask endGame;
 	TimerTask infoTimeleft;
-	
+
 	public GameModel(GestureChallengeScene gCS){
-		
+
 		playerColors= new MTColor[4];
 		playerColors[0]=new MTColor(188f,140f,255f); //Purple
 		playerColors[1]=new MTColor(255f,190f,0f);
@@ -43,11 +49,11 @@ public class GameModel implements PopUpCreator {
 		playerColors[3]=new MTColor(136f,255f,89f);
 		myGCS = gCS;
 	}
-	
+
 	public void createInterfaces(){
 		myPI = new PlayerInterface[playerNumber];
 		ranking = new int[playerNumber];
-		
+
 		for(int i=0;i<playerNumber;i++){
 			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));		
 			if(i<4){
@@ -59,7 +65,7 @@ public class GameModel implements PopUpCreator {
 			ranking[i]=playerNumber;
 		}
 	}
-	
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
@@ -72,7 +78,7 @@ public class GameModel implements PopUpCreator {
 	public void setLevelNumber(int levelNumber) {
 		this.levelNumber = levelNumber;
 	}
-	
+
 	public void updateRanking(){
 		int[] scores = new int[playerNumber];
 		int[] sortedscores = new int[playerNumber];
@@ -80,7 +86,7 @@ public class GameModel implements PopUpCreator {
 			scores[i]=myPI[i].getMyScore();
 			sortedscores[i]=myPI[i].getMyScore();
 		}
-		
+
 		Arrays.sort(sortedscores);
 		int rank=playerNumber+1;
 		int lastworse=-1;
@@ -89,10 +95,10 @@ public class GameModel implements PopUpCreator {
 		for(boolean i:assigned){
 			i=false;
 		}
-		
+
 		//System.out.println("scores are: "+Arrays.toString(scores));	
 		//System.out.println("orderedScores are: "+Arrays.toString(sortedscores));
-		
+
 		for(int i=0;i<playerNumber;i++){
 			for(int j=0;j<playerNumber;j++){
 				if(!assigned[j]){
@@ -110,9 +116,9 @@ public class GameModel implements PopUpCreator {
 						assigned[j]=true;
 					}
 				}
-				
+
 			}
-			
+
 		}
 
 		//System.out.println("ranks are: "+Arrays.toString(ranking));
@@ -129,37 +135,37 @@ public void fireRanks(){
 		support.firePropertyChange("ranking"+i,null,String.valueOf(ranking[i]));
 	}
 }
-	
+
 	public void subscribeInterfaces() {
 		for(PlayerInterface i:myPI){
 			support.addPropertyChangeListener(i);
 		}
-		
+
 	}
-	
+
 	public void emptyScene(){
-		
+
 
 
 		//Empty world
 		for (Body b=myGCS.getWorld().getBodyList();
 			     b != null;
 			     b = b.getNext()){
-			
+
 			final Body ba=b;
 			myGCS.getMTApplication().invokeLater(new Runnable(){
 
 				@Override
 				public void run() {
 					myGCS.getWorld().destroyBody(ba);
-					
+
 				}
-				
+
 			});
-			
-			
+
+
 		}
-		
+
 		//Empty physic Container
 		MTComponent[] m = myGCS.getPhysicsContainer().getChildren();
 		for(MTComponent c:m){
@@ -169,13 +175,13 @@ public void fireRanks(){
 				@Override
 				public void run() {
 					myGCS.getPhysicsContainer().removeChild(ca);
-					
+
 				}
-				
+
 			});
-			
+
 		}
-		
+
 		//remove texts from scene
 		m = myGCS.getCanvas().getChildren();
 		for(MTComponent c:m){
@@ -187,46 +193,221 @@ public void fireRanks(){
 					@Override
 					public void run() {
 						myGCS.getCanvas().removeChild(ca);
-						
+
 					}
-					
+
 				});
 			}
-			
-			
+
+
 		}
-	
-	myGCS.createScreenBorders(myGCS.getPhysicsContainer());	
-		
+
+
 	}
-	
+
 	public void cancelGameTimers(){
 		for(PlayerInterface PI:myPI){
 			PI.cancelTimers();
 		}
 	}
-	
-	
+
+
 	public void newGame(){
+
+
+
+
+	/*	Popup p = new Popup<Integer>("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
 		
-		//POP HOME POP UP
+		p.addPopupItem("2 players", 2);
+		p.addPopupItem("3 players", 3);
+		p.addPopupItem("4 players", 4);*/
+
+
 		popHomePopup();
-		
+
 	}
 	
-	public void initGame(){
+	
+	public void popHomePopup(){
+		
+		PopupLogo p = new PopupLogo<String>(MTEllipse.class,"home_popup",myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
+		p.addPopupItem("New game", "new_game");
+		p.addPopupItem("Quit", "quit");
+
+	}
+	
+	
+	public void popActivateGameExplanations(){
+		Popup p = new Popup<Boolean>(MTEllipse.class, "activate_explanations"," show  help", myGCS, this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
+
+		p.addPopupItem("yes", true);
+		p.addPopupItem("no", false);
+
+	}
+	
+	
+	public void popNbPlayersPopup(){
+		Popup p = new PopupNbPlayers("player_number","Number of players", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+	}
+	
+	public void popLevelPopup(){
+		Popup p = new Popup<Integer>(MTEllipse.class, "level_number","Difficulty level", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+
+		p.addPopupItem("Beginner", 1);
+		p.addPopupItem("Intermediate", 2);
+		p.addPopupItem("Advanced", 3);
+		p.addPopupItem("Free game", 4);
+	}
+	
+	
+	public void popRankingPopup(){
+		ArrayList<RankingPopup> ranking = new ArrayList<RankingPopup>();
+		for(int i=0;i<playerNumber;i++){
+			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));	
+			float x = myGCS.getMTApplication().width/2f +(float) (Math.cos(angle)*Constants.radiusCenterGoals);
+			float y = myGCS.getMTApplication().height/2f +(float) (Math.sin(angle)*Constants.radiusCenterGoals);
+				ranking.add(new  RankingPopup("Ranking", "Game results", myGCS, this, new Vector3D(x,y), 100,angle, myPI[i].getMyColor()));
+
+		}
+
+		//We fill the popup with sorted scores
+		ArrayList<PlayerInterface> PIRanking = new ArrayList<PlayerInterface>();
+		while(PIRanking.size()<myPI.length){
+			PlayerInterface maxPI = null;
+			for(int i=0;i<myPI.length;i++){
+				if(!PIRanking.contains(myPI[i])){
+					maxPI = myPI[i];
+					break;
+				}
+			}
+			//System.out.println("minPI : "+minPI.getMyScore());
+			for(int i=0;i<myPI.length;i++){
+				//System.out.println("Current PI : "+myPI[i].getMyScore());
+				if(myPI[i].getMyScore()>maxPI.getMyScore() && !PIRanking.contains(myPI[i])){
+					maxPI = myPI[i];
+					//System.out.println("nouveau minPI : "+minPI.getMyScore());
+				}								
+			}
+			//System.out.println("On ajoute "+minPI.getMyScore()+" au PIRanking");
+			PIRanking.add(maxPI);
+		}
+
+		for(int j=0;j<ranking.size();j++){
+			for(int i=0;i<PIRanking.size();i++){
+				ranking.get(j).addPopupItem(String.valueOf(PIRanking.get(i).getMyScore()), i, PIRanking.get(i).getMyColor());
+			}
+		}
+	}
+	
+	
+	public void setSceneMenuVisible(boolean isVisible){
+		
+
+		
+		if(isVisible){
+			if(myGCS.getCentralMenu()==null){
+				//GCSceneMenu(GameModel GM, AbstractMTApplication app, Iscene scene, float x, float y, String Imagepath, float scale) {
+
+				GCSceneMenu m = new GCSceneMenu(this, myGCS.getMTApplication(),myGCS, myGCS.getMTApplication().width/2f, myGCS.getMTApplication().height/2f, "."+((String)File.separator)+"src"+((String)File.separator)+"scene"+((String)File.separator)+"menu"+((String)File.separator)+"data"+((String)File.separator)+"menu.png", 0.3f);
+				myGCS.setCentralMenu(m);
+			}else{
+				myGCS.getCentralMenu().setVisible(true);
+			}
+		}else{
+			if(myGCS.getCentralMenu()!=null){
+				myGCS.getCentralMenu().setVisible(false);
+			}
+		}
+	}
+	
+	public void endGameTimers(){
+		infoTimeleft.cancel();
+		endGame.cancel();
+		myTimer.cancel();
+		cancelGameTimers();
+	}
+	
+	public void endGame(boolean showRanking){
+		if(showRanking){
+			System.err.println("TIME'UP");
+
+
+
+			myGCS.getMTApplication().invokeLater(new Runnable(){
+
+				/**
+				 * Creation of ranking Popup
+				 * Each player should have a popup in his area
+				 */
+				public void run() {
+					//Creation of each popup
+					
+
+					popRankingPopup();
+					endGameTimers();
+
+				}
+
+			});
+
+			for(PlayerInterface PI:myPI){
+				support.removePropertyChangeListener(PI);
+			}
+
+			emptyScene();
+		}else{
+			System.err.println("TIME'UP");
+
+
+
+			myGCS.getMTApplication().invokeLater(new Runnable(){
+
+				/**
+				 * Creation of ranking Popup
+				 * Each player should have a popup in his area
+				 */
+				public void run() {
+					
+
+					
+					endGameTimers();
+
+				}
+
+			});
+
+			for(PlayerInterface PI:myPI){
+				support.removePropertyChangeListener(PI);
+			}
+
+			emptyScene();
+		}
+	}
+
+	
+	
+	
+	
+	public void initGame(final GameModel gm){
+		this.setSceneMenuVisible(true);
 		fireRanks();
 		myTimer = new Timer();
 		endGame=new TimerTask(){
 
 			@Override
 			public void run() {
-				endGame();
 				
+
+				endGame(true);
+
+
 			}
-			
+
 		};
 		
+	
+
 		infoTimeleft=new TimerTask(){
 
 			@Override
@@ -251,135 +432,50 @@ public void fireRanks(){
 					//System.out.println(String.valueOf(min)+"'"+String.valueOf(secI)+"''");
 
 				}
-				
+
 			}
-			
+
 		};
-		
-		
+
+
 		myTimer.schedule(endGame,(Constants.gameTime)*1000);
 		myTimer.schedule(infoTimeleft,0, 1000);
 	}
 
 	@Override
 	public void reactToPopUpResponse(String PopUpName, Object o) {
+
 		
-		//answers come from home popup
-		if(PopUpName.equals("home")){
-				
+		if(PopUpName.equals("home_popup")){
 			if(((String)o).compareTo("new_game")==0){
-				//show number of players popup
-				popNumberOfPlayerPopup();
+				//pop next popup
+				popActivateGameExplanations();
 			}else{
-				//quit app
-				this.myGCS.getMTApplication().destroy();
+				//quit
+				myGCS.getMTApplication().destroy();
 			}
 			
-		//answers come from player_number popup
-		}else if(PopUpName.equals("player_number")){
+		
+		}else if(PopUpName.equals("activate_explanations")){
 			
-			//set players numbers
-			setPlayerNumber((Integer)o);
-			//System.out.println("playerNumber set");
-			
-			//show level_number pop_up
-			popLevePopup();
-			
-			
-			
-		//answers come from level_number popup	
+			explanationActivated=(Boolean)o;
+			popLevelPopup();
+		
 		}else if(PopUpName.equals("level_number")){
 			
-			//set level number
 			setLevelNumber((Integer)o);
 			System.out.println("levelNumber set");
 			
-			//start game
-			this.setCenterMenuButtonEnable(true);
+			popNbPlayersPopup();
+		}else if(PopUpName.equals("player_number")){
+			
+			setPlayerNumber((Integer)o);
+			System.out.println("playerNumber set");
 			this.createInterfaces();
 			this.subscribeInterfaces();
-			this.initGame();
-		}
-		
-	}
-
-	public void endGame(){
-		System.err.println("ENG OF GAME");
-		this.setCenterMenuButtonEnable(false);
-		
-		
-		
-		myGCS.getMTApplication().invokeLater(new Runnable(){
-
-			@Override
-			public void run() {
-				infoTimeleft.cancel();
-				endGame.cancel();
-				myTimer.cancel();
-				cancelGameTimers();
-				
-			}
 			
-		});
-
-		for(PlayerInterface PI:myPI){
-			support.removePropertyChangeListener(PI);
+			this.initGame(this);		
 		}
-		
-		emptyScene();
-		
-		//TODO Show ranking popup
-		
-		//TODO after ranking popup start new game
-		newGame();
+	}
 
-		
-	}
-	
-	private void popHomePopup(){
-		//HOME POPUP
-		PopupLogo p2 = new PopupLogo<String>("home",myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
-		p2.addPopupItem("    New Game", "new_game");
-		p2.addPopupItem("           Quit", "quit");
-	}
-	
-	private void popNumberOfPlayerPopup(){
-		//POPUP
-		Popup p = new PopupNbPlayers("player_number","Number of players ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
-
-	}
-	
-	private void popLevePopup(){
-		//POPUP
-		Popup p = new Popup<Integer>("level_number","Difficulty level ?", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
-		
-		p.addPopupItem("Beginner", 1);
-		p.addPopupItem("Intermediate", 2);
-		p.addPopupItem("Advanced", 3);
-		p.addPopupItem("Free game", 4);
-	}
-	
-	
-	private void setCenterMenuButtonEnable(boolean b) {
-		
-		if(b){
-			//TODO create Button
-			if(myGCS.getCentralMenu()==null){
-				GCSceneMenu m = new GCSceneMenu(this, this.myGCS.getMTApplication(), myGCS, (this.myGCS.getMTApplication().width)/2, (this.myGCS.getMTApplication().height)/2, "."+((String)File.separator)+"src"+((String)File.separator)+"scene"+((String)File.separator)+"menu"+((String)File.separator)+"data"+((String)File.separator)+"menu.png",0.3f);
-				myGCS.setCentralMenu(m);
-			}else{
-				myGCS.getCentralMenu().setVisible(true);
-			}
-
-
-		}else{
-			if(myGCS.getCentralMenu()!=null){
-				myGCS.getCentralMenu().setVisible(false);
-			}
-		}
-		
-		
-		
-	}
-	
 }
