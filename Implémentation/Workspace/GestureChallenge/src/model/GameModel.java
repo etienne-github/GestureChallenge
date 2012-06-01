@@ -257,7 +257,9 @@ public void fireRanks(){
 		p.addPopupItem("Beginner", 1);
 		p.addPopupItem("Intermediate", 2);
 		p.addPopupItem("Advanced", 3);
-		p.addPopupItem("Free game", 4);
+		
+		//TODO  check that deleting the following line is harmless
+		//p.addPopupItem("Free game", 4);
 	}
 	
 	
