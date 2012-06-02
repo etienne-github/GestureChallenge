@@ -57,5 +57,6 @@
 	<classpathentry kind="lib" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/lib/jna_old.jar"/>
 	<classpathentry kind="lib" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/lib/jna-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/lib/jna.jar"/>
+	<classpathentry kind="lib" path="/Users/etiennegirot/Desktop/UTC/NF28/Projet/GestureChallenge/Implémentation/Workspace/GestureChallenge/lib/jl1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

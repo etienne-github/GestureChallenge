@@ -27,7 +27,6 @@ public class StartGestureChallengeScene extends MTApplication {
 	public void startUp() {
 		if(Constants.isOnMac){
 			getInputManager().registerInputSource(new MacTrackpadSource(this));
-
 		}
 		GestureChallengeScene GCS = new GestureChallengeScene(this, "GestureChallenge");
 		addScene(GCS);

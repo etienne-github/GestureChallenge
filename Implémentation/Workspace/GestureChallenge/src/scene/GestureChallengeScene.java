@@ -381,6 +381,7 @@ public class GestureChallengeScene extends AbstractScene {
 							if((other = isHit("Wall",comp1,comp2))!=null){
 								//System.out.println("met a wall");
 								aBullet.bounce();
+								myGM.playBounceWallSound();
 								if(aBullet.getReboundleft()<=0){
 									app.invokeLater(new Runnable() {
 										public void run() {
@@ -394,6 +395,7 @@ public class GestureChallengeScene extends AbstractScene {
 							}else if((other = isHit("PlayerGoal",comp1,comp2))!=null){
 								//System.out.println("met a goal");
 								aBullet.score();
+								myGM.playBounceGoalSound();
 								myGM.updateRanking();
 								//destroy
 								app.invokeLater(new Runnable() {
@@ -407,6 +409,7 @@ public class GestureChallengeScene extends AbstractScene {
 								//System.out.println("met a shield");
 								PlayerRotableShield pS = (PlayerRotableShield ) other;
 								aBullet.changeSender(pS.getMyPI());
+								myGM.playBounceShieldSound();
 								/*aBullet.bounce();
 								if(aBullet.getReboundleft()<=0){
 									app.invokeLater(new Runnable() {

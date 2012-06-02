@@ -49,6 +49,7 @@ public class GameModel implements PopUpCreator {
 	GSMovie m3;
 	GSMovie m4;
 	ArrayList<RankingPopup> rankingPopup=new ArrayList<RankingPopup>();
+	SoundManager mySoundManager;
 
 	public GameModel(GestureChallengeScene gCS){
 
@@ -58,6 +59,16 @@ public class GameModel implements PopUpCreator {
 		playerColors[2]=new MTColor(0f,217f,255f);
 		playerColors[3]=new MTColor(136f,255f,89f);
 		myGCS = gCS;
+		
+		mySoundManager = new SoundManager();
+		
+		mySoundManager.addSoundinSoundLibrary("bounce_wall","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"bounce_1.aiff" , false);
+		mySoundManager.addSoundinSoundLibrary("bip","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"bip_touch.aiff" , false);
+		mySoundManager.addSoundinSoundLibrary("bounce_shield","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"bounce_shield.aiff" , false);
+		mySoundManager.addSoundinSoundLibrary("bounce_goal","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"bounce_goal.aiff" , false);
+//		mySoundManager.addSoundinSoundLibrary("backtrack","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"Boxeur.aiff" , true);
+
+		mySoundManager.MP3Player("."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"Boxeur.mp3");
 		
 		if(!Constants.isOnMac){
 			m1 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi",30);
@@ -69,6 +80,27 @@ public class GameModel implements PopUpCreator {
 
 	}
 
+	public SoundManager getSoundManager(){
+		return mySoundManager;
+	}
+	
+	public void playBeepSound(){
+		this.mySoundManager.playSound("bip");
+	}
+	
+	public void playBounceWallSound(){
+		this.mySoundManager.playSound("bounce_wall");
+	}
+	
+	public void playBounceShieldSound(){
+		this.mySoundManager.playSound("bounce_shield");
+	}
+	
+	public void playBounceGoalSound(){
+		this.mySoundManager.playSound("bounce_goal");
+	}
+	
+	
 	public void createInterfaces(){
 		myPI = new PlayerInterface[playerNumber];
 		ranking = new int[playerNumber];
