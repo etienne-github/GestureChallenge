@@ -1,5 +1,6 @@
 package main;
 
+import model.Constants;
 import model.GameModel;
 
 import org.mt4j.MTApplication;
@@ -24,7 +25,10 @@ public class StartGestureChallengeScene extends MTApplication {
 	
 	@Override
 	public void startUp() {
-		getInputManager().registerInputSource(new MacTrackpadSource(this));
+		if(Constants.isOnMac){
+			getInputManager().registerInputSource(new MacTrackpadSource(this));
+
+		}
 		GestureChallengeScene GCS = new GestureChallengeScene(this, "GestureChallenge");
 		addScene(GCS);
 		GameModel GM = new GameModel(GCS);

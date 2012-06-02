@@ -17,12 +17,15 @@ import org.mt4j.util.MTColor;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 
+import codeanticode.gsvideo.GSMovie;
+
 import playerinterface.PlayerInterface;
 import popup.PopUpCreator;
 import popup.Popup;
 import popup.PopupLogo;
 import popup.RankingPopup;
 import popup.touch.PopupNbPlayers;
+import popup.video.PopupVideo;
 import scene.GestureChallengeScene;
 import scene.menu.GCSceneMenu;
 
@@ -39,6 +42,12 @@ public class GameModel implements PopUpCreator {
 	Timer myTimer;
 	TimerTask endGame;
 	TimerTask infoTimeleft;
+	int numberOfFinishedTutos;
+	GSMovie m1;
+	GSMovie m2;
+	GSMovie m3;
+	GSMovie m4;
+	
 
 	public GameModel(GestureChallengeScene gCS){
 
@@ -48,6 +57,15 @@ public class GameModel implements PopUpCreator {
 		playerColors[2]=new MTColor(0f,217f,255f);
 		playerColors[3]=new MTColor(136f,255f,89f);
 		myGCS = gCS;
+		
+		if(!Constants.isOnMac){
+			m1 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi",30);
+			m2 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"bouclier.avi",30);
+			m3 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan.avi",30);
+			m4 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi",30);
+		}
+		
+
 	}
 
 	public void createInterfaces(){
@@ -223,11 +241,56 @@ public void fireRanks(){
 		p.addPopupItem("3 players", 3);
 		p.addPopupItem("4 players", 4);*/
 
-
+		
 		popHomePopup();
+		
 
 	}
 	
+	
+	
+	
+	
+	public void popVideoPopup(){
+		
+		for(int i=0;i<playerNumber;i++){
+			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));	
+			float x = myGCS.getMTApplication().width/2f +(float) (Math.cos(angle)*Constants.radiusCenterGoals);
+			float y = myGCS.getMTApplication().height/2f +(float) (Math.sin(angle)*Constants.radiusCenterGoals);
+
+			PopupVideo p = new PopupVideo(MTEllipse.class, "tuto_popup" ,myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300,0.3f);  
+			
+			if(!Constants.isOnMac){
+				//TODO ADD other clips and give an option to increase perf
+				p.addMovieClip("Drag","."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi",m1);
+				//p.addMovieClip("Drag", new GSMovie(this.myGCS.getMTApplication(), "."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi"));
+				if(levelNumber>1){
+				    p.addMovieClip("Rotate","."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"bouclier.avi",m2);
+					//p.addMovieClip("Rotate", new GSMovie(this.myGCS.getMTApplication(), "."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"bouclier.avi"));
+
+				}
+				
+				if(levelNumber>2){
+					p.addMovieClip("Pan","."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan.avi",m3);
+					//p.addMovieClip("Pan", this.myGCS.getMTApplication(), "."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan.avi"));
+					//p.addMovieClip("Pan2", new GSMovie(this.myGCS.getMTApplication(), "."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi"));
+
+
+					p.addMovieClip("Pan2","."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi",m4);
+				}
+
+				p.playMovie2("Drag");
+			}
+			
+			
+			p.getMyShape().setPositionGlobal(new Vector3D(x,y));
+			p.getMyShape().rotateZ(p.getMyShape().getCenterPointGlobal(), (float) Math.toDegrees(angle)-90);
+			
+		}
+		
+		
+		
+	}
 	
 	public void popHomePopup(){
 		
@@ -471,12 +534,28 @@ public void fireRanks(){
 			popNbPlayersPopup();
 		}else if(PopUpName.equals("player_number")){
 			
-			setPlayerNumber((Integer)o);
+			setPlayerNumber(((Integer)o));
 			System.out.println("playerNumber set");
-			this.createInterfaces();
-			this.subscribeInterfaces();
 			
-			this.initGame(this);		
+			if(explanationActivated){
+				numberOfFinishedTutos=0;
+				popVideoPopup();
+			}else{
+				this.createInterfaces();
+				this.subscribeInterfaces();
+				
+				this.initGame(this);
+			}
+			
+					
+		}else if(PopUpName.equals("tuto_popup")){
+			numberOfFinishedTutos++;
+			if(numberOfFinishedTutos>=playerNumber){
+				this.createInterfaces();
+				this.subscribeInterfaces();
+				
+				this.initGame(this);
+			}
 		}
 	}
 
