@@ -195,6 +195,7 @@ public class GestureChallengeScene extends AbstractScene {
 	}
 	
 	
+
 	
 	public void createScreenBorders(MTComponent parent){
 		//Create empty circle

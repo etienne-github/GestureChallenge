@@ -4,6 +4,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,7 +48,7 @@ public class GameModel implements PopUpCreator {
 	GSMovie m2;
 	GSMovie m3;
 	GSMovie m4;
-	
+	ArrayList<RankingPopup> rankingPopup=new ArrayList<RankingPopup>();
 
 	public GameModel(GestureChallengeScene gCS){
 
@@ -302,6 +303,17 @@ public void fireRanks(){
 		
 	}
 	
+	public void popEndGamePopup(){
+		
+		PopupLogo p = new PopupLogo<String>(MTEllipse.class,"endgame_popup",myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),215);
+		p.addPopupItem("New game", "new_game");
+		p.addPopupItem("Quit", "quit");
+
+	}
+	
+	
+	
+	
 	public void popHomePopup(){
 		
 		PopupLogo p = new PopupLogo<String>(MTEllipse.class,"home_popup",myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
@@ -337,12 +349,13 @@ public void fireRanks(){
 	
 	
 	public void popRankingPopup(){
-		ArrayList<RankingPopup> ranking = new ArrayList<RankingPopup>();
+		rankingPopup.clear();
+		rankingPopup = new ArrayList<RankingPopup>();
 		for(int i=0;i<playerNumber;i++){
 			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));	
 			float x = myGCS.getMTApplication().width/2f +(float) (Math.cos(angle)*Constants.radiusCenterGoals);
 			float y = myGCS.getMTApplication().height/2f +(float) (Math.sin(angle)*Constants.radiusCenterGoals);
-				ranking.add(new  RankingPopup("Ranking", "Game results", myGCS, this, new Vector3D(x,y), 100,angle, myPI[i].getMyColor()));
+			rankingPopup.add(new  RankingPopup("Ranking", "Game results", myGCS, this, new Vector3D(x,y), 100,angle, myPI[i].getMyColor()));
 
 		}
 
@@ -368,13 +381,24 @@ public void fireRanks(){
 			PIRanking.add(maxPI);
 		}
 
-		for(int j=0;j<ranking.size();j++){
+		for(int j=0;j<rankingPopup.size();j++){
 			for(int i=0;i<PIRanking.size();i++){
-				ranking.get(j).addPopupItem(String.valueOf(PIRanking.get(i).getMyScore()), i, PIRanking.get(i).getMyColor());
+				rankingPopup.get(j).addPopupItem(String.valueOf(PIRanking.get(i).getMyScore()), i, PIRanking.get(i).getMyColor());
 			}
 		}
 	}
 	
+	
+	public void removeRankingPopup(){
+		Iterator<RankingPopup> it = rankingPopup.iterator();
+		while(it.hasNext()){
+			RankingPopup p = it.next();
+			p.getMyShape().removeFromParent();
+			p.getMyShape().destroy();
+			
+		}
+		rankingPopup.clear();
+	}
 	
 	public void setSceneMenuVisible(boolean isVisible){
 		
@@ -420,6 +444,9 @@ public void fireRanks(){
 					
 
 					popRankingPopup();
+					setSceneMenuVisible(false);
+					popEndGamePopup();
+					
 					endGameTimers();
 
 				}
@@ -565,6 +592,15 @@ public void fireRanks(){
 				this.subscribeInterfaces();
 				
 				this.initGame(this);
+			}
+		}else if(PopUpName.equals("endgame_popup")){
+			if(((String)o).compareTo("new_game")==0){
+				this.removeRankingPopup();
+				this.myGCS.createScreenBorders(this.myGCS.getPhysicsContainer());
+				popActivateGameExplanations();
+			}else{
+				//quit
+				myGCS.getMTApplication().destroy();
 			}
 		}
 	}

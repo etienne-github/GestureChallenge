@@ -22,8 +22,6 @@ public class PopupLogo<O> extends Popup<O> {
 		myLogo.setPositionRelativeToOther(this.getMyShape(), this.getMyShape().getCenterPointLocal());
 		myLogo.setPickable(false);
 		myLogo.removeAllGestureEventListeners();
-		//xStartPopUpItem=this.getCenterPointLocal().x;
-		//yStartPopUpItem=this.getCenterPointLocal().y+75;
 	}
 
 	public void addPopupItem(final String text,O obj){
