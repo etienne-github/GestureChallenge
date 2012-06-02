@@ -29,7 +29,6 @@ import scene.GestureChallengeScene;
 public class Popup<O>{
 
 	private float width;
-	private float height;
 	private AbstractShape myShape;
 	private String textContent;
 	private MTTextArea textArea;
@@ -38,7 +37,12 @@ public class Popup<O>{
 	protected HashMap<String,O> hMap;
 	protected String name;
 	private ArrayList<PopupItem> popupItemList=new ArrayList<PopupItem>();
-	
+
+	public ArrayList<PopupItem> getPopupItemList() {
+		return popupItemList;
+	}
+
+
 	protected float xStartPopUpItem;
 	protected float yStartPopUpItem;
 
@@ -52,9 +56,11 @@ public class Popup<O>{
 	public Popup(Class<?> sprite, String name,String content, GestureChallengeScene s, PopUpCreator PC, Vector3D centerPosition, float radius) {
 		if(sprite.equals(MTEllipse.class)){
 			myShape = new MTEllipse(s.getMTApplication(),centerPosition,radius,radius);
+			width = radius;
 		}
 		else if(sprite.equals(MTRoundRectangle.class)){
 			myShape = new MTRoundRectangle(centerPosition.x, centerPosition.y,0f,(float) (radius*1.5),radius,10f,10f,s.getMTApplication());
+			width = (float) (radius*1.5);
 		}
 		this.PC=PC;
 		this.scene=s;
@@ -70,11 +76,11 @@ public class Popup<O>{
 		int policeSize = (int) (radius*2.5f)/15;
 		System.out.println("police size = "+policeSize);
 		float l = (float) Math.sqrt(2*Math.pow(radius, 2));
-		textArea = new MTTextArea(s.getMTApplication(), 100, 100, textContent.length()*21, l, FontManager.getInstance().createFont(s.getMTApplication(),"REZ.ttf",(int) policeSize,MTColor.BLACK, MTColor.BLACK));
+		textArea = new MTTextArea(s.getMTApplication(), 100, 100, (float) (width - (width*0.2)), l, FontManager.getInstance().createFont(s.getMTApplication(),"REZ.ttf",(int) policeSize,MTColor.BLACK, MTColor.BLACK));
 		textArea.setText(this.textContent);
 		textArea.setNoFill(true);
 		textArea.removeAllGestureEventListeners();
-		textArea.setPositionRelativeToParent(myShape.getCenterPointLocal());
+		textArea.setPositionRelativeToParent(new Vector3D(myShape.getCenterPointLocal().x, (float) (myShape.getCenterPointLocal().y-(myShape.getHeightXY(TransformSpace.GLOBAL))*0.05)));
 		textArea.setNoStroke(true);
 		myShape.addChild(this.textArea);
 
@@ -130,9 +136,6 @@ public class Popup<O>{
 			if(myShape instanceof MTEllipse){
 				this.setPositionRelativeToOther(myShape, new Vector3D(myShape.getCenterPointLocal().x,myShape.getCenterPointLocal().y-100+popupItemList.size()*(this.getHeightXY(TransformSpace.GLOBAL)+5)));
 			}
-			else if(myShape instanceof MTRoundRectangle){
-				this.setPositionRelativeToOther(myShape, new Vector3D(myShape.getCenterPointLocal().x+myShape.getWidthXY(TransformSpace.GLOBAL)/2,myShape.getCenterPointLocal().y-100+popupItemList.size()*(this.getHeightXY(TransformSpace.GLOBAL)+5)+myShape.getHeightXY(TransformSpace.GLOBAL)/2));
-			}
 		}
 
 	}
@@ -145,6 +148,7 @@ public class Popup<O>{
 		IFont f = FontManager.getInstance().createFont(scene.getMTApplication(), "REZ.ttf", 30);
 
 		PopupItem pI = new PopupItem(text, myShape.getCenterPointLocal().x-100, myShape.getCenterPointLocal().y-100, f.getFontAbsoluteHeight()+2, f);
+		pI.setName(text+obj.toString());
 		pI.setNoFill(true);
 		pI.setStrokeColor(MTColor.PURPLE);
 		myShape.addChild(pI);

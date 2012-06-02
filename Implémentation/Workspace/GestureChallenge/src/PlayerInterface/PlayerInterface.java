@@ -42,7 +42,16 @@ public class PlayerInterface implements PropertyChangeListener {
 	PlayerDisplay myPD;
 	PlayerPanShield myPanShield;
 
+	//InputProcessors
+	private PanProcessorTwoFingers myPanProcessor;
+	private ThreeFingersAverageGestureProcessor myThreeFingersProcessor;
 
+	public PanProcessorTwoFingers getMyPanProcessor(){return myPanProcessor;}
+
+
+	public ThreeFingersAverageGestureProcessor getMyThreeFingersProcessor() {
+		return myThreeFingersProcessor;
+	}
 
 
 	public GestureChallengeScene getMyGCS() {
@@ -132,7 +141,8 @@ public class PlayerInterface implements PropertyChangeListener {
 		myPG.setPickable(false);
 
 		if(level>1){
-			myRSA.registerInputProcessor(new ThreeFingersAverageGestureProcessor(myGCS.getMTApplication()));
+			myThreeFingersProcessor = new ThreeFingersAverageGestureProcessor(myGCS.getMTApplication());
+			myRSA.registerInputProcessor(myThreeFingersProcessor);
 			myRSA.addGestureListener(ThreeFingersAverageGestureProcessor.class, new IGestureEventListener() {
 				public boolean processGestureEvent(MTGestureEvent ge) {
 					ThreeFingersAverageGestureEvent evt = (ThreeFingersAverageGestureEvent) ge;
@@ -226,7 +236,8 @@ public class PlayerInterface implements PropertyChangeListener {
 		// Add pan listener in order to create a temporary shield between the two cursors
 		if(level>2){
 			final PlayerInterface PI = this;
-			myMSA.registerInputProcessor(new PanProcessorTwoFingers(myGCS.getMTApplication()));
+			myPanProcessor = new PanProcessorTwoFingers(myGCS.getMTApplication());
+			myMSA.registerInputProcessor(myPanProcessor);
 			myMSA.addGestureListener(PanProcessorTwoFingers.class, new IGestureEventListener() {
 				public boolean processGestureEvent(MTGestureEvent ge) {
 					PanTwoFingerEvent evt = (PanTwoFingerEvent)ge;

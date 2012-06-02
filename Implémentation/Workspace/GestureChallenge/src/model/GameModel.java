@@ -164,6 +164,16 @@ public void fireRanks(){
 	public void emptyScene(){
 
 
+		//Desactiver les pan encore sur la scene
+				for(PlayerInterface PI:myPI){
+					if(levelNumber>1){
+						PI.getMyThreeFingersProcessor().unLockAllCursors();
+						if(levelNumber>2){
+							PI.getMyPanProcessor().unLockAllCursors();
+						}
+					}
+				}
+
 
 		//Empty world
 		for (Body b=myGCS.getWorld().getBodyList();
