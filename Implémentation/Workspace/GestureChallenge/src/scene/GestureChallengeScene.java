@@ -485,7 +485,7 @@ public class GestureChallengeScene extends AbstractScene {
 									//System.out.println("met a wall");
 									final FakePlayerRotableShield pS = (FakePlayerRotableShield) other;
 									aBullet.bounce();
-									myGM.playBounceGoalSound();
+									myGM.playBounceShieldSound();
 									if(aBullet.getReboundleft()<=0){
 										app.invokeLater(new Runnable() {
 											public void run() {	

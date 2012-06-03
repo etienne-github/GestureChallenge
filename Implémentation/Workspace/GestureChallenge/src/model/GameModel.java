@@ -377,14 +377,16 @@ public void fireRanks(){
 	public void popActivateGameExplanations(){
 		Popup p = new Popup<Boolean>(MTEllipse.class, "activate_explanations"," show  help", myGCS, this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
 
-		p.addPopupItem("yes", true);
-		p.addPopupItem("no", false);
+		p.addPopupItem("yes", "yes");
+		p.addPopupItem("no", "no");
+		p.addBackButton("back");
 
 	}
 	
 	
 	public void popNbPlayersPopup(){
 		Popup p = new PopupNbPlayers("player_number","Number of players", myGCS, this, new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f), 300);
+		p.addBackButton(-1);
 	}
 	
 	public void popLevelPopup(){
@@ -393,6 +395,7 @@ public void fireRanks(){
 		p.addPopupItem("Beginner", 1);
 		p.addPopupItem("Intermediate", 2);
 		p.addPopupItem("Advanced", 3);
+		p.addBackButton(-1);
 		
 		//TODO  check that deleting the following line is harmless
 		//p.addPopupItem("Free game", 4);
@@ -626,30 +629,56 @@ public void fireRanks(){
 		
 		}else if(PopUpName.equals("activate_explanations")){
 			
-			explanationActivated=(Boolean)o;
-			popLevelPopup();
+			if(((String)o).compareTo("yes")==0){
+				
+				explanationActivated=true;
+				popLevelPopup();
+			}else if(((String)o).compareTo("no")==0){
+				
+				explanationActivated=false;
+				popLevelPopup();
+			}else{
+				popHomePopup();
+			}
+
 		
 		}else if(PopUpName.equals("level_number")){
 			
-			setLevelNumber((Integer)o);
-			System.out.println("levelNumber set");
+			if(((Integer)o)!=-1){
+				setLevelNumber((Integer)o);
+				System.out.println("levelNumber set");
+				
+				popNbPlayersPopup();
+			}else{
+				popActivateGameExplanations();
+			}
 			
-			popNbPlayersPopup();
+			
 		}else if(PopUpName.equals("player_number")){
 			
-			setPlayerNumber(((Integer)o));
-			System.out.println("playerNumber set");
 			
-			if(explanationActivated){
-				numberOfFinishedTutos=0;
-				showHelpPopup("");
-				//popVideoPopup();
-			}else{
-				this.createInterfaces();
-				this.subscribeInterfaces();
+			if(((Integer)o)!=-1){
+				setPlayerNumber(((Integer)o));
+				System.out.println("playerNumber set");
+
+
+				if(explanationActivated){
+					numberOfFinishedTutos=0;
+					showHelpPopup("");
+				}else{
+					this.createInterfaces();
+					this.subscribeInterfaces();
+					
+					this.initGame(this);
+				}
 				
-				this.initGame(this);
+				
+			}else{
+				popLevelPopup();
 			}
+			
+			
+
 			
 					
 		}else if(PopUpName.equals("tuto_popup")){

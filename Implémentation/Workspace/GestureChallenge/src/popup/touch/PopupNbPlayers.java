@@ -3,18 +3,25 @@ package popup.touch;
 import java.io.File;
 
 import org.mt4j.AbstractMTApplication;
+import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.shapes.MTEllipse;
+import org.mt4j.components.visibleComponents.shapes.MTRoundRectangle;
+import org.mt4j.components.visibleComponents.shapes.MTRectangle.PositionAnchor;
 import org.mt4j.components.visibleComponents.widgets.MTTextArea;
+import org.mt4j.components.visibleComponents.widgets.MTTextField;
 import org.mt4j.components.visibleComponents.widgets.buttons.MTImageButton;
 import org.mt4j.input.IMTInputEventListener;
 import org.mt4j.input.gestureAction.TapAndHoldVisualizer;
 import org.mt4j.input.inputData.MTInputEvent;
 import org.mt4j.input.inputProcessors.IGestureEventListener;
 import org.mt4j.input.inputProcessors.MTGestureEvent;
+import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
+import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
 
 
 import org.mt4j.util.MTColor;
 import org.mt4j.util.font.FontManager;
+import org.mt4j.util.font.IFont;
 import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 
@@ -22,6 +29,7 @@ import physic.shape.PhysicsCircle;
 import physic.shape.util.PhysicsHelper;
 import popup.PopUpCreator;
 import popup.Popup;
+import popup.PopupCredits;
 
 import popup.touch.gestureAction.TapAndHoldCentralVizualizer;
 import popup.touch.gestureEvent.TapAndHoldCountEvent;
@@ -227,5 +235,6 @@ public class PopupNbPlayers extends Popup {
 
 		
 	}*/
+	
 
 }

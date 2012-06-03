@@ -23,6 +23,8 @@ import org.mt4j.util.font.FontManager;
 import org.mt4j.util.font.IFont;
 import org.mt4j.util.math.Vector3D;
 
+import popup.touch.PopupNbPlayers;
+
 import scene.GestureChallengeScene;
 
 
@@ -37,6 +39,7 @@ public class Popup<O>{
 	protected HashMap<String,O> hMap;
 	protected String name;
 	private ArrayList<PopupItem> popupItemList=new ArrayList<PopupItem>();
+	private Object backReturnedObject;
 
 	public ArrayList<PopupItem> getPopupItemList() {
 		return popupItemList;
@@ -96,6 +99,13 @@ public class Popup<O>{
 
 
 
+	public void addBackButton(Object backReturnedObject){
+		this.backReturnedObject=backReturnedObject;
+		BackButton b = new BackButton(0, 0, 50, FontManager.getInstance().createFont(this.scene.getMTApplication(),"REZ.ttf",30,MTColor.BLACK, MTColor.BLACK));
+		b.setPositionRelativeToOther(this.getMyShape(), new Vector3D(this.getMyShape().getCenterPointLocal().x/*-this.getMyShape().getWidthXY(TransformSpace.GLOBAL)/2f+b.getWidthXY(TransformSpace.GLOBAL)/2f*/,this.getMyShape().getCenterPointLocal().x+100));
+		this.getMyShape().addChild(b);
+	}
+	
 	class PopupItem extends MTRoundRectangle {
 
 		MTTextField tF;
@@ -274,4 +284,49 @@ public class Popup<O>{
 		}
 
 	}
+	
+class BackButton extends MTRoundRectangle{
+		
+		MTTextField tF;
+		
+		public BackButton(float x, float y, float height,IFont f) {
+			super(x, y,0f,Popup.this.getMyShape().getWidthXY(TransformSpace.GLOBAL)/2f,height,10f,10f,Popup.this.scene.getMTApplication());
+
+			tF = new MTTextField(Popup.this.scene.getMTApplication(), 0, 0, Popup.this.getMyShape().getWidthXY(TransformSpace.GLOBAL)/2f, f.getFontAbsoluteHeight()+2, f);
+
+
+			tF.setInnerPadding(0);
+			tF.setText("                               Back");
+			tF.setStrokeColor(MTColor.BLACK);
+			tF.setNoStroke(true);
+			tF.setNoFill(true);
+			tF.removeAllGestureEventListeners();
+			this.removeAllGestureEventListeners();
+			tF.registerInputProcessor(new TapProcessor(Popup.this.scene.getMTApplication()));
+			tF.addGestureListener(TapProcessor.class, new IGestureEventListener() {
+
+				@Override
+				public boolean processGestureEvent(MTGestureEvent ge) {
+					TapEvent te = (TapEvent)ge;
+					if (te.isTapped()){
+						
+						
+						Popup.this.PC.reactToPopUpResponse(Popup.this.name,Popup.this.backReturnedObject);
+
+						Popup.this.getMyShape().removeFromParent();
+					}
+					return false;
+				}
+			});
+
+			tF.setAnchor(PositionAnchor.CENTER);
+			tF.setPositionRelativeToOther(this, this.getCenterPointLocal());
+			this.setStrokeColor(MTColor.PURPLE);
+			this.setNoFill(true);
+			
+			this.addChild(tF);
+		}
+
+	}
+	
 }
