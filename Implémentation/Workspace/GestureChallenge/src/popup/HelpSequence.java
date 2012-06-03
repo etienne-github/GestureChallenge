@@ -12,14 +12,14 @@ public abstract class HelpSequence {
 	String moviePath;
 	GSMovie movieClip;
 	HybridHelpPopUp myHHP;
-	
-	
-	
-	
 
 
-public HelpSequence(String moviePath,GSMovie preloadedMovieClip, PApplet app, HybridHelpPopUp h){
-		
+
+
+
+
+	public HelpSequence(String moviePath,GSMovie preloadedMovieClip, PApplet app, HybridHelpPopUp h){
+
 		myHHP=h;
 		this.moviePath=moviePath;
 		if(!Constants.isOnMac){
@@ -30,39 +30,43 @@ public HelpSequence(String moviePath,GSMovie preloadedMovieClip, PApplet app, Hy
 				movieClip=preloadedMovieClip;
 			}
 		}
-		
-		
-		
+
+
+
 	}
 
-abstract protected void remove();
+	abstract protected void remove();
 
-abstract protected void setUp();
+	abstract protected void setUp();
+
+	void missedBullet(){
+
+	}
 
 
-public String getMoviePath() {
-	return moviePath;
-}
+	public String getMoviePath() {
+		return moviePath;
+	}
 
-public void setMoviePath(String moviePath) {
-	this.moviePath = moviePath;
-}
+	public void setMoviePath(String moviePath) {
+		this.moviePath = moviePath;
+	}
 
-public GSMovie getMovieClip() {
-	return movieClip;
-}
+	public GSMovie getMovieClip() {
+		return movieClip;
+	}
 
-public void setMovieClip(GSMovie movieClip) {
-	this.movieClip = movieClip;
-}
+	public void setMovieClip(GSMovie movieClip) {
+		this.movieClip = movieClip;
+	}
 
-public HybridHelpPopUp getMyHHP() {
-	return myHHP;
-}
+	public HybridHelpPopUp getMyHHP() {
+		return myHHP;
+	}
 
-public void setMyHHP(HybridHelpPopUp myHHP) {
-	this.myHHP = myHHP;
-}
+	public void setMyHHP(HybridHelpPopUp myHHP) {
+		this.myHHP = myHHP;
+	}
 
-	
+
 }

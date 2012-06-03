@@ -23,12 +23,10 @@ import org.mt4j.util.math.Vector3D;
 import codeanticode.gsvideo.GSMovie;
 
 import playerinterface.PlayerInterface;
+import popup.AdvancedHelpSequence;
 import popup.BeginnerHelpSequence;
-import popup.BeginnerLevelHelpPopup;
-import popup.HelpPopup;
 import popup.HybridHelpPopUp;
 import popup.IntermediateHelpSequence;
-import popup.IntermediateLevelHelpPopup;
 import popup.PopUpCreator;
 import popup.Popup;
 import popup.PopupCredits;
@@ -58,7 +56,6 @@ public class GameModel implements PopUpCreator {
 	GSMovie m3;
 	GSMovie m4;
 	ArrayList<RankingPopup> rankingPopup=new ArrayList<RankingPopup>();
-	ArrayList<HelpPopup> helpPopup = new ArrayList<HelpPopup>();
 	SoundManager mySoundManager;
 	MP3 DecomptePlayer;
 	boolean isDecomptePlaying=false;
@@ -742,8 +739,8 @@ public void fireRanks(){
 			}
 			
 			if(levelNumber>=3){
-				s = new BeginnerHelpSequence("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi",m3,myGCS.getMTApplication(),p);
-				p.addSequence("Pan Gesture", s);
+				AdvancedHelpSequence Ad = new AdvancedHelpSequence("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi",m3,myGCS.getMTApplication(),p);
+				p.addSequence("Pan Gesture", Ad);
 			}
 			
 			p.playSequence("Drag Gesture");

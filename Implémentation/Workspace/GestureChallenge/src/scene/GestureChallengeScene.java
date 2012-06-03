@@ -1,10 +1,6 @@
 package scene;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Constants;
 import model.GameModel;
@@ -19,32 +15,22 @@ import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
-import org.mt4j.components.TransformSpace;
 import org.mt4j.components.visibleComponents.shapes.MTRectangle;
-import org.mt4j.components.visibleComponents.widgets.MTSceneMenu;
-import org.mt4j.input.inputProcessors.IGestureEventListener;
-import org.mt4j.input.inputProcessors.MTGestureEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapEvent;
-import org.mt4j.input.inputProcessors.componentProcessors.tapProcessor.TapProcessor;
 import org.mt4j.input.inputProcessors.globalProcessors.CursorTracer;
 import org.mt4j.sceneManagement.AbstractScene;
 import org.mt4j.util.MTColor;
-import org.mt4j.util.math.ToolsMath;
 import org.mt4j.util.math.Vector3D;
 import org.mt4j.util.math.Vertex;
 
 import physic.shape.IPhysicsComponent;
 import physic.shape.PhysicsCircle;
-import physic.shape.PhysicsPolygon;
 import physic.shape.PhysicsRectangle;
-import physic.shape.PhysicsShield;
-import physic.shape.util.PhysicsHelper;
 import physic.shape.util.UpdatePhysicsAction;
 import playerinterface.PlayerBullet;
-import playerinterface.PlayerGoal;
 import playerinterface.PlayerRotableShield;
 import popup.FakePlayerBullet;
 import popup.FakePlayerOwnGoal;
+import popup.FakePlayerPanShield;
 import popup.FakePlayerRotableShield;
 import scene.menu.GCSceneMenu;
 
@@ -57,7 +43,7 @@ import scene.menu.GCSceneMenu;
 public class GestureChallengeScene extends AbstractScene {
 	private float timeStep = 1.0f / 60.0f;
 	private int constraintIterations = 10;
-	
+
 	/** THE CANVAS SCALE **/
 	private float scale = 20;
 	private AbstractMTApplication app;
@@ -66,11 +52,11 @@ public class GestureChallengeScene extends AbstractScene {
 	private MTComponent physicsContainer;
 	GameModel myGM;
 	GCSceneMenu centralMenu=null;
-	
+
 	public GestureChallengeScene(AbstractMTApplication mtApplication, String name) {
 		super(mtApplication, name);
 		this.app = mtApplication;
-		
+
 		float worldOffset = 10; //Make Physics world slightly bigger than screen borders
 		//Physics world dimensions
 		AABB worldAABB = new AABB(new Vec2(-worldOffset, -worldOffset), new Vec2((app.width)/scale + worldOffset, (app.height)/scale + worldOffset));
@@ -79,17 +65,17 @@ public class GestureChallengeScene extends AbstractScene {
 		boolean sleep = true;
 		//Create the pyhsics world
 		this.world = new World(worldAABB, gravity, sleep);
-		
+
 		this.registerGlobalInputProcessor(new CursorTracer(app, this));
-		
+
 		//Update the positions of the components according the the physics simulation each frame
 		this.registerPreDrawAction(new UpdatePhysicsAction(world, timeStep, constraintIterations, scale));
-		
+
 		MTRectangle bck = new MTRectangle(app,app.loadImage("."+((String)File.separator)+"src"+((String)File.separator)+"scene"+((String)File.separator)+"data"+((String)File.separator)+"bkgrnd.jpg"));
 		this.getCanvas().addChild(bck);
 		bck.removeAllGestureEventListeners();
 		bck.setPositionGlobal(new Vector3D(app.width/2f,app.height/2f));
-		
+
 		physicsContainer = new MTComponent(app);
 		//Scale the physics container. Physics calculations work best when the dimensions are small (about 0.1 - 10 units)
 		//So we make the display of the container bigger and add in turn make our physics object smaller
@@ -99,33 +85,33 @@ public class GestureChallengeScene extends AbstractScene {
 		//physicsContainer.
 		//Create borders around the screen
 		//this.createScreenBorders(physicsContainer);
-		
-		
-		
-		
-		
+
+
+
+
+
 		//Create empty circle
 		int bigRadius= 200;
 		int smallRadius = 170;
 		int smallDef = 25;
 		int bigDef = 25;
 		double coveredAngle = Math.toRadians(50); //50 degrees
-		
-		
+
+
 		//SHIELD CREATION
 		//PhysicsShield pS = new PhysicsShield(bigRadius, smallRadius, smallDef,bigDef,(float) coveredAngle, new Vector3D(app.width/2f,app.height/2f), app, world, 0f, 0f, 0f, scale);
 		//physicsContainer.addChild(pS);
 
 		//pS.registerInputProcessor(new TapProcessor(app));
-		
-		
+
+
 		 //MARQUAGE CENTRE
 		 /*c= new PhysicsCircle(app,pS.getCenterPointGlobal(), 20, world, 0, 0, 0, scale);
 		 System.out.println("center : "+physicsContainer.globalToLocal(pS.getCenterPointGlobal()).x+" "+physicsContainer.globalToLocal(pS.getCenterPointGlobal()).y);
 		 physicsContainer.globalToLocal(pS.getCenterPointGlobal());
 		 physicsContainer.addChild(c);*/
-		
-		
+
+
 		//TEST ROTATION
 		/*pS.addGestureListener(TapProcessor.class, new IGestureEventListener(){
 
@@ -167,7 +153,7 @@ public class GestureChallengeScene extends AbstractScene {
 	addWorldContactListener(world);
 	//PlayerGoal pG = new PlayerGoal(app,new Vertex(app.width/2f,app.height/2F),world,scale,MTColor.PURPLE);
 	//physicsContainer.addChild(pG);
-	
+
 	//add bouncing circle
 	/*PhysicsCircle c = new PhysicsCircle(app, new Vertex(app.width/2f,app.height/2F), 10, world, 1.0f, 0, 1, scale);
 	MTColor col1 = new MTColor(ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255),ToolsMath.getRandom(60, 255));
@@ -179,31 +165,31 @@ public class GestureChallengeScene extends AbstractScene {
 	c.getBody().getShapeList().m_filter.maskBits=15;
 	c.getBody().getShapeList().m_filter.categoryBits=15;
 	c.getBody().getShapeList().m_filter.groupIndex=0;*/
-	
+
 	//boolean collideWall = (c.getBody().getShapeList().m_filter.maskBits & 1) != 0 && (c.getBody().getShapeList().m_filter.categoryBits & 1) != 0;
 
 
 	//boolean collideArc = (c.getBody().getShapeList().m_filter.maskBits & 2) != 0 && (c.getBody().getShapeList().m_filter.categoryBits & 2) != 0;
-	
+
 	//System.out.println("bullet collides with walls ? "+collideWall);
 	//System.out.println("bullet collides with arcs ? "+collideArc);
-	
+
 	//c.getBody().getShapeList().m_filter.groupIndex=0x0004;
 	//physicsContainer.addChild(c);
 	//System.out.println("c : "+c.getBody().getShapeList().m_filter.categoryBits+" / "+ c.getBody().getShapeList().m_filter.groupIndex);
 
-	
-	
-		
-	}
-	
-	
 
-	
+
+
+	}
+
+
+
+
 	public void createScreenBorders(MTComponent parent){
 		//Create empty circle
 			int mask = 0;
-			
+
 			for(int ind=0;ind<16;ind++){
 				mask+=Math.pow(2, ind);
 			}
@@ -214,7 +200,7 @@ public class GestureChallengeScene extends AbstractScene {
 				var radius:Number = 100;
 				var numSegments:Number = 24;
 				var twoPi:Number = Math.PI * 2;*/
-				
+
 				Vertex[] emptyCircleVertices=new Vertex[def];
 				PhysicsCircle test;
 				for(int i=0;i<def;i++){
@@ -237,15 +223,15 @@ public class GestureChallengeScene extends AbstractScene {
 					halfAB = new Vertex(AB.x/2f,AB.y/2f);
 					pR = new PhysicsRectangle(new Vertex(emptyCircleVertices[i].x+halfAB.x,emptyCircleVertices[i].y+halfAB.y), l, 8, app, world, 0, 0, 0, scale);
 
-					
-					
+
+
 					if((i>def/4)&&(i<3*(def/4))){
-						
+
 						pR.getBody().setXForm(
 								pR.getBody().getPosition(), (float) (AB.angleBetween(Vector3D.X_AXIS)*-1)
 								/*((float) Math.toDegrees(angle))*/
 						);
-						
+
 						//pR.rotateZ(pR.getCenterPointLocal(), (float) Math.toDegrees(AB.angleBetween(Vector3D.X_AXIS))*-1, TransformSpace.LOCAL);
 					}else{
 						pR.getBody().setXForm(
@@ -283,15 +269,15 @@ public class GestureChallengeScene extends AbstractScene {
 				pR.setNoStroke(true);
 				pR.setName("Wall");
 				parent.addChild(pR);	
-			
+
 	}
 
-	
+
 	public void setCentralMenu(GCSceneMenu m) {
 		this.centralMenu=m;
 		this.getCanvas().addChild(m);
 	}
-	
+
 	public GCSceneMenu getCentralMenu() {
 		return centralMenu;
 	}
@@ -303,7 +289,7 @@ public class GestureChallengeScene extends AbstractScene {
 
 	public void onEnter() {
 	}
-	
+
 	public void onLeave() {	
 	}
 
@@ -342,8 +328,8 @@ public class GestureChallengeScene extends AbstractScene {
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
-	
-	
+
+
 	private MTComponent isHit(String componentName, MTComponent comp1, MTComponent comp2){
 		MTComponent hitComp = null;
 		if (comp1.getName() != null && comp1.getName().equalsIgnoreCase(componentName)){
@@ -353,7 +339,7 @@ public class GestureChallengeScene extends AbstractScene {
 		}
 		return hitComp;
 	}
-	
+
 	private void addWorldContactListener(final World world){
 		world.setContactListener(new ContactListener(){
 
@@ -377,8 +363,8 @@ public class GestureChallengeScene extends AbstractScene {
 						MTComponent bullet = isHit("PlayerBullet", comp1, comp2);
 						if(bullet!=null){
 							final PlayerBullet aBullet = (PlayerBullet) bullet;
-							
-							
+
+
 						//Check what is OTHER an act in accordance	
 							MTComponent other;
 							if((other = isHit("Wall",comp1,comp2))!=null){
@@ -425,12 +411,12 @@ public class GestureChallengeScene extends AbstractScene {
 								}*/
 							}
 						}
-						
+
 						MTComponent fakebullet = isHit("FakePlayerBullet", comp1, comp2);
 						if(fakebullet!=null){
 							final FakePlayerBullet aBullet = (FakePlayerBullet) fakebullet;
-							
-							
+
+
 							//Check what is OTHER an act in accordance	
 								MTComponent other;
 								if((other = isHit("Wall",comp1,comp2))!=null){
@@ -447,7 +433,7 @@ public class GestureChallengeScene extends AbstractScene {
 										});
 
 									}
-									
+
 								}else if((other = isHit("FakePlayerAimGoal",comp1,comp2))!=null){
 									//System.out.println("met a wall");
 									aBullet.bounce();
@@ -463,8 +449,8 @@ public class GestureChallengeScene extends AbstractScene {
 
 									}
 								}else if((other = isHit("FakePlayerOwnGoal",comp1,comp2))!=null){
-									
-									
+
+
 									//System.out.println("met a wall");
 									final FakePlayerOwnGoal pG = (FakePlayerOwnGoal) other;
 									aBullet.bounce();
@@ -480,8 +466,8 @@ public class GestureChallengeScene extends AbstractScene {
 
 									}
 								}else if((other = isHit("FakePlayerShield",comp1,comp2))!=null){
-									
-									
+
+
 									//System.out.println("met a wall");
 									final FakePlayerRotableShield pS = (FakePlayerRotableShield) other;
 									aBullet.bounce();
@@ -491,48 +477,67 @@ public class GestureChallengeScene extends AbstractScene {
 											public void run() {	
 												world.destroyBody(aBullet.getBody());
 												physicsContainer.removeChild(aBullet);
-												
+
 												pS.caughtBullet();
-												
+
 											}
 										});
 
 									}
 								}
-							
-							
-							
+								else if((other = isHit("FakePlayerPanShield",comp1,comp2))!=null){
+
+
+									//System.out.println("met a wall");
+									final FakePlayerPanShield pS = (FakePlayerPanShield) other;
+									aBullet.bounce();
+									myGM.playBounceShieldSound();
+									if(aBullet.getReboundleft()<=0){
+										app.invokeLater(new Runnable() {
+											public void run() {	
+												world.destroyBody(aBullet.getBody());
+												physicsContainer.removeChild(aBullet);
+
+												pS.caughtBullet();
+
+											}
+										});
+
+									}
+								}
+
+
 						}
-						
-						
-						
-						
-						
+
+
+
+
+
 					}
-					
-					
-					
+
+
+
 				}	
 			}
 
 			@Override
 			public void persist(ContactPoint arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void remove(ContactPoint arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void result(ContactResult arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 		});
 	}
 
@@ -541,12 +546,12 @@ public class GestureChallengeScene extends AbstractScene {
 	public void setGM(GameModel gm){
 		myGM=gm;
 	}
-	
+
 
 	public void subscribe(){
 		myGM.subscribeInterfaces();
 	}
-	
+
 	/*private void addWorldContactListener(World world){
 		world.setContactListener(new ContactListener() {
 			

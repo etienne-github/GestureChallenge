@@ -42,7 +42,7 @@ public class Constants {
 
 	public static int gameTime=0*60+25;
 	
-	public static boolean isOnMac=true;
+	public static boolean isOnMac=System.getProperty("os.name").toLowerCase().contains("mac");
 
 
 	

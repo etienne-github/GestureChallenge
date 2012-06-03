@@ -53,8 +53,6 @@ import org.mt4j.util.opengl.GLMaterial;
 import org.mt4j.util.opengl.GluTrianglulator;
 
 import physic.shape.PhysicsRectangle;
-import popup.HelpPopup;
-import popup.BeginnerLevelHelpPopup;
 import popup.HybridHelpPopUp;
 import processing.core.PApplet;
 import org.mt4j.util.MTColor;
