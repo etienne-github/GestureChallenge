@@ -31,6 +31,7 @@ import popup.IntermediateHelpSequence;
 import popup.IntermediateLevelHelpPopup;
 import popup.PopUpCreator;
 import popup.Popup;
+import popup.PopupCredits;
 import popup.PopupLogo;
 import popup.RankingPopup;
 import popup.touch.PopupNbPlayers;
@@ -296,12 +297,17 @@ public void fireRanks(){
 		p.addPopupItem("4 players", 4);*/
 
 		
+		
 		popHomePopup();
+		//popCreditsPopup();
 		
 
 	}
 	
 	
+	public void popCreditsPopup(String previousPopupName){
+		PopupCredits p = new PopupCredits("credits",previousPopupName,myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
+	}
 	
 	
 	
@@ -350,6 +356,7 @@ public void fireRanks(){
 		
 		PopupLogo p = new PopupLogo<String>(MTEllipse.class,"endgame_popup",myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),215);
 		p.addPopupItem("New game", "new_game");
+		p.addPopupItem("Credits", "credits");
 		p.addPopupItem("Quit", "quit");
 
 	}
@@ -361,6 +368,7 @@ public void fireRanks(){
 		
 		PopupLogo p = new PopupLogo<String>(MTEllipse.class,"home_popup",myGCS,this,new Vector3D(myGCS.getMTApplication().width/2f,myGCS.getMTApplication().height/2f),300);
 		p.addPopupItem("New game", "new_game");
+		p.addPopupItem("Credits", "credits");
 		p.addPopupItem("Quit", "quit");
 
 	}
@@ -607,7 +615,10 @@ public void fireRanks(){
 			if(((String)o).compareTo("new_game")==0){
 				//pop next popup
 				popActivateGameExplanations();
+			}else if(((String)o).compareTo("credits")==0){
+				popCreditsPopup("home_popup");
 			}else{
+				
 				//quit
 				myGCS.getMTApplication().destroy();
 			}
@@ -655,10 +666,21 @@ public void fireRanks(){
 				this.removeRankingPopup();
 				this.myGCS.createScreenBorders(this.myGCS.getPhysicsContainer());
 				popActivateGameExplanations();
+			}else if(((String)o).compareTo("credits")==0){
+				popCreditsPopup("endgame_popup");
 			}else{
+				
 				//quit
 				myGCS.getMTApplication().destroy();
 			}
+			
+		}else if(PopUpName.equals("credits")){
+			if(((String)o).compareTo("endgame_popup")==0){
+				popEndGamePopup();
+			}else{
+				popHomePopup();
+			}
+			
 		}
 	}
 
