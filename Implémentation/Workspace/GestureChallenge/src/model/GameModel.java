@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import model.SoundManager.MP3;
+
 import org.jbox2d.dynamics.Body;
 import org.mt4j.AbstractMTApplication;
 import org.mt4j.components.MTComponent;
@@ -21,6 +23,12 @@ import org.mt4j.util.math.Vector3D;
 import codeanticode.gsvideo.GSMovie;
 
 import playerinterface.PlayerInterface;
+import popup.BeginnerHelpSequence;
+import popup.BeginnerLevelHelpPopup;
+import popup.HelpPopup;
+import popup.HybridHelpPopUp;
+import popup.IntermediateHelpSequence;
+import popup.IntermediateLevelHelpPopup;
 import popup.PopUpCreator;
 import popup.Popup;
 import popup.PopupLogo;
@@ -49,7 +57,10 @@ public class GameModel implements PopUpCreator {
 	GSMovie m3;
 	GSMovie m4;
 	ArrayList<RankingPopup> rankingPopup=new ArrayList<RankingPopup>();
+	ArrayList<HelpPopup> helpPopup = new ArrayList<HelpPopup>();
 	SoundManager mySoundManager;
+	MP3 DecomptePlayer;
+	boolean isDecomptePlaying=false;
 
 	public GameModel(GestureChallengeScene gCS){
 
@@ -68,7 +79,7 @@ public class GameModel implements PopUpCreator {
 		mySoundManager.addSoundinSoundLibrary("bounce_goal","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"bounce_goal.aiff" , false);
 //		mySoundManager.addSoundinSoundLibrary("backtrack","."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"Boxeur.aiff" , true);
 
-		mySoundManager.MP3Player("."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"Boxeur.mp3");
+		mySoundManager.MP3Player("."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"Boxeur.mp3").play();
 		
 		if(!Constants.isOnMac){
 			m1 = new GSMovie(gCS.getMTApplication(),"."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi",30);
@@ -526,13 +537,16 @@ public void fireRanks(){
 	public void initGame(final GameModel gm){
 		this.setSceneMenuVisible(true);
 		fireRanks();
+		isDecomptePlaying=false;
 		myTimer = new Timer();
 		endGame=new TimerTask(){
+			
 
+			
 			@Override
 			public void run() {
 				
-
+				DecomptePlayer.close();
 				endGame(true);
 
 
@@ -565,6 +579,15 @@ public void fireRanks(){
 					support.firePropertyChange("time", null, String.valueOf(min)+"'"+String.valueOf(secI)+"''");
 					//System.out.println(String.valueOf(min)+"'"+String.valueOf(secI)+"''");
 
+				}
+				
+				if((min<=0)&&(secI<=20)){
+					if(!isDecomptePlaying){
+						System.err.println("lunch decompte");
+						isDecomptePlaying=true;
+						DecomptePlayer = mySoundManager.MP3Player("."+((String)File.separator)+"src"+((String)File.separator)+"sounds"+((String)File.separator)+"decompte.mp3");
+						DecomptePlayer.play();
+					}
 				}
 
 			}
@@ -608,7 +631,8 @@ public void fireRanks(){
 			
 			if(explanationActivated){
 				numberOfFinishedTutos=0;
-				popVideoPopup();
+				showHelpPopup("");
+				//popVideoPopup();
 			}else{
 				this.createInterfaces();
 				this.subscribeInterfaces();
@@ -620,6 +644,7 @@ public void fireRanks(){
 		}else if(PopUpName.equals("tuto_popup")){
 			numberOfFinishedTutos++;
 			if(numberOfFinishedTutos>=playerNumber){
+				//System.err.println("received !!");
 				this.createInterfaces();
 				this.subscribeInterfaces();
 				
@@ -635,6 +660,51 @@ public void fireRanks(){
 				myGCS.getMTApplication().destroy();
 			}
 		}
+	}
+
+	
+	
+	public void removeHelpPopup(){
+		//TODO useless ?
+	}
+	
+	public void showHelpPopup(String videoName){
+		
+
+		for(int i=0;i<playerNumber;i++){
+			float angle =((float) ((i+1)*2*Math.PI/(playerNumber)+Math.PI/2f));	
+			float x = myGCS.getMTApplication().width/2f +(float) (Math.cos(angle)*Constants.radiusCenterGoals);
+			float y = myGCS.getMTApplication().height/2f +(float) (Math.sin(angle)*Constants.radiusCenterGoals);
+			
+			HybridHelpPopUp p = new HybridHelpPopUp(this, myGCS, "tuto_popup", new Vector3D(x,y), angle, this);
+			myGCS.getCanvas().addChild(p);
+			
+
+			BeginnerHelpSequence s = new BeginnerHelpSequence("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"envoie_projectile.avi",m1,myGCS.getMTApplication(),p);
+			p.addSequence("Drag Gesture", s);
+			
+			if(levelNumber>=2){
+				
+				IntermediateHelpSequence Is = new IntermediateHelpSequence("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"bouclier.avi",m2,myGCS.getMTApplication(),p);
+				p.addSequence("Rotate Gesture", Is);
+				
+			}
+			
+			if(levelNumber>=3){
+				s = new BeginnerHelpSequence("."+((String)File.separator)+"src"+((String)File.separator)+"popup"+((String)File.separator)+"video"+((String)File.separator)+"data"+((String)File.separator)+"pan2.avi",m3,myGCS.getMTApplication(),p);
+				p.addSequence("Pan Gesture", s);
+			}
+			
+			p.playSequence("Drag Gesture");
+		}
+	}
+	
+	
+	@Override
+	public void playTouchSound() {
+		//TODO comment out
+		this.playBeepSound();
+		
 	}
 
 }

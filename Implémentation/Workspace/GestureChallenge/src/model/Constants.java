@@ -40,7 +40,7 @@ public class Constants {
 	
 	//Game model parameters
 
-	public static int gameTime=0*60+30;
+	public static int gameTime=0*60+25;
 	
 	public static boolean isOnMac=true;
 
